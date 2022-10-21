@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miniville_GroupeC", "Miniville_GroupeC.csproj", "{113FEF88-6B0E-41CE-A1B9-A0683B46B195}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{113FEF88-6B0E-41CE-A1B9-A0683B46B195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{113FEF88-6B0E-41CE-A1B9-A0683B46B195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{113FEF88-6B0E-41CE-A1B9-A0683B46B195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{113FEF88-6B0E-41CE-A1B9-A0683B46B195}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E97A758-D6EB-496E-86B1-2E55FB8E727C}
+	EndGlobalSection
+EndGlobal
