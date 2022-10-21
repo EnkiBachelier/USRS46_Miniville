@@ -11,23 +11,40 @@ namespace Miniville_GroupeC
         BLUE
     }
 
-    public class Card
+    public abstract class MasterCard
     {
         public string name;
         public int activationValue;
         public int costValue;
         public CardColor cardColor;
-        public Action<int,Player,Player> onDiceResult;
 
-        public Card(string name, int activationValue, int costValue, CardColor cardColor, Action<int, Player, Player> onDiceResult)
+        public MasterCard(int activationValue, CardColor cardColor, string name, int costValue)
         {
             this.name = name;
             this.activationValue = activationValue;
             this.costValue = costValue;
             this.cardColor = cardColor;
-            this.onDiceResult = onDiceResult;
         }
+
+        public abstract void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying);
     }
 
+
+    public class FarmCard : MasterCard
+    {
+        public FarmCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue)
+            {
+                //currentPlayer.nbPiece ++;
+            }
+        }
+
+    }
 
 }

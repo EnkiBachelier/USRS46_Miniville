@@ -11,17 +11,16 @@ namespace Miniville_GroupeC
         public Dice playDice;
         public int nbPieceVictory;
         public List<string> namePlayers;
-        private List<Card> initialCards;
+        private List<MasterCard> initialCards;
 
         public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
 
-            this.initialCards = new List<Card>()
+            this.initialCards = new List<MasterCard>()
             {
-                //new Card("Champs de blé", 1, CardColor.BLUE),
-                //new Card("Boulangerie"),
+                new FarmCard()                          //name, activation value, costvalue, CardColor. Action
             };
 
             foreach (string thatName in namePlayers)
@@ -53,7 +52,7 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    int valueDice = this.playDice.De;
+                    //int valueDice = this.playDice.value;
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées");
                     //players[i].CheckCardToActivate(valueDice);
                     Console.WriteLine("Quel carte souhaitez-vous acheete");
