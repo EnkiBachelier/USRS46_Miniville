@@ -7,6 +7,9 @@ namespace Miniville_GroupeC
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            Dice d = new Dice();
+            Console.WriteLine(d.De);
         }
     }
 }
