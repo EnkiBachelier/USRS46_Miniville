@@ -20,7 +20,7 @@ namespace Miniville_GroupeC
 
             this.initialCards = new List<MasterCard>()
             {
-                new FarmCard()                          //name, activation value, costvalue, CardColor. Action
+                new WheatFieldCard()                          //name, activation value, costvalue, CardColor. Action
             };
 
             foreach (string thatName in namePlayers)

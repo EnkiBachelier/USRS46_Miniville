@@ -30,9 +30,9 @@ namespace Miniville_GroupeC
     }
 
 
-    public class FarmCard : MasterCard
+    public class WheatFieldCard : MasterCard
     {
-        public FarmCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
+        public WheatFieldCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
         {
 
         }
@@ -46,5 +46,23 @@ namespace Miniville_GroupeC
         }
 
     }
+
+    public class FarmCard : MasterCard
+    {
+        public FarmCard() : base(1, CardColor.BLUE, "Ferme", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue)
+            {
+                //currentPlayer.nbPiece ++;
+            }
+        }
+    }
+
+
 
 }
