@@ -29,6 +29,17 @@ namespace Miniville_GroupeC
             }
         }
 
+        private int CheckWinner(List<int> piecesPlayers)
+        {
+            int gagnant = 0;
+            for (int i = 0; i < piecesPlayers.Count; i++)
+            {
+                if (piecesPlayers[i] == this.nbPieceVictory)
+                    gagnant = i;
+            }
+            return gagnant;
+        }
+
         
 
 
