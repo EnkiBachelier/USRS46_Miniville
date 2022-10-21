@@ -40,7 +40,29 @@ namespace Miniville_GroupeC
             return gagnant;
         }
 
-        
+        public void GameLoop()
+        {
+            List<int> piecesPlayers = new List<int>();
+            foreach (Player thatPlayer in players)
+            {
+                //piecesPlayers.Add(thatPlayer.nbPiece);
+            }
+
+            while (CheckWinner(piecesPlayers) != 0)
+            {
+                for (int i = 0; i < players.Count; i++)
+                {
+                    //int valueDice = this.playDice.value;
+                    Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées");
+                    //players[i].CheckCardToActivate(valueDice);
+                    Console.WriteLine("Quel carte souhaitez-vous acheete");
+                    //players[i].BuyCards();
+
+
+                    //piecesPlayers[i] = players[i].nbPiece;
+                }
+            }
+        }
 
 
     }
