@@ -17,7 +17,17 @@ namespace Miniville_GroupeC
         public int activationValue;
         public int costValue;
         public CardColor cardColor;
-        public Action action;
+        public Action onDiceResults;
+
+        public Card(string name, int activationValue, int costValue, CardColor cardColor, Action onDiceResult)
+        {
+            this.name = name;
+            this.activationValue = activationValue;
+            this.costValue = costValue;
+            this.cardColor = cardColor;
+            this.onDiceResults = onDiceResult;
+        }
+
     }
 
 
