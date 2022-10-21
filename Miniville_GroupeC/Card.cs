@@ -27,7 +27,6 @@ namespace Miniville_GroupeC
             this.cardColor = cardColor;
             this.onDiceResult = onDiceResult;
         }
-
     }
 
 
