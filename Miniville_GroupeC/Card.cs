@@ -63,6 +63,20 @@ namespace Miniville_GroupeC
         }
     }
 
+    public class BakeryCard : MasterCard
+    {
+        public BakeryCard() : base (2,CardColor.GREEN,"Boulangerie", 1)
+        {
 
+        }
+
+        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        {
+            if(currentPlayer == playerWhosPlaying && diceResult == activationValue)
+            {
+                //currentPlayer.nbPlayer+=1;
+            }
+        }
+    }
 
 }
