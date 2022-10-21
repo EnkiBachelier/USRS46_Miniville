@@ -79,4 +79,20 @@ namespace Miniville_GroupeC
         }
     }
 
+    public class MiniMarketCard : MasterCard
+    {
+        public MiniMarketCard() : base (4,CardColor.GREEN, "Superette",2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        {
+            if(currentPlayer == playerWhosPlaying && diceResult == activationValue)
+            {
+                //currentPlayer.nbPiece+=3;
+            }
+        }
+    }
+
 }
