@@ -20,7 +20,7 @@ namespace Miniville_GroupeC
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
-            this.pile = new Pile();
+            pile = new Pile();
 
             this.initialCards = new List<MasterCard>()
             {
