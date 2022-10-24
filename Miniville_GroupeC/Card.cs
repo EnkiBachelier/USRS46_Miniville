@@ -115,4 +115,38 @@ namespace Miniville_GroupeC
             }
         }
     }
+
+    public class Restaurant : MasterCard
+    {
+
+        public Restaurant() : base(5, CardColor.RED, "Restaurant", 4)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue && playerOwner != playerWhosPlaying)
+            {
+                //playerWhosPlaying -= 2;
+                //playerOwner.nbPiece+= 2;
+            }
+        }
+
+        public class Stadium : MasterCard
+        {
+            public Stadium() : base(6, CardColor.BLUE, "Stade", 6)
+            {
+
+            }
+
+            public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+            {
+                if(diceResult == activationValue)
+                {
+                    //playerOwner += 4
+                }
+            }
+        }
+    }
+
 }
