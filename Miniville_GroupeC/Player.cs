@@ -27,16 +27,33 @@ namespace Miniville_GroupeC
             int choice = -1;
 
             do{
-                Console.WriteLine("Que voulez-vous acheter ?");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("1 - Des champs de blé ? (1$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("2 - Une ferme ? (2$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("3 - Une boulangerie ? (1$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("4 - Une café ? (2$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("5 - Une superette ? (2$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("6 - Une forêt ? (2$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("7 - Un restaurant ? (4$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("8 - Un stade ? (6$)");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("9 - Passer votre tour");
+                Console.ResetColor();
 
             } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 ||choice > 9);
 
@@ -60,7 +77,7 @@ namespace Miniville_GroupeC
                 case 4:
                     var cafe = new CafeCard();
                     CanBuyCard(cafe);
-                    Console.WriteLine("Vous avez choisi d'acheter un cafe\n");
+                    Console.WriteLine("Vous avez choisi d'acheter un café\n");
                     break;
                 case 5:
                     var minimarket = new MiniMarketCard();
@@ -100,8 +117,7 @@ namespace Miniville_GroupeC
             }
             else
             {
-                //Le joueur n'a pas assez de thune pour acheter la carte
-                Console.WriteLine("Vous n'avez pas assez de pièces.\n");
+                Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
                 BuyCard();
             }
         }

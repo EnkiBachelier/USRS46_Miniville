@@ -20,6 +20,8 @@ namespace Miniville_GroupeC
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
+            this.namePlayers = namePlayers;
+
             pile = new Pile();
 
             foreach (string thatName in namePlayers)
@@ -58,27 +60,44 @@ namespace Miniville_GroupeC
                 piecesPlayers.Add(thatPlayer.nbPiece);
             }
 
-            while (CheckWinner(piecesPlayers) == -1)
+            bool isInLoop = true;
+            while (isInLoop)
             {
-                Console.WriteLine("LOOP");
                 for (int i = 0; i < players.Count; i++)
                 {
 
                     currentPlayers = players[i];
                     int valueDice = this.playDice.De;
-                    Console.WriteLine("\n\nC'est au tour de " + currentPlayers.name + " qui a un total de " + currentPlayers.nbPiece + " pièces !");
-                    Console.WriteLine("Le dé affiche une valeur de " + valueDice + "\n");
+                    
+                    Console.Write("\n\nC'est au tour de " + currentPlayers.name + " qui a un total de ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write(currentPlayers.nbPiece);
+                    Console.ResetColor();
+                    Console.WriteLine(" pièces !");
+
+                    Console.Write("Le dé affiche une valeur de ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write(valueDice);
+                    Console.ResetColor();
+                    Console.WriteLine();
+
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
                     currentPlayers.CheckCardToActivate(valueDice);
-                    Console.Write("Quel carte souhaitez-vous acheter ? ");
+                    Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayers.BuyCard();
 
                     piecesPlayers[i] = currentPlayers.nbPiece;
-                    
+                    if (currentPlayers.nbPiece >= this.nbPieceVictory)
+                    {
+                        
+                        isInLoop = false;
+                        break;
+                    }
                 }
             }
-            Console.WriteLine("Terminé");
+            Console.BackgroundColor = ConsoleColor.Green;
             Console.WriteLine("Bravo au joueur " + namePlayers[CheckWinner(piecesPlayers)] + " qui a gagné !!");
+            Console.ResetColor();
         }
 
 
