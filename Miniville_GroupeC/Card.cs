@@ -128,7 +128,7 @@ namespace Miniville_GroupeC
         {
             if (diceResult == activationValue)
             {
-                playerOwner.nbPiece++
+                playerOwner.nbPiece++;
             }
         }
     }

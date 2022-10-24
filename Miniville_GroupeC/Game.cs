@@ -22,23 +22,26 @@ namespace Miniville_GroupeC
             this.expertMode = expertMode;
             pile = new Pile();
 
-            this.initialCards = new List<MasterCard>()
-            {
-                new WheatFieldCard(),
-                new BakeryCard()
-            };
-
             foreach (string thatName in namePlayers)
             {
+                MasterCard cardCham = new WheatFieldCard();
+                MasterCard cardBak = new BakeryCard();
+                this.initialCards = new List<MasterCard>()
+                {
+                    cardCham,
+                    cardBak
+                };
                 Player thatPlayer = new Player(3, this.initialCards, this, thatName);
+                cardCham.SetPlayerOwner(thatPlayer);
+                cardBak.SetPlayerOwner(thatPlayer);
                 players.Add(thatPlayer);
             }
         }
 
         private int CheckWinner(List<int> piecesPlayers)
         {
-            int gagnant = 0;
-            for (int i = 0; i < piecesPlayers.Count; i++)
+            int gagnant = -1;
+            for (int i = 0; i < namePlayers.Count; i++)
             {
                 if (piecesPlayers[i] == this.nbPieceVictory)
                     gagnant = i;
@@ -55,22 +58,27 @@ namespace Miniville_GroupeC
                 piecesPlayers.Add(thatPlayer.nbPiece);
             }
 
-            while (CheckWinner(piecesPlayers) == 0)
+            while (CheckWinner(piecesPlayers) == -1)
             {
+                Console.WriteLine("LOOP");
                 for (int i = 0; i < players.Count; i++)
                 {
+
                     currentPlayers = players[i];
                     int valueDice = this.playDice.De;
-                    Console.WriteLine(valueDice);
-                    Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées");
+                    Console.WriteLine("\n\nC'est au tour de " + currentPlayers.name + " qui a un total de " + currentPlayers.nbPiece + " pièces !");
+                    Console.WriteLine("Le dé affiche une valeur de " + valueDice + "\n");
+                    Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
                     currentPlayers.CheckCardToActivate(valueDice);
-                    Console.WriteLine("Quel carte souhaitez-vous acheter ?");
+                    Console.Write("Quel carte souhaitez-vous acheter ? ");
                     currentPlayers.BuyCard();
 
-
                     piecesPlayers[i] = currentPlayers.nbPiece;
+                    
                 }
             }
+            Console.WriteLine("Terminé");
+            Console.WriteLine("Bravo au joueur " + namePlayers[CheckWinner(piecesPlayers)] + " qui a gagné !!");
         }
 
 
