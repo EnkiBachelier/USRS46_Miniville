@@ -22,12 +22,13 @@ namespace Miniville_GroupeC
 
             this.initialCards = new List<MasterCard>()
             {
-                new WheatFieldCard()                          //name, activation value, costvalue, CardColor. Action
+                new WheatFieldCard(),                          //name, activation value, costvalue, CardColor. Action
+                new BakeryCard()
             };
 
             foreach (string thatName in namePlayers)
             {
-                players.Add(new Player());              //(
+                players.Add(new Player(3, this.initialCards,this,thatName));              //(
             }
         }
 
@@ -47,7 +48,7 @@ namespace Miniville_GroupeC
             List<int> piecesPlayers = new List<int>();
             foreach (Player thatPlayer in players)
             {
-                //piecesPlayers.Add(thatPlayer.nbPiece);
+                piecesPlayers.Add(thatPlayer.nbPiece);
             }
 
             while (CheckWinner(piecesPlayers) != 0)

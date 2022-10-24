@@ -4,43 +4,47 @@ using System.Text;
 
 namespace Miniville_GroupeC
 {
-    public class Player : Game
+    public class Player
     {
 
-        List<Card> Cards = new List<Card>();
-        int Piece;
-        Game game = new Game();
-        string Name;
-        Pile pile = new Pile();
+        public List<MasterCard> playerCards = new List<MasterCard>();
+        public int nbPiece;
+        public Game game;
+        public string name;
 
-        public Player(int piece, List<Card> cards, Game game, string name, Pile pile)
+
+        public Player(int piece, List<MasterCard> MasterCards, Game game, string name)
         {
-            this.Piece = piece;
-            this.Cards = cards;
+            this.nbPiece = piece;
+            this.playerCards = MasterCards;
             this.game = game;
-            this.Name = name;
-            this.pile = pile;
+            this.name = name;
 
         }
 
-        public void BuyCard(Card, cards)
+        public void BuyCard(MasterCard cards)
         {
-            if(activationValue == True)
-            {
-                Cards += Card;
-                SupprCarte
-            }
 
-            
+            if (nbPiece >= cards.costValue)
+            {
+                nbPiece -= cards.costValue;
+                playerCards.Add(cards);
+                //game.pile.removeCards(cards)
+            }
+            else
+            {
+                //Le joueur n'a pas assez de thune pour acheter la carte
+            }
         }
 
-        public CheckCardToActivate(int diceValue)
+        public void CheckCardToActivate(int diceValue)
         {
-            foreach (Card C in Cards)
+
+            foreach (var card in playerCards)
             {
-                if (diceValue == CostValue) { return true};
-                else {return false};
+                card.OnDiceResult(diceValue, game.currentPlayers);
             }
+
         }
     }
 }
