@@ -17,7 +17,7 @@ namespace Miniville_GroupeC
         public int activationValue;
         public int costValue;
         public CardColor cardColor;
-
+        public Player playerOwner;
         public MasterCard(int activationValue, CardColor cardColor, string name, int costValue)
         {
             this.name = name;
@@ -26,18 +26,23 @@ namespace Miniville_GroupeC
             this.cardColor = cardColor;
         }
 
-        public abstract void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying);
+        public abstract void OnDiceResult(int diceResult, Player playerWhosPlaying);
+
+        public void SetPlayerOwner(Player owner)
+        {
+            playerOwner = owner;
+        }
     }
 
 
-    public class FarmCard : MasterCard
+    public class WheatFieldCard : MasterCard
     {
-        public FarmCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
+        public WheatFieldCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
         {
 
         }
 
-        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if(diceResult == activationValue)
             {
@@ -47,4 +52,114 @@ namespace Miniville_GroupeC
 
     }
 
+    public class FarmCard : MasterCard
+    {
+        public FarmCard() : base(1, CardColor.BLUE, "Ferme", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue)
+            {
+                //currentPlayer.nbPiece ++;
+            }
+        }
+    }
+
+    public class BakeryCard : MasterCard
+    {
+        public BakeryCard() : base (2,CardColor.GREEN,"Boulangerie", 1)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                //currentPlayer.nbPlayer+=1;
+            }
+        }
+    }
+
+    public class CafeCard : MasterCard
+    {
+        public CafeCard() : base(3, CardColor.RED, "Café", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class MiniMarketCard : MasterCard
+    {
+        public MiniMarketCard() : base (4,CardColor.GREEN, "Superette",2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                //currentPlayer.nbPiece+=3;
+            }
+        }
+    }
+
+    public class ForestCard : MasterCard
+    {
+        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue)
+            {
+                //playerOwner.nbPiece++
+            }
+        }
+    }
+
+    public class RestaurantCard : MasterCard
+    {
+        public RestaurantCard() : base(5, CardColor.RED, "Restaurant", 4)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue && playerOwner != playerWhosPlaying)
+            {
+                //playerWhosPlaying -= 2;
+                //playerOwner.nbPiece+= 2;
+            }
+        }
+
+    }
+
+    public class StadiumCard : MasterCard
+        {
+            public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6)
+            {
+
+            }
+
+            public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+            {
+                if(diceResult == activationValue)
+                {
+                    //playerOwner += 4
+                }
+            }
+        }
 }
