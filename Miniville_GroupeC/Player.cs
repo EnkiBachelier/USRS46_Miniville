@@ -25,9 +25,13 @@ namespace Miniville_GroupeC
 
         public void BuyCard(Card, cards)
         {
-            //ici rediriger vers la carte en question
+            if(activationValue == True)
+            {
+                Cards += Card;
+                SupprCarte
+            }
 
-            Cards += Card;
+            
         }
 
         public CheckCardToActivate(int diceValue)
