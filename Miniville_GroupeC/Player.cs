@@ -36,42 +36,54 @@ namespace Miniville_GroupeC
                 Console.WriteLine("6 - Une forêt ? (2$)");
                 Console.WriteLine("7 - Un restaurant ? (4$)");
                 Console.WriteLine("8 - Un stade ? (6$)");
+                Console.WriteLine("9 - Passer votre tour");
 
-            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 ||choice > 8);
+            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 ||choice > 9);
 
             switch(choice)
             {
                 case 1:
                     var wheatFieldCard = new WheatFieldCard();
                     CanBuyCard(wheatFieldCard);
+                    Console.WriteLine("Vous avez choisi d'acheter un champ de blé\n");
                     break;
                 case 2:
                     var farm = new FarmCard();
                     CanBuyCard(farm);
+                    Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 3:
                     var bakery = new BakeryCard();
                     CanBuyCard(bakery);
+                    Console.WriteLine("Vous avez choisi d'acheter une boulangerie\n");
                     break;
                 case 4:
                     var cafe = new CafeCard();
                     CanBuyCard(cafe);
+                    Console.WriteLine("Vous avez choisi d'acheter un cafe\n");
                     break;
                 case 5:
                     var minimarket = new MiniMarketCard();
                     CanBuyCard(minimarket);
+                    Console.WriteLine("Vous avez choisi d'acheter une superette\n");
                     break;
                 case 6:
                     var forest = new ForestCard();
                     CanBuyCard(forest);
+                    Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 7:
                     var restau = new RestaurantCard();
                     CanBuyCard(restau);
+                    Console.WriteLine("Vous avez choisi d'acheter un restaurant\n");
                     break;
                 case 8:
                     var stadium = new StadiumCard();
                     CanBuyCard(stadium);
+                    Console.WriteLine("Vous avez choisi d'acheter un stade\n");
+                    break;
+                case 9:
+                    Console.WriteLine("Vous avez passé votre tour\n");
                     break;
             }
 
@@ -84,11 +96,13 @@ namespace Miniville_GroupeC
                 nbPiece -= card.costValue;
                 playercard.Add(card);
                 game.pile.RemoveCardFromPile(card);
+                card.SetPlayerOwner(this);
             }
             else
             {
                 //Le joueur n'a pas assez de thune pour acheter la carte
-                Console.WriteLine("Vous n'avez pas assez de pièces.");
+                Console.WriteLine("Vous n'avez pas assez de pièces.\n");
+                BuyCard();
             }
         }
 
