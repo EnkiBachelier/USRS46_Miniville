@@ -12,11 +12,13 @@ namespace Miniville_GroupeC
         public int nbPieceVictory;
         public List<string> namePlayers;
         private List<MasterCard> initialCards;
+        private bool expertMode;
 
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
+            this.expertMode = expertMode;
 
             this.initialCards = new List<MasterCard>()
             {
