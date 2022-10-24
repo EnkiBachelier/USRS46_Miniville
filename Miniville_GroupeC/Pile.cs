@@ -11,12 +11,12 @@ namespace Miniville_GroupeC
         public Pile()
         {
             int nb = 0;
-            for (int i = 0; i < 6*8; i++)
+            for (int i = 0; i < 6 * 8; i++)
             {
-                
-                if(i % 6 == 0)
+
+                if (i % 6 == 0)
                     nb++;
-                switch(nb)
+                switch (nb)
                 {
                     case 1:
                         mainpile.Add(new WheatFieldCard());
@@ -44,8 +44,21 @@ namespace Miniville_GroupeC
                         break;
                 }
 
-
             }
+        }
+
+        public void RemoveCardFromPile(MasterCard card)
+        {
+            int index = -1;
+            for (int i = 0; i < mainpile.Count; i++)
+            {
+                if (card.name == mainpile[i].name)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            mainpile.RemoveAt(index);
         }
     }
 }

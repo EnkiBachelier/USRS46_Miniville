@@ -12,20 +12,23 @@ namespace Miniville_GroupeC
         public int nbPieceVictory;
         public List<string> namePlayers;
         private List<MasterCard> initialCards;
+        private bool expertMode;
 
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
+            this.expertMode = expertMode;
 
             this.initialCards = new List<MasterCard>()
             {
-                new WheatFieldCard()                          //name, activation value, costvalue, CardColor. Action
+                new WheatFieldCard(),                          //name, activation value, costvalue, CardColor. Action
+                new BakeryCard()
             };
 
             foreach (string thatName in namePlayers)
             {
-                players.Add(new Player());              //(
+                players.Add(new Player(3, this.initialCards,this,thatName));              //(
             }
         }
 
@@ -45,7 +48,7 @@ namespace Miniville_GroupeC
             List<int> piecesPlayers = new List<int>();
             foreach (Player thatPlayer in players)
             {
-                //piecesPlayers.Add(thatPlayer.nbPiece);
+                piecesPlayers.Add(thatPlayer.nbPiece);
             }
 
             while (CheckWinner(piecesPlayers) != 0)
