@@ -13,7 +13,7 @@ namespace Miniville_GroupeC
             List<string> namePlayers = new List<string>();
 
             Console.WriteLine("Bienvenue dans Miniville !");
-            Console.Write("Avec combien de maires souhaitez-vous jouer ?");
+            Console.Write("Avec combien de maires souhaitez-vous jouer ? ");
             int nbMayors = int.Parse(Console.ReadLine());
             for (int i = 0; i < nbMayors; i++)
             {
