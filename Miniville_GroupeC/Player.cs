@@ -24,8 +24,9 @@ namespace Miniville_GroupeC
 
         public void BuyCard()
         {
+            int choice = -1;
 
-            {
+            do{
                 Console.WriteLine("Que voulez-vous acheter ?");
                 Console.WriteLine("1 - Des champs de blé ? (1$)");
                 Console.WriteLine("2 - Une ferme ? (2$)");

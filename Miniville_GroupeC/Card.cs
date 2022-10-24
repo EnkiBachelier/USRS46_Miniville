@@ -44,9 +44,9 @@ namespace Miniville_GroupeC
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(diceResult == activationValue)
+            if (diceResult == activationValue)
             {
-                //currentPlayer.nbPiece ++;
+                playerOwner.nbPiece++;
             }
         }
 
@@ -61,25 +61,25 @@ namespace Miniville_GroupeC
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(diceResult == activationValue)
+            if (diceResult == activationValue)
             {
-                //currentPlayer.nbPiece ++;
+                playerOwner.nbPiece++;
             }
         }
     }
 
     public class BakeryCard : MasterCard
     {
-        public BakeryCard() : base (2,CardColor.GREEN,"Boulangerie", 1)
+        public BakeryCard() : base(2, CardColor.GREEN, "Boulangerie", 1)
         {
 
         }
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
             {
-                //currentPlayer.nbPlayer+=1;
+                playerOwner.nbPiece += 2;
             }
         }
     }
@@ -93,22 +93,26 @@ namespace Miniville_GroupeC
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            throw new NotImplementedException();
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece++;
+                playerWhosPlaying.nbPiece--;
+            }
         }
     }
 
     public class MiniMarketCard : MasterCard
     {
-        public MiniMarketCard() : base (4,CardColor.GREEN, "Superette",2)
+        public MiniMarketCard() : base(4, CardColor.GREEN, "Superette", 2)
         {
 
         }
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
             {
-                //currentPlayer.nbPiece+=3;
+                playerOwner.nbPiece += 3;
             }
         }
     }
@@ -122,9 +126,9 @@ namespace Miniville_GroupeC
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(diceResult == activationValue)
+            if (diceResult == activationValue)
             {
-                //playerOwner.nbPiece++
+                playerOwner.nbPiece++
             }
         }
     }
@@ -138,28 +142,28 @@ namespace Miniville_GroupeC
 
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(diceResult == activationValue && playerOwner != playerWhosPlaying)
+            if (diceResult == activationValue)
             {
-                //playerWhosPlaying -= 2;
-                //playerOwner.nbPiece+= 2;
+                playerWhosPlaying.nbPiece -= 2;
+                playerOwner.nbPiece += 2;
             }
         }
 
     }
 
     public class StadiumCard : MasterCard
+    {
+        public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6)
         {
-            public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6)
-            {
 
-            }
+        }
 
-            public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
             {
-                if(diceResult == activationValue)
-                {
-                    //playerOwner += 4
-                }
+                playerOwner.nbPiece += 4;
             }
         }
+    }
 }

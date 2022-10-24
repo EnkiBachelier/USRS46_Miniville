@@ -59,14 +59,16 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
+                    currentPlayers = players[i];
                     int valueDice = this.playDice.De;
+                    Console.WriteLine(valueDice);
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées");
-                    players[i].CheckCardToActivate(valueDice);
+                    currentPlayers.CheckCardToActivate(valueDice);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ?");
-                    players[i].BuyCard(new CafeCard());
+                    currentPlayers.BuyCard();
 
 
-                    piecesPlayers[i] = players[i].nbPiece;
+                    piecesPlayers[i] = currentPlayers.nbPiece;
                 }
             }
         }
