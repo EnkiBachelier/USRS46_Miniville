@@ -13,13 +13,14 @@ namespace Miniville_GroupeC
         public List<string> namePlayers;
         private List<MasterCard> initialCards;
         private bool expertMode;
+        public Pile pile;
 
         public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
-
+            pile = new Pile();
             this.initialCards = new List<MasterCard>()
             {
                 new WheatFieldCard(),                          //name, activation value, costvalue, CardColor. Action
