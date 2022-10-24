@@ -14,11 +14,12 @@ namespace Miniville_GroupeC
 
             Console.WriteLine("Bienvenue dans Miniville !");
             Console.Write("Avec combien de maires souhaitez-vous jouer ?");
-
-            for(int i = 0; i < int.Parse(Console.ReadLine()); i++)
+            int nbMayors = int.Parse(Console.ReadLine());
+            for (int i = 0; i < nbMayors; i++)
             {
-                Console.Write("\nQuel est le nom du maire n°" + i + "?");
-                namePlayers.Add(Console.ReadLine());
+                Console.Write("\nQuel est le nom du maire n°" + (i+1) + "? ");
+                string name = Console.ReadLine();
+                namePlayers.Add(name);
             }
 
             Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
@@ -48,6 +49,7 @@ namespace Miniville_GroupeC
             }
 
             Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
+            theGame.GameLoop();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Miniville_GroupeC
 
         public void BuyCard(MasterCard cards)
         {
-
+            
             if (nbPiece >= cards.costValue)
             {
                 nbPiece -= cards.costValue;
