@@ -26,8 +26,7 @@ namespace Miniville_GroupeC
         {
             int choice = -1;
 
-            do
-            {
+            do{
                 Console.WriteLine("Que voulez-vous acheter ?");
                 Console.WriteLine("1 - Des champs de blé ? (1$)");
                 Console.WriteLine("2 - Une ferme ? (2$)");
