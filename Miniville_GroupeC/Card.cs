@@ -17,7 +17,7 @@ namespace Miniville_GroupeC
         public int activationValue;
         public int costValue;
         public CardColor cardColor;
-
+        public Player playerOwner;
         public MasterCard(int activationValue, CardColor cardColor, string name, int costValue)
         {
             this.name = name;
@@ -26,7 +26,12 @@ namespace Miniville_GroupeC
             this.cardColor = cardColor;
         }
 
-        public abstract void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying);
+        public abstract void OnDiceResult(int diceResult, Player playerWhosPlaying);
+
+        public void SetPlayerOwner(Player owner)
+        {
+            playerOwner = owner;
+        }
     }
 
 
@@ -37,7 +42,7 @@ namespace Miniville_GroupeC
 
         }
 
-        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if(diceResult == activationValue)
             {
@@ -54,7 +59,7 @@ namespace Miniville_GroupeC
 
         }
 
-        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if(diceResult == activationValue)
             {
@@ -70,9 +75,9 @@ namespace Miniville_GroupeC
 
         }
 
-        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(currentPlayer == playerWhosPlaying && diceResult == activationValue)
+            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
             {
                 //currentPlayer.nbPlayer+=1;
             }
@@ -86,13 +91,28 @@ namespace Miniville_GroupeC
 
         }
 
-        public override void OnDiceResult(int diceResult, Player currentPlayer, Player playerWhosPlaying)
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if(currentPlayer == playerWhosPlaying && diceResult == activationValue)
+            if(playerOwner == playerWhosPlaying && diceResult == activationValue)
             {
                 //currentPlayer.nbPiece+=3;
             }
         }
     }
 
+    public class Forest : MasterCard
+    {
+        public Forest() : base(5, CardColor.BLUE, "Forêt", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if(diceResult == activationValue)
+            {
+                //playerOwner.nbPiece++
+            }
+        }
+    }
 }
