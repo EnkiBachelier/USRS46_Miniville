@@ -84,6 +84,19 @@ namespace Miniville_GroupeC
         }
     }
 
+    public class CafeCard : MasterCard
+    {
+        public CafeCard() : base(3, CardColor.RED, "Café", 2)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class MiniMarketCard : MasterCard
     {
         public MiniMarketCard() : base (4,CardColor.GREEN, "Superette",2)
@@ -100,9 +113,9 @@ namespace Miniville_GroupeC
         }
     }
 
-    public class Forest : MasterCard
+    public class ForestCard : MasterCard
     {
-        public Forest() : base(5, CardColor.BLUE, "Forêt", 2)
+        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 2)
         {
 
         }
@@ -116,13 +129,13 @@ namespace Miniville_GroupeC
         }
     }
 
-    public class Restaurant : MasterCard
+    public class RestaurantCard : MasterCard
     {
-
-        public Restaurant() : base(5, CardColor.RED, "Restaurant", 4)
+        public RestaurantCard() : base(5, CardColor.RED, "Restaurant", 4)
         {
 
         }
+
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if(diceResult == activationValue && playerOwner != playerWhosPlaying)
@@ -132,9 +145,11 @@ namespace Miniville_GroupeC
             }
         }
 
-        public class Stadium : MasterCard
+    }
+
+    public class StadiumCard : MasterCard
         {
-            public Stadium() : base(6, CardColor.BLUE, "Stade", 6)
+            public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6)
             {
 
             }
@@ -147,6 +162,4 @@ namespace Miniville_GroupeC
                 }
             }
         }
-    }
-
 }
