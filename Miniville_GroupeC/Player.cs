@@ -28,28 +28,28 @@ namespace Miniville_GroupeC
 
             do{
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("1 - Des champs de blé ? (1$)");
+                Console.WriteLine("1 - Des champs de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("2 - Une ferme ? (2$)");
+                Console.WriteLine("2 - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("3 - Une boulangerie ? (1$)");
+                Console.WriteLine("3 - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("4 - Une café ? (2$)");
+                Console.WriteLine("4 - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("5 - Une superette ? (2$)");
+                Console.WriteLine("5 - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("6 - Une forêt ? (2$)");
+                Console.WriteLine("6 - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("7 - Un restaurant ? (4$)");
+                Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 5");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("8 - Un stade ? (6$)");
+                Console.WriteLine("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("9 - Passer votre tour");
