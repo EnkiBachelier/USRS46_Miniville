@@ -18,7 +18,20 @@ namespace Miniville_GroupeC
 
             #endregion
 
+            #region Textes de lancement
             Console.WriteLine("Bienvenue dans Miniville !");
+            Console.Write("Dans ce jeu, vous serez amené à devenir le maire le plus ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("INCROYABLE");
+            Console.ResetColor();
+            Console.WriteLine(" que cette région ait connu");
+            Console.WriteLine("\nMais bien évidemment, certains essayeront de vous mettre des bâtons dans les pattes...");
+            Console.Write("Etonnez-les avec votre ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("MAGNIFICIENCE");
+            Console.ResetColor();
+            Console.WriteLine(" et réduisez-les à l'état d'agents municipaux !\n\n");
+            #endregion
 
             #region Données des maires
             do
