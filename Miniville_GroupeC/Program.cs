@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Miniville_GroupeC
 {
@@ -15,21 +15,30 @@ namespace Miniville_GroupeC
             int errorTryCatch = 0;
             bool expertMode = false;
             int nbPiecesToWin = 0;
+            bool doubleDe = false;
             #endregion
 
             #region Textes de lancement
-            Console.WriteLine("Bienvenue dans Miniville !");
-            Console.Write("Dans ce jeu, vous serez amené à devenir le maire le plus ");
+            Console.WriteLine("                                         Bienvenue à MINIVILLE !!!");
+            Wait(0.4f);
+            Console.Write("\nDans ce jeu, vous serez amené à devenir le maire le plus ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("INCROYABLE");
+            AffichageCharParChar("INCROYABLE", 0.2f);
             Console.ResetColor();
-            Console.WriteLine(" que cette région ait connu");
+            Console.WriteLine(" que cette région ait connu.");
+            Wait(0.4f);
+            Console.WriteLine("Si vous arrivez à suffisamment séduire le vieux maire de Miniville, il vous laissera sa place (en échange d'une retraire payée par vos soins)");
             Console.WriteLine("\nMais bien évidemment, certains essayeront de vous mettre des bâtons dans les pattes...");
+            Wait(0.4f);
             Console.Write("Etonnez-les avec votre ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("MAGNIFICIENCE");
+            AffichageCharParChar("MAGNIFICIENCE", 0.25f);
             Console.ResetColor();
-            Console.WriteLine(" et réduisez-les à l'état d'agents municipaux !\n\n");
+            Console.Write(" et réduisez-les à l'état d'");
+            Console.ForegroundColor = ConsoleColor.Red;
+            AffichageCharParChar("agents municipaux !", 0.25f);
+            Console.ResetColor();
+            Console.WriteLine("\n");
             #endregion
 
             #region Données des maires
@@ -71,6 +80,23 @@ namespace Miniville_GroupeC
 
                 string difficulty = Console.ReadLine();
 
+                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                Console.WriteLine("1 -- Avec un dé !");
+                Console.WriteLine("2 -- Avec deux dés !");
+
+                string DoubleDe = Console.ReadLine();
+
+
+                switch (DoubleDe)
+                {
+                    case "1":
+                        doubleDe = false;
+                        break;
+                    case "2":
+                        doubleDe = true;
+                        break;
+                }
+
                 //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
                 {
@@ -84,7 +110,7 @@ namespace Miniville_GroupeC
                         break;
                     case "3":
                         nbPiecesToWin = 30;
-                        errorTryCatch = 0 ;
+                        errorTryCatch = 0;
                         break;
                     case "4":
                         nbPiecesToWin = 20;
@@ -98,13 +124,32 @@ namespace Miniville_GroupeC
 
 
                 }
-            } while(errorTryCatch == 1);
+            } while (errorTryCatch == 1);
             #endregion
 
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode, doubleDe);
             theGame.GameLoop();
             #endregion
         }
+
+        #region Méthodes
+        //Marque une pause de n-secondes
+        public static void Wait(float second)
+        {
+            Task Delay = Task.Delay(TimeSpan.FromSeconds(second));
+            Delay.Wait();
+        }
+
+        //Affiche des char un par un
+        public static void AffichageCharParChar(string message, float second)
+        {
+            foreach (char thatChar in message)
+            {
+                Console.Write(thatChar);
+                Wait(second);
+            }
+        }
+        #endregion
     }
 }

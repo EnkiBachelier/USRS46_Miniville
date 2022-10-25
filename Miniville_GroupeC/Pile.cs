@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Miniville_GroupeC
 {
@@ -14,7 +12,7 @@ namespace Miniville_GroupeC
         public Pile()
         {
             int nb = 0;
-            for (int i = 0; i < 6 * 8; i++)
+            for (int i = 0; i < 6 * 13; i++)
             {
 
                 //Ajout de 6 instances de chaque carte dans la pile
@@ -46,6 +44,22 @@ namespace Miniville_GroupeC
                     case 8:
                         mainPile.Add(new StadiumCard());
                         break;
+                    case 9:
+                        mainPile.Add(new CheeseFactoryCard());
+                        break;
+                    case 10:
+                        mainPile.Add(new FurnitureFactoryCard());
+                        break;
+                    case 11:
+                        mainPile.Add(new MineCard());
+                        break;
+                    case 12:
+                        mainPile.Add(new OrchardCard());
+                        break;
+                    case 13:
+                        mainPile.Add(new MarketCard());
+                        break;
+
                 }
 
             }

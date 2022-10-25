@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Miniville_GroupeC
 {
@@ -31,131 +31,264 @@ namespace Miniville_GroupeC
         public void BuyCard()
         {
             int choice = -1;
+            //Retourne le nombre restant dans la pile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
+            var amountWheatFields = pile.mainPile.Where(x => x is WheatFieldCard).ToList();
+            var amountFarms = pile.mainPile.Where(x => x is FarmCard).ToList();
+            var amountBakeries = pile.mainPile.Where(x => x is BakeryCard).ToList();
+            var amountCoffees = pile.mainPile.Where(x => x is CoffeeCard).ToList();
+            var amountMiniMarkets = pile.mainPile.Where(x => x is MiniMarketCard).ToList();
+            var amountForests = pile.mainPile.Where(x => x is ForestCard).ToList();
+            var amountRestaurants = pile.mainPile.Where(x => x is RestaurantCard).ToList();
+            var amountStadiums = pile.mainPile.Where(x => x is StadiumCard).ToList();
+            var amountCheeseFactories = pile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
+            var amountFurnitureFactories = pile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
+            var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
+            var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
+            var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
 
             do
             {
                 //Affichage des cartes de la pile selon la disponibilité dans la pile
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new WheatFieldCard()))
+                if (amountWheatFields.Count > 0)
                     Console.WriteLine("1 - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new FarmCard()))
+                if (amountFarms.Count > 0)
                     Console.WriteLine("2 - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (pile.mainPile.Contains(new BakeryCard()))
+                if (amountBakeries.Count > 0)
                     Console.WriteLine("3 - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                if (pile.mainPile.Contains(new CoffeeCard()))
+                if (amountCoffees.Count > 0)
                     Console.WriteLine("4 - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (pile.mainPile.Contains(new MiniMarketCard()))
+                if (amountMiniMarkets.Count > 0)
                     Console.WriteLine("5 - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new ForestCard()))
+                if (amountForests.Count > 0)
                     Console.WriteLine("6 - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                if (pile.mainPile.Contains(new RestaurantCard()))
-                    Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 5");
-
+                if (amountRestaurants.Count > 0)
+                    Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10");
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new StadiumCard()))
+                if (amountStadiums.Count > 0)
                     Console.WriteLine("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6");
-
                 Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountCheeseFactories.Count > 0)
+                    Console.WriteLine("9 - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountFurnitureFactories.Count > 0)
+                    Console.WriteLine("10 - Une fabrique de meuble (3$) ? Recevez 3 pièces lorsque le dé affiche 8");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                if (amountMines.Count > 0)
+                    Console.WriteLine("11 - Une mine (6$) ? Recevez 5 pièces lorsque le dé affiche 9");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                if (amountOrchards.Count > 0)
+                    Console.WriteLine("12 - Un verger (3$) ? Recevez 4 pièces lorsque le dé affiche 10");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountMarkets.Count > 0)
+                    Console.WriteLine("13 - Un marché (2$) ? Recevez 2 pièces lorsque le dé affiche 11");
+                Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("9 - Passer votre tour");
+                Console.WriteLine("14 - Passer votre tour");
                 Console.ResetColor();
 
-            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 9);
+            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 14);
 
             switch (choice)
             {
-                //Selon le choix du joueur et son argent, réalise l'achat
+                //Selon le choix du joueur et la disponibilité de la carte dans la pile, réalise l'achat via CanBuyCard()
                 case 1:
                     var wheatFieldCard = new WheatFieldCard();
+                    if (amountWheatFields.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(wheatFieldCard);
                     Console.WriteLine("Vous avez choisi d'acheter un champ de blé\n");
                     break;
                 case 2:
                     var farm = new FarmCard();
+                    if (amountFarms.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(farm);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 3:
                     var bakery = new BakeryCard();
+                    if (amountBakeries.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(bakery);
                     Console.WriteLine("Vous avez choisi d'acheter une boulangerie\n");
                     break;
                 case 4:
                     var cafe = new CoffeeCard();
+                    if (amountCoffees.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(cafe);
                     Console.WriteLine("Vous avez choisi d'acheter un café\n");
                     break;
                 case 5:
                     var minimarket = new MiniMarketCard();
+                    if (amountMiniMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(minimarket);
                     Console.WriteLine("Vous avez choisi d'acheter une superette\n");
                     break;
                 case 6:
                     var forest = new ForestCard();
+                    if (amountForests.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(forest);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 7:
                     var restau = new RestaurantCard();
+                    if (amountRestaurants.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(restau);
                     Console.WriteLine("Vous avez choisi d'acheter un restaurant\n");
                     break;
                 case 8:
                     var stadium = new StadiumCard();
+                    if (amountStadiums.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
                     CanBuyCard(stadium);
                     Console.WriteLine("Vous avez choisi d'acheter un stade\n");
                     break;
                 case 9:
+                    var cheeseFacto = new CheeseFactoryCard();
+                    if (amountCheeseFactories.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(cheeseFacto);
+                    Console.WriteLine("Vous avez choisi d'acheter une fabrique de fromage\n");
+                    break;
+                case 10:
+                    var furnitureFacto = new FurnitureFactoryCard();
+                    if (amountFurnitureFactories.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(furnitureFacto);
+                    Console.WriteLine("Vous avez choisi d'acheter une fabrique de meubles\n");
+                    break;
+                case 11:
+                    var mine = new StadiumCard();
+                    if (amountMines.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(mine);
+                    Console.WriteLine("Vous avez choisi d'acheter une mine\n");
+                    break;
+                case 12:
+                    var orchard = new OrchardCard();
+                    if (amountOrchards.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(orchard);
+                    Console.WriteLine("Vous avez choisi d'acheter un verger\n");
+                    break;
+                case 13:
+                    var market = new MarketCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(market);
+                    Console.WriteLine("Vous avez choisi d'acheter un marché\n");
+                    break;
+                case 14:
                     Console.WriteLine("Vous avez passé votre tour\n");
                     break;
             }
         }
 
-        //Si le joueur a assez d'argent et que la carte est disponible dans la pile, achète la carte sinon relance BuyCard()
+        //Si le joueur a assez d'argent, achète la carte sinon relance BuyCard()
         private void CanBuyCard(MasterCard card)
         {
-            //Disponibilité de la carte
-            if (!pile.mainPile.Contains(card))
+            if (nbPiece >= card.costValue)
             {
-                Console.WriteLine("Cette carte n'est plus disponible dans la pile");
-                BuyCard();
+                nbPiece -= card.costValue;
+                playerCardList.Add(card);
+                game.pile.RemoveCardFromPile(card);
+                card.SetPlayerOwner(this);
             }
             else
             {
-                //Possibilité de payer la carte
-                if (nbPiece >= card.costValue)
-                {
-                    nbPiece -= card.costValue;
-                    playerCardList.Add(card);
-                    game.pile.RemoveCardFromPile(card);
-                    card.SetPlayerOwner(this);
-                }
-                else
-                {
-                    Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
-                    BuyCard();
-                }
+                Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
+                BuyCard();
             }
         }
+
 
         //Parcourt les cartes de chaque joueur afin de les activer selon la valeur du dé
         public void CheckCardToActivate(int diceValue)

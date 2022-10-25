@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Miniville_GroupeC
 {
     #region Enum : CardColor
@@ -150,14 +147,14 @@ namespace Miniville_GroupeC
     #region Class : RestaurantCard (Dérivée de MasterCard)
     public class RestaurantCard : MasterCard
     {
-        public RestaurantCard() : base(5, CardColor.RED, "Restaurant", 4)
+        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 4)
         {
         }
 
         //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if (diceResult == activationValue)
+            if (diceResult == activationValue || diceResult == 10)
             {
                 playerWhosPlaying.nbPiece -= 2;
                 playerOwner.nbPiece += 2;
@@ -178,6 +175,92 @@ namespace Miniville_GroupeC
         {
             if (diceResult == activationValue)
                 playerOwner.nbPiece += 4;
+        }
+    }
+    #endregion
+
+    #region Class : CheeseFactoryCard (Dérivée de MasterCard)
+    public class CheeseFactoryCard : MasterCard
+    {
+        public CheeseFactoryCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+    #endregion
+
+    #region Class : FurnitureFactoryCard (Dérivée de MasterCard)
+    public class FurnitureFactoryCard : MasterCard
+    {
+        public FurnitureFactoryCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+    #endregion
+
+    #region Class : MineCard (Dérivée de MasterCard)
+    public class MineCard : MasterCard
+    {
+        public MineCard() : base(9, CardColor.BLUE, "Mine", 6)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 5;
+            }
+        }
+    }
+    #endregion
+
+    #region Class : OrchardCard (Dérivée de MasterCard)
+    public class OrchardCard : MasterCard
+    {
+        public OrchardCard() : base(10, CardColor.BLUE, "Verger", 3)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+    #endregion
+
+    #region Class : MarketCard (Dérivée de MasterCard)
+    public class MarketCard : MasterCard
+    {
+        public MarketCard() : base(11, CardColor.GREEN, "Marche de fruits et légumes", 2)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 12))
+            {
+                playerOwner.nbPiece += 2;
+            }
         }
     }
     #endregion
