@@ -23,7 +23,7 @@ namespace Miniville_GroupeC
                     nbMayors = int.Parse(Console.ReadLine());
                     errorTryCatch = 0;
                 }
-                catch (Exception ex)
+                catch
                 {
                     Console.WriteLine("Veuillez entrer un numéro valide");
                     errorTryCatch = 1;
@@ -38,34 +38,48 @@ namespace Miniville_GroupeC
                 namePlayers.Add(name);
             }
 
-            Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
-            Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
-            Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
-            Console.WriteLine("3 -- Partie longue (30 pièces pour gagner)");
-            Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
 
-            string difficulty = Console.ReadLine();
-
-            int nbPiecesToWin = 0;
             bool expertMode = false;
-            switch (difficulty)
+            int nbPiecesToWin = 0;
+
+            int errorDifficult = 1;
+            do
             {
-                case "1":
-                    nbPiecesToWin = 10;
-                    break;
-                case "2":
-                    nbPiecesToWin = 20;
-                    break;
-                case "3":
-                    nbPiecesToWin = 30;
-                    break;
-                case "4":
-                    nbPiecesToWin = 20;
-                    expertMode = true;
-                    break;
+                Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
+                Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
+                Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
+                Console.WriteLine("3 -- Partie longue (30 pièces pour gagner)");
+                Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
+
+                string difficulty = Console.ReadLine();
+
+                switch (difficulty)
+                {
+                    case "1":
+                        nbPiecesToWin = 10;
+                        errorDifficult = 0;
+                        break;
+                    case "2":
+                        nbPiecesToWin = 20;
+                        errorDifficult = 0;
+                        break;
+                    case "3":
+                        nbPiecesToWin = 30;
+                        errorDifficult =0 ;
+                        break;
+                    case "4":
+                        nbPiecesToWin = 20;
+                        expertMode = true;
+                        errorDifficult =0;
+                        break;
+                    default:
+                        Console.WriteLine("Veuillez entrer un numéro valide");
+                        errorDifficult = 1;
+                        break;
 
 
-            }
+                }
+            } while(errorDifficult == 1);
 
             Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
             theGame.GameLoop();
