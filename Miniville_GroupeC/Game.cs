@@ -122,11 +122,25 @@ namespace Miniville_GroupeC
             }
 
             //Affichage du gagnant
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Bravo au joueur " + winningPlayer + " qui a gagné !!");
+            Console.Write("Bravo au grand maire ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Program.AffichageCharParChar(winningPlayer, 0.25f);
             Console.ResetColor();
+            Console.WriteLine();
+            Program.Wait(0.5f);
+            Console.WriteLine("Suite à l'étalage de sa puissance, le vieux maire de Miniville lui a laissé sa place.");
+            Program.Wait(0.3f);
+            Console.WriteLine("Le nouveau maire " + winningPlayer + " a décidé de renommer la ville : ");
+            string nameNewTown = Console.ReadLine();
+            Console.WriteLine("Bienvenue à " + nameNewTown + ", ville créée par le grand " + winningPlayer);
+            Program.Wait(0.3f);
+            Console.WriteLine("Depuis que le nouveau maire a renommé la ville, le taux de criminalité a fortement baissé, les petits vieux ne se sentent plus menacés.");
+            Console.WriteLine("A vrai dire, c'est devenu le parfait opposé de l'ancienne ville, les petits vieux se mettent à attaquer les jeunes et à les humilier publiquement");
+
+
         }
 
         #endregion
+
     }
 }

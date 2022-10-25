@@ -18,18 +18,26 @@ namespace Miniville_GroupeC
             #endregion
 
             #region Textes de lancement
-            Console.WriteLine("Bienvenue dans Miniville !");
-            Console.Write("Dans ce jeu, vous serez amené à devenir le maire le plus ");
+            Console.WriteLine("                                         Bienvenue à MINIVILLE !!!");
+            Wait(0.4f);
+            Console.Write("\nDans ce jeu, vous serez amené à devenir le maire le plus ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("INCROYABLE");
+            AffichageCharParChar("INCROYABLE", 0.2f);
             Console.ResetColor();
-            Console.WriteLine(" que cette région ait connu");
+            Console.WriteLine(" que cette région ait connu.");
+            Wait(0.4f);
+            Console.WriteLine("Si vous arrivez à suffisamment séduire le vieux maire de Miniville, il vous laissera sa place (en échange d'une retraire payée par vos soins)");
             Console.WriteLine("\nMais bien évidemment, certains essayeront de vous mettre des bâtons dans les pattes...");
+            Wait(0.4f);
             Console.Write("Etonnez-les avec votre ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("MAGNIFICIENCE");
+            AffichageCharParChar("MAGNIFICIENCE", 0.25f);
             Console.ResetColor();
-            Console.WriteLine(" et réduisez-les à l'état d'agents municipaux !\n\n");
+            Console.Write(" et réduisez-les à l'état d'");
+            Console.ForegroundColor = ConsoleColor.Red;
+            AffichageCharParChar("agents municipaux !", 0.25f);
+            Console.ResetColor();
+            Console.WriteLine("\n");
             #endregion
 
             #region Données des maires
@@ -109,10 +117,20 @@ namespace Miniville_GroupeC
 
         #region Méthodes
         //Marque une pause de n-secondes
-        static void Wait(float second)
+        public static void Wait(float second)
         {
             Task Delay = Task.Delay(TimeSpan.FromSeconds(second));
             Delay.Wait();
+        }
+
+        //Affiche des char un par un
+        public static void AffichageCharParChar(string message, float second)
+        {
+            foreach (char thatChar in message)
+            {
+                Console.Write(thatChar);
+                Wait(second);
+            }
         }
         #endregion
     }
