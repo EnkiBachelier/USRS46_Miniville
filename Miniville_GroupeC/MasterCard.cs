@@ -147,14 +147,14 @@ namespace Miniville_GroupeC
     #region Class : RestaurantCard (Dérivée de MasterCard)
     public class RestaurantCard : MasterCard
     {
-        public RestaurantCard() : base(5, CardColor.RED, "Restaurant", 4)
+        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 4)
         {
         }
 
         //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if (diceResult == activationValue)
+            if (diceResult == activationValue || diceResult == 10)
             {
                 playerWhosPlaying.nbPiece -= 2;
                 playerOwner.nbPiece += 2;
@@ -177,11 +177,12 @@ namespace Miniville_GroupeC
                 playerOwner.nbPiece += 4;
         }
     }
-	#endregion
+    #endregion
 
-    public class FromagerieCard : MasterCard
+    #region Class : CheeseFactoryCard (Dérivée de MasterCard)
+    public class CheeseFactoryCard : MasterCard
     {
-        public FromagerieCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
+        public CheeseFactoryCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
         {
 
         }
@@ -193,10 +194,12 @@ namespace Miniville_GroupeC
             }
         }
     }
+    #endregion
 
-    public class FabriqueDeMeublesCard : MasterCard
+    #region Class : FurnitureFactoryCard (Dérivée de MasterCard)
+    public class FurnitureFactoryCard : MasterCard
     {
-        public FabriqueDeMeublesCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
+        public FurnitureFactoryCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
         {
 
         }
@@ -208,7 +211,9 @@ namespace Miniville_GroupeC
             }
         }
     }
-	
+    #endregion
+
+    #region Class : MineCard (Dérivée de MasterCard)
     public class MineCard : MasterCard
     {
         public MineCard() : base(9, CardColor.BLUE, "Mine", 6)
@@ -223,26 +228,12 @@ namespace Miniville_GroupeC
             }
         }
     }
-	
-    public class Restaurant : MasterCard
-    {
-        public Restaurant() : base(9 | 10, CardColor.RED, "Restaurant", 3)
-        {
+    #endregion
 
-        }
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            if (diceResult == activationValue)
-            {
-                playerOwner.nbPiece += 2;
-                playerWhosPlaying.nbPiece -= 2;
-            }
-        }
-    }
-	
-    public class Verger : MasterCard
+    #region Class : OrchardCard (Dérivée de MasterCard)
+    public class OrchardCard : MasterCard
     {
-        public Verger() : base(10, CardColor.BLUE, "Verger", 3)
+        public OrchardCard() : base(10, CardColor.BLUE, "Verger", 3)
         {
 
         }
@@ -255,19 +246,22 @@ namespace Miniville_GroupeC
             }
         }
     }
-	
-    public class Marche : MasterCard
+    #endregion
+
+    #region Class : MarketCard (Dérivée de MasterCard)
+    public class MarketCard : MasterCard
     {
-        public Marche() : base(11 | 12, CardColor.GREEN, "Marche de fruits et légumes", 2)
+        public MarketCard() : base(11, CardColor.GREEN, "Marche de fruits et légumes", 2)
         {
 
         }
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 12))
             {
                 playerOwner.nbPiece += 2;
             }
         }
     }
+    #endregion
 }

@@ -40,6 +40,11 @@ namespace Miniville_GroupeC
             var amountForests = pile.mainPile.Where(x => x is ForestCard).ToList();
             var amountRestaurants = pile.mainPile.Where(x => x is RestaurantCard).ToList();
             var amountStadiums = pile.mainPile.Where(x => x is StadiumCard).ToList();
+            var amountCheeseFactories = pile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
+            var amountFurnitureFactories = pile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
+            var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
+            var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
+            var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
 
             do
             {
@@ -76,7 +81,7 @@ namespace Miniville_GroupeC
 
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 if (amountRestaurants.Count > 0)
-                    Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 5");
+                    Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10");
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -84,11 +89,36 @@ namespace Miniville_GroupeC
                     Console.WriteLine("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6");
                 Console.ResetColor();
 
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("9 - Passer votre tour");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountCheeseFactories.Count > 0)
+                    Console.WriteLine("9 - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7");
                 Console.ResetColor();
 
-            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 9);
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountFurnitureFactories.Count > 0)
+                    Console.WriteLine("10 - Une fabrique de meuble (3$) ? Recevez 3 pièces lorsque le dé affiche 8");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                if (amountMines.Count > 0)
+                    Console.WriteLine("11 - Une mine (6$) ? Recevez 5 pièces lorsque le dé affiche 9");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                if (amountOrchards.Count > 0)
+                    Console.WriteLine("12 - Un verger (3$) ? Recevez 4 pièces lorsque le dé affiche 10");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (amountMarkets.Count > 0)
+                    Console.WriteLine("13 - Un marché (2$) ? Recevez 2 pièces lorsque le dé affiche 11");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("14 - Passer votre tour");
+                Console.ResetColor();
+
+            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 14);
 
             switch (choice)
             {
@@ -182,6 +212,61 @@ namespace Miniville_GroupeC
                     Console.WriteLine("Vous avez choisi d'acheter un stade\n");
                     break;
                 case 9:
+                    var cheeseFacto = new CheeseFactoryCard();
+                    if (amountCheeseFactories.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(cheeseFacto);
+                    Console.WriteLine("Vous avez choisi d'acheter une fabrique de fromage\n");
+                    break;
+                case 10:
+                    var furnitureFacto = new FurnitureFactoryCard();
+                    if (amountFurnitureFactories.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(furnitureFacto);
+                    Console.WriteLine("Vous avez choisi d'acheter une fabrique de meubles\n");
+                    break;
+                case 11:
+                    var mine = new StadiumCard();
+                    if (amountMines.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(mine);
+                    Console.WriteLine("Vous avez choisi d'acheter une mine\n");
+                    break;
+                case 12:
+                    var orchard = new OrchardCard();
+                    if (amountOrchards.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(orchard);
+                    Console.WriteLine("Vous avez choisi d'acheter un verger\n");
+                    break;
+                case 13:
+                    var market = new MarketCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                        break;
+                    }
+                    CanBuyCard(market);
+                    Console.WriteLine("Vous avez choisi d'acheter un marché\n");
+                    break;
+                case 14:
                     Console.WriteLine("Vous avez passé votre tour\n");
                     break;
             }

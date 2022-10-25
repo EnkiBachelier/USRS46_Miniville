@@ -15,6 +15,7 @@ namespace Miniville_GroupeC
             int errorTryCatch = 0;
             bool expertMode = false;
             int nbPiecesToWin = 0;
+            bool doubleDe = false;
             #endregion
 
             #region Textes de lancement
@@ -78,25 +79,24 @@ namespace Miniville_GroupeC
                 Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
 
                 string difficulty = Console.ReadLine();
-				
-				Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
-				Console.WriteLine("1 -- Avec un dé !");
-				Console.WriteLine("2 -- Avec deux dés !");
 
-				string DoubleDe = Console.ReadLine();
-				
-				bool doubleDe = false;
+                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                Console.WriteLine("1 -- Avec un dé !");
+                Console.WriteLine("2 -- Avec deux dés !");
 
-				switch (DoubleDe)
-				{
-					case "1":
-						doubleDe = false;
-						break;
-					case "2":
-						doubleDe = true;
-						break;
-				}
-				
+                string DoubleDe = Console.ReadLine();
+
+
+                switch (DoubleDe)
+                {
+                    case "1":
+                        doubleDe = false;
+                        break;
+                    case "2":
+                        doubleDe = true;
+                        break;
+                }
+
                 //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
                 {
@@ -110,7 +110,7 @@ namespace Miniville_GroupeC
                         break;
                     case "3":
                         nbPiecesToWin = 30;
-                        errorTryCatch = 0 ;
+                        errorTryCatch = 0;
                         break;
                     case "4":
                         nbPiecesToWin = 20;
@@ -124,11 +124,11 @@ namespace Miniville_GroupeC
 
 
                 }
-            } while(errorTryCatch == 1);
+            } while (errorTryCatch == 1);
             #endregion
 
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode, doubleDe);
             theGame.GameLoop();
             #endregion
         }

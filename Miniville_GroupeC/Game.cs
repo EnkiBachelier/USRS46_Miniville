@@ -58,7 +58,6 @@ namespace Miniville_GroupeC
         public void GameLoop()
         {
 
-
             bool isInLoop = true;
             string winningPlayer = "";
 
@@ -66,31 +65,28 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    currentPlayer = players[i];
-                    int valueDice = this.playDice.activeValueOfDice;
-					int valueDice2 = this.playDice.activeValueOfSecondDice;
 
                     //Données du joueur et du dé
+                    currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
-
-					int valueTotal = valueDice;
+					int valueTotal = this.playDice.activeValueOfDice;
                     if(doubleDe)
-						valuetotal += valueDice2;
+						valueTotal += this.playDice.activeValueOfSecondDice;
 
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write(currentPlayer.nbPiece);
                     Console.ResetColor();
                     Console.WriteLine(" pièces !");
 
-                    Console.Write("Le dé affiche une valeur de ");
+                    Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write(valuetotal);
+                    Console.Write(valueTotal);
                     Console.ResetColor();
                     Console.WriteLine();               
 
                     //Activation de cartes et achats
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
-                    currentPlayers.CheckCardToActivate(valuetotal);
+                    currentPlayer.CheckCardToActivate(valueTotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayer.BuyCard();
 
@@ -108,9 +104,15 @@ namespace Miniville_GroupeC
                             var amountForests = currentPlayer.playerCardList.Where(x => x is ForestCard).ToList();
                             var amountRestaurants = currentPlayer.playerCardList.Where(x => x is RestaurantCard).ToList();
                             var amountStadiums = currentPlayer.playerCardList.Where(x => x is StadiumCard).ToList();
+                            var amountCheeseFactories = currentPlayer.playerCardList.Where(x => x is CheeseFactoryCard).ToList();
+                            var amountFurnitureFactories = currentPlayer.playerCardList.Where(x => x is FurnitureFactoryCard).ToList();
+                            var amountMines = currentPlayer.playerCardList.Where(x => x is MineCard).ToList();
+                            var amountOrchards = currentPlayer.playerCardList.Where(x => x is OrchardCard).ToList();
+                            var amountMarkets = currentPlayer.playerCardList.Where(x => x is MarketCard).ToList();
 
                             if (amountWheatFields.Count * amountFarms.Count * amountBakeries.Count * amountCoffees.Count * amountMiniMarkets.Count *
-                                amountForests.Count * amountRestaurants.Count * amountStadiums.Count > 0)
+                                amountForests.Count * amountRestaurants.Count * amountStadiums.Count * amountCheeseFactories.Count *
+                                amountFurnitureFactories.Count * amountMines.Count * amountOrchards.Count * amountMarkets.Count > 0)
                             {
                                 winningPlayer = currentPlayer.name;
                                 isInLoop = false;
