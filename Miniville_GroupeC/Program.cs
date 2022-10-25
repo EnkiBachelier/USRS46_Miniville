@@ -78,7 +78,25 @@ namespace Miniville_GroupeC
                 Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
 
                 string difficulty = Console.ReadLine();
+				
+				Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+				Console.WriteLine("1 -- Avec un dé !");
+				Console.WriteLine("2 -- Avec deux dés !");
 
+				string DoubleDe = Console.ReadLine();
+				
+				bool doubleDe = false;
+
+				switch (DoubleDe)
+				{
+					case "1":
+						doubleDe = false;
+						break;
+					case "2":
+						doubleDe = true;
+						break;
+				}
+				
                 //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
                 {

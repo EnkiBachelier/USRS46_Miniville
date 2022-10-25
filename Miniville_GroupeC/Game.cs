@@ -16,17 +16,19 @@ namespace Miniville_GroupeC
         public List<string> namePlayers = new List<string>();
         private List<MasterCard> initialCards = new List<MasterCard>();
         private bool expertMode;
+        private bool doubleDe;
         public Pile pile;
 
         #endregion
 
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool doubleDe = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
             this.namePlayers = namePlayers;
+            this.doubleDe = doubleDe;
             pile = new Pile();
 
             //On initialise chaque joueur avec une boulangerie et un champ de blé ainsi que 3 pièces
@@ -64,12 +66,17 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-
                     currentPlayer = players[i];
                     int valueDice = this.playDice.activeValueOfDice;
+					int valueDice2 = this.playDice.activeValueOfSecondDice;
 
                     //Données du joueur et du dé
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
+
+					int valueTotal = valueDice;
+                    if(doubleDe)
+						valuetotal += valueDice2;
+
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write(currentPlayer.nbPiece);
                     Console.ResetColor();
@@ -77,13 +84,13 @@ namespace Miniville_GroupeC
 
                     Console.Write("Le dé affiche une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write(valueDice);
+                    Console.Write(valuetotal);
                     Console.ResetColor();
-                    Console.WriteLine();
+                    Console.WriteLine();               
 
                     //Activation de cartes et achats
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
-                    currentPlayer.CheckCardToActivate(valueDice);
+                    currentPlayers.CheckCardToActivate(valuetotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayer.BuyCard();
 
