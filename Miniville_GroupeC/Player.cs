@@ -99,6 +99,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(wheatFieldCard);
                     Console.WriteLine("Vous avez choisi d'acheter un champ de blé\n");
@@ -109,6 +110,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(farm);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
@@ -119,6 +121,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(bakery);
                     Console.WriteLine("Vous avez choisi d'acheter une boulangerie\n");
@@ -129,6 +132,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(cafe);
                     Console.WriteLine("Vous avez choisi d'acheter un café\n");
@@ -139,6 +143,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(minimarket);
                     Console.WriteLine("Vous avez choisi d'acheter une superette\n");
@@ -149,6 +154,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(forest);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
@@ -159,6 +165,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(restau);
                     Console.WriteLine("Vous avez choisi d'acheter un restaurant\n");
@@ -169,6 +176,7 @@ namespace Miniville_GroupeC
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
+                        break;
                     }
                     CanBuyCard(stadium);
                     Console.WriteLine("Vous avez choisi d'acheter un stade\n");
