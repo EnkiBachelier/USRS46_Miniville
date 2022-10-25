@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Miniville_GroupeC
 {
@@ -106,5 +106,14 @@ namespace Miniville_GroupeC
             theGame.GameLoop();
             #endregion
         }
+
+        #region Méthodes
+        //Marque une pause de n-secondes
+        static void Wait(float second)
+        {
+            Task Delay = Task.Delay(TimeSpan.FromSeconds(second));
+            Delay.Wait();
+        }
+        #endregion
     }
 }
