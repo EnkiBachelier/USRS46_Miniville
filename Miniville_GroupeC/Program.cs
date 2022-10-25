@@ -46,6 +46,24 @@ namespace Miniville_GroupeC
 
             string difficulty = Console.ReadLine();
 
+            Console.WriteLine("\nAvec combien de dé voulais vous jouer\n");
+            Console.WriteLine("1 -- Avec un dé !");
+            Console.WriteLine("2 -- Avec deux dés !");
+
+            string DoubleDe = Console.ReadLine();
+
+            bool doubleDe = false;
+
+            switch (DoubleDe)
+            {
+                case "1":
+                    doubleDe = false;
+                    break;
+                case "2":
+                    doubleDe = true;
+                    break;
+            }
+
             int nbPiecesToWin = 0;
             bool expertMode = false;
             switch (difficulty)
@@ -63,11 +81,8 @@ namespace Miniville_GroupeC
                     nbPiecesToWin = 20;
                     expertMode = true;
                     break;
-
-
             }
-
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode, doubleDe);
             theGame.GameLoop();
         }
     }

@@ -166,4 +166,91 @@ namespace Miniville_GroupeC
             }
         }
     }
+    public class FromagerieCard : MasterCard
+    {
+        public FromagerieCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+
+    public class FabriqueDeMeublesCard : MasterCard
+    {
+        public FabriqueDeMeublesCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+    public class MineCard : MasterCard
+    {
+        public MineCard() : base(9, CardColor.BLUE, "Mine", 6)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 5;
+            }
+        }
+    }
+    public class Restaurant : MasterCard
+    {
+        public Restaurant() : base(9 | 10, CardColor.RED, "Restaurant", 3)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 2;
+                playerWhosPlaying.nbPiece -= 2;
+            }
+        }
+    }
+    public class Verger : MasterCard
+    {
+        public Verger() : base(10, CardColor.BLUE, "Verger", 3)
+        {
+
+        }
+
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 3;
+            }
+        }
+    }
+    public class Marche : MasterCard
+    {
+        public Marche() : base(11 | 12, CardColor.GREEN, "Marche de fruits et légumes", 2)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            {
+                playerOwner.nbPiece += 2;
+            }
+        }
+    }
 }

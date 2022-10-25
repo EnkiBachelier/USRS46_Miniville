@@ -13,14 +13,17 @@ namespace Miniville_GroupeC
         public List<string> namePlayers = new List<string>();
         private List<MasterCard> initialCards = new List<MasterCard>();
         private bool expertMode;
+        private bool doubleDe;
         public Pile pile;
 
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
+
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool doubleDe = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
             this.namePlayers = namePlayers;
+            this.doubleDe = doubleDe;
 
             pile = new Pile();
 
@@ -66,24 +69,47 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-
+                    int valueDice = 0;
+                    int valueDice2 = 0;
                     currentPlayers = players[i];
-                    int valueDice = this.playDice.De;
+
+                    if(doubleDe == false)
+                    {
+                        valueDice = this.playDice.De;
+                    }
+                    else if (doubleDe == true)
+                    {
+                        valueDice = this.playDice.De;
+                        valueDice2 = this.playDice.De2;
+                    }
                     
+                    int valuetotal = valueDice + valueDice2;
+
                     Console.Write("\n\nC'est au tour de " + currentPlayers.name + " qui a un total de ");
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write(currentPlayers.nbPiece);
                     Console.ResetColor();
                     Console.WriteLine(" pièces !");
 
-                    Console.Write("Le dé affiche une valeur de ");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write(valueDice);
-                    Console.ResetColor();
-                    Console.WriteLine();
+                    if(doubleDe == false)
+                    {
+                        Console.Write("Le dé affiche une valeur de ");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write(valueDice);
+                        Console.ResetColor();
+                        Console.WriteLine();
+                    }else if(doubleDe == true)
+                    {
+                        Console.Write("Le dé affiche une valeur de ");
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.Write(valuetotal);
+                        Console.ResetColor();
+                        Console.WriteLine();
+                    }
+                    
 
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
-                    currentPlayers.CheckCardToActivate(valueDice);
+                    currentPlayers.CheckCardToActivate(valuetotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayers.BuyCard();
 
