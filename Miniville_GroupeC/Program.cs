@@ -8,43 +8,61 @@ namespace Miniville_GroupeC
     {
         static void Main(string[] args)
         {
-
+            #region Déclaration des variables
             Dice playDice = new Dice();
             List<string> namePlayers = new List<string>();
-
-            Console.WriteLine("Bienvenue dans Miniville !");
             int nbMayors = 0;
             int errorTryCatch = 0;
+            bool expertMode = false;
+            int nbPiecesToWin = 0;
+            #endregion
+
+            #region Textes de lancement
+            Console.WriteLine("Bienvenue dans Miniville !");
+            Console.Write("Dans ce jeu, vous serez amené à devenir le maire le plus ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("INCROYABLE");
+            Console.ResetColor();
+            Console.WriteLine(" que cette région ait connu");
+            Console.WriteLine("\nMais bien évidemment, certains essayeront de vous mettre des bâtons dans les pattes...");
+            Console.Write("Etonnez-les avec votre ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("MAGNIFICIENCE");
+            Console.ResetColor();
+            Console.WriteLine(" et réduisez-les à l'état d'agents municipaux !\n\n");
+            #endregion
+
+            #region Données des maires
             do
             {
+                //Nombres de maires
                 try
                 {
-                    Console.Write("Avec combien de maires souhaitez-vous jouer ? ");
+                    Console.Write("Combien de maires souhaitent jouer ? ");
                     nbMayors = int.Parse(Console.ReadLine());
                     errorTryCatch = 0;
                 }
                 catch
                 {
-                    Console.WriteLine("Veuillez entrer un numéro valide");
+                    Console.WriteLine("Veuillez entrer un numéro valide !");
                     errorTryCatch = 1;
                 }
 
             } while (errorTryCatch == 1);
 
+            //Noms des maires
             for (int i = 0; i < nbMayors; i++)
             {
                 Console.Write("\nQuel est le nom du maire n°" + (i + 1) + "? ");
                 string name = Console.ReadLine();
                 namePlayers.Add(name);
             }
+            #endregion
 
-
-            bool expertMode = false;
-            int nbPiecesToWin = 0;
-
-            int errorDifficult = 1;
+            #region Niveau de difficultés des parties
             do
             {
+                //Affichage des difficultés
                 Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
                 Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
                 Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
@@ -53,36 +71,40 @@ namespace Miniville_GroupeC
 
                 string difficulty = Console.ReadLine();
 
+                //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
                 {
                     case "1":
                         nbPiecesToWin = 10;
-                        errorDifficult = 0;
+                        errorTryCatch = 0;
                         break;
                     case "2":
                         nbPiecesToWin = 20;
-                        errorDifficult = 0;
+                        errorTryCatch = 0;
                         break;
                     case "3":
                         nbPiecesToWin = 30;
-                        errorDifficult =0 ;
+                        errorTryCatch = 0 ;
                         break;
                     case "4":
                         nbPiecesToWin = 20;
                         expertMode = true;
-                        errorDifficult =0;
+                        errorTryCatch = 0;
                         break;
                     default:
                         Console.WriteLine("Veuillez entrer un numéro valide");
-                        errorDifficult = 1;
+                        errorTryCatch = 1;
                         break;
 
 
                 }
-            } while(errorDifficult == 1);
+            } while(errorTryCatch == 1);
+            #endregion
 
+            #region Lancement du jeu
             Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
             theGame.GameLoop();
+            #endregion
         }
     }
 }

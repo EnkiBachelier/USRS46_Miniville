@@ -6,59 +6,68 @@ namespace Miniville_GroupeC
 {
     public class Pile
     {
-        public List<MasterCard> mainpile = new List<MasterCard>();
+        #region Déclaration des variables
+        public List<MasterCard> mainPile = new List<MasterCard>();
+        #endregion
 
+        #region Constructeur
         public Pile()
         {
             int nb = 0;
             for (int i = 0; i < 6 * 8; i++)
             {
 
+                //Ajout de 6 instances de chaque carte dans la pile
                 if (i % 6 == 0)
                     nb++;
                 switch (nb)
                 {
                     case 1:
-                        mainpile.Add(new WheatFieldCard());
+                        mainPile.Add(new WheatFieldCard());
                         break;
                     case 2:
-                        mainpile.Add(new FarmCard());
+                        mainPile.Add(new FarmCard());
                         break;
                     case 3:
-                        mainpile.Add(new BakeryCard());
+                        mainPile.Add(new BakeryCard());
                         break;
                     case 4:
-                        mainpile.Add(new CafeCard());
+                        mainPile.Add(new CoffeeCard());
                         break;
                     case 5:
-                        mainpile.Add(new MiniMarketCard());
+                        mainPile.Add(new MiniMarketCard());
                         break;
                     case 6:
-                        mainpile.Add(new ForestCard());
+                        mainPile.Add(new ForestCard());
                         break;
                     case 7:
-                        mainpile.Add(new RestaurantCard());
+                        mainPile.Add(new RestaurantCard());
                         break;
                     case 8:
-                        mainpile.Add(new StadiumCard());
+                        mainPile.Add(new StadiumCard());
                         break;
                 }
 
             }
         }
+        #endregion
 
+        #region Méthodes
+        
+        //Retire une carte précise (achetée par exemple) de la pile
         public void RemoveCardFromPile(MasterCard card)
         {
-            int index = -1;
-            for (int i = 0; i < mainpile.Count; i++)
+            int inactiveValueOfDicex = -1;
+            for (int i = 0; i < mainPile.Count; i++)
             {
-                if (card.name == mainpile[i].name)
+                if (card.name == mainPile[i].name)
                 {
-                    index = i;
+                    inactiveValueOfDicex = i;
                     break;
                 }
             }
-            mainpile.RemoveAt(index);
+            mainPile.RemoveAt(inactiveValueOfDicex);
         }
+        #endregion
     }
 }
