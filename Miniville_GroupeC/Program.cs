@@ -15,7 +15,6 @@ namespace Miniville_GroupeC
             int errorTryCatch = 0;
             bool expertMode = false;
             int nbPiecesToWin = 0;
-
             #endregion
 
             #region Textes de lancement
@@ -63,6 +62,7 @@ namespace Miniville_GroupeC
             #region Niveau de difficultés des parties
             do
             {
+                //Affichage des difficultés
                 Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
                 Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
                 Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
@@ -71,6 +71,7 @@ namespace Miniville_GroupeC
 
                 string difficulty = Console.ReadLine();
 
+                //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
                 {
                     case "1":

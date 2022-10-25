@@ -55,6 +55,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
@@ -70,6 +71,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
@@ -85,6 +87,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
@@ -100,6 +103,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Le joueur qui possède la carte vole 1$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
@@ -118,6 +122,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
@@ -133,6 +138,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
@@ -148,6 +154,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
@@ -166,6 +173,7 @@ namespace Miniville_GroupeC
         {
         }
 
+        //Ajoute 4$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)

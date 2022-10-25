@@ -34,7 +34,7 @@ namespace Miniville_GroupeC
 
             do
             {
-                //Affichage des cartes de la pile
+                //Affichage des cartes de la pile selon la disponibilité dans la pile
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (pile.mainPile.Contains(new WheatFieldCard()))
                     Console.WriteLine("1 - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1");
@@ -130,32 +130,38 @@ namespace Miniville_GroupeC
             }
         }
 
-        //Si le joueur a assez d'argent, achète la carte sinon relance BuyCard()
+        //Si le joueur a assez d'argent et que la carte est disponible dans la pile, achète la carte sinon relance BuyCard()
         private void CanBuyCard(MasterCard card)
         {
-            if (nbPiece >= card.costValue)
+            //Disponibilité de la carte
+            if (!pile.mainPile.Contains(card))
             {
-                nbPiece -= card.costValue;
-                playerCardList.Add(card);
-                game.pile.RemoveCardFromPile(card);
-                card.SetPlayerOwner(this);
+                Console.WriteLine("Cette carte n'est plus disponible dans la pile");
+                BuyCard();
             }
             else
             {
-                Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
-                BuyCard();
+                //Possibilité de payer la carte
+                if (nbPiece >= card.costValue)
+                {
+                    nbPiece -= card.costValue;
+                    playerCardList.Add(card);
+                    game.pile.RemoveCardFromPile(card);
+                    card.SetPlayerOwner(this);
+                }
+                else
+                {
+                    Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
+                    BuyCard();
+                }
             }
         }
 
         //Parcourt les cartes de chaque joueur afin de les activer selon la valeur du dé
         public void CheckCardToActivate(int diceValue)
         {
-
             foreach (var card in playerCardList)
-            {
                 card.OnDiceResult(diceValue, game.currentPlayer);
-            }
-
         }
         #endregion
     }

@@ -54,7 +54,7 @@ namespace Miniville_GroupeC
 
         #region Méthodes
         
-        //Retire la carte achetée de la pile
+        //Retire une carte précise (achetée par exemple) de la pile
         public void RemoveCardFromPile(MasterCard card)
         {
             int inactiveValueOfDicex = -1;

@@ -39,6 +39,8 @@ namespace Miniville_GroupeC
                     cardIniBakery
                 };
                 Player thatPlayer = new Player(3, this.initialCards, this, thatName, this.pile);
+
+                //On associe les cartes au joueur
                 cardIniWheatField.SetPlayerOwner(thatPlayer);
                 cardIniBakery.SetPlayerOwner(thatPlayer);
                 players.Add(thatPlayer);
@@ -55,6 +57,7 @@ namespace Miniville_GroupeC
 
             bool isInLoop = true;
             string winningPlayer = "";
+
             while (isInLoop)
             {
                 for (int i = 0; i < players.Count; i++)
