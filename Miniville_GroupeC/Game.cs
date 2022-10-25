@@ -90,9 +90,25 @@ namespace Miniville_GroupeC
                     piecesPlayers[i] = currentPlayers.nbPiece;
                     if (currentPlayers.nbPiece >= this.nbPieceVictory)
                     {
-                        winningPlayer = currentPlayers.name;
-                        isInLoop = false;
-                        break;
+                        if (expertMode && currentPlayers.playercard.Contains(new FarmCard()) &&
+                            currentPlayers.playercard.Contains(new CafeCard()) &&
+                            currentPlayers.playercard.Contains(new RestaurantCard()) &&
+                            currentPlayers.playercard.Contains(new WheatFieldCard()) &&
+                            currentPlayers.playercard.Contains(new BakeryCard()) &&
+                            currentPlayers.playercard.Contains(new MiniMarketCard()) &&
+                            currentPlayers.playercard.Contains(new ForestCard()) &&
+                            currentPlayers.playercard.Contains(new StadiumCard()))
+                        {
+                            winningPlayer = currentPlayers.name;
+                            isInLoop = false;
+                            break;
+                        }
+                        else
+                        {
+                            winningPlayer = currentPlayers.name;
+                            isInLoop = false;
+                            break;
+                        }
                     }
                 }
             }
