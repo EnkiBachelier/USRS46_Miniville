@@ -6,10 +6,12 @@ namespace Miniville_GroupeC
 {
     public class Dice
     {
+        #region Déclaration des variables
         Random rdm = new Random();
 
-        private int Dices => rdm.Next(1, 7);
+        private int valueRandom => rdm.Next(1, 7);
 
-        public int De { get { return Dices; } }
+        public int activeValueOfDice { get { return valueRandom; } }
+        #endregion
     }
 }
