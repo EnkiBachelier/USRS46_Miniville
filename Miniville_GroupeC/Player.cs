@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Miniville_GroupeC
 {
@@ -30,50 +31,59 @@ namespace Miniville_GroupeC
         public void BuyCard()
         {
             int choice = -1;
+            //Retourne le nombre restant dans la pile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
+            var amountWheatFields = pile.mainPile.Where(x => x is WheatFieldCard).ToList();
+            var amountFarms = pile.mainPile.Where(x => x is FarmCard).ToList();
+            var amountBakeries = pile.mainPile.Where(x => x is BakeryCard).ToList();
+            var amountCoffees = pile.mainPile.Where(x => x is CoffeeCard).ToList();
+            var amountMiniMarkets = pile.mainPile.Where(x => x is MiniMarketCard).ToList();
+            var amountForests = pile.mainPile.Where(x => x is ForestCard).ToList();
+            var amountRestaurants = pile.mainPile.Where(x => x is RestaurantCard).ToList();
+            var amountStadiums = pile.mainPile.Where(x => x is StadiumCard).ToList();
 
             do
             {
                 //Affichage des cartes de la pile selon la disponibilité dans la pile
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new WheatFieldCard()))
+                if (amountWheatFields.Count > 0)
                     Console.WriteLine("1 - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new FarmCard()))
+                if (amountFarms.Count > 0)
                     Console.WriteLine("2 - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (pile.mainPile.Contains(new BakeryCard()))
+                if (amountBakeries.Count > 0)
                     Console.WriteLine("3 - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                if (pile.mainPile.Contains(new CoffeeCard()))
+                if (amountCoffees.Count > 0)
                     Console.WriteLine("4 - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (pile.mainPile.Contains(new MiniMarketCard()))
+                if (amountMiniMarkets.Count > 0)
                     Console.WriteLine("5 - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new ForestCard()))
+                if (amountForests.Count > 0)
                     Console.WriteLine("6 - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                if (pile.mainPile.Contains(new RestaurantCard()))
+                if (amountRestaurants.Count > 0)
                     Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 5");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                if (pile.mainPile.Contains(new StadiumCard()))
+                if (amountStadiums.Count > 0)
                     Console.WriteLine("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6");
-
                 Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("9 - Passer votre tour");
                 Console.ResetColor();
@@ -82,44 +92,84 @@ namespace Miniville_GroupeC
 
             switch (choice)
             {
-                //Selon le choix du joueur et son argent, réalise l'achat
+                //Selon le choix du joueur et la disponibilité de la carte dans la pile, réalise l'achat via CanBuyCard()
                 case 1:
                     var wheatFieldCard = new WheatFieldCard();
+                    if (amountWheatFields.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(wheatFieldCard);
                     Console.WriteLine("Vous avez choisi d'acheter un champ de blé\n");
                     break;
                 case 2:
                     var farm = new FarmCard();
+                    if (amountFarms.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(farm);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 3:
                     var bakery = new BakeryCard();
+                    if (amountBakeries.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(bakery);
                     Console.WriteLine("Vous avez choisi d'acheter une boulangerie\n");
                     break;
                 case 4:
                     var cafe = new CoffeeCard();
+                    if (amountCoffees.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(cafe);
                     Console.WriteLine("Vous avez choisi d'acheter un café\n");
                     break;
                 case 5:
                     var minimarket = new MiniMarketCard();
+                    if (amountMiniMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(minimarket);
                     Console.WriteLine("Vous avez choisi d'acheter une superette\n");
                     break;
                 case 6:
                     var forest = new ForestCard();
+                    if (amountForests.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(forest);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 7:
                     var restau = new RestaurantCard();
+                    if (amountRestaurants.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(restau);
                     Console.WriteLine("Vous avez choisi d'acheter un restaurant\n");
                     break;
                 case 8:
                     var stadium = new StadiumCard();
+                    if (amountStadiums.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        BuyCard();
+                    }
                     CanBuyCard(stadium);
                     Console.WriteLine("Vous avez choisi d'acheter un stade\n");
                     break;
@@ -129,32 +179,23 @@ namespace Miniville_GroupeC
             }
         }
 
-        //Si le joueur a assez d'argent et que la carte est disponible dans la pile, achète la carte sinon relance BuyCard()
+        //Si le joueur a assez d'argent, achète la carte sinon relance BuyCard()
         private void CanBuyCard(MasterCard card)
         {
-            //Disponibilité de la carte
-            if (!pile.mainPile.Contains(card))
+            if (nbPiece >= card.costValue)
             {
-                Console.WriteLine("Cette carte n'est plus disponible dans la pile");
-                BuyCard();
+                nbPiece -= card.costValue;
+                playerCardList.Add(card);
+                game.pile.RemoveCardFromPile(card);
+                card.SetPlayerOwner(this);
             }
             else
             {
-                //Possibilité de payer la carte
-                if (nbPiece >= card.costValue)
-                {
-                    nbPiece -= card.costValue;
-                    playerCardList.Add(card);
-                    game.pile.RemoveCardFromPile(card);
-                    card.SetPlayerOwner(this);
-                }
-                else
-                {
-                    Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
-                    BuyCard();
-                }
+                Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");
+                BuyCard();
             }
         }
+
 
         //Parcourt les cartes de chaque joueur afin de les activer selon la valeur du dé
         public void CheckCardToActivate(int diceValue)
