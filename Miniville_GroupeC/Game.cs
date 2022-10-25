@@ -61,6 +61,7 @@ namespace Miniville_GroupeC
             }
 
             bool isInLoop = true;
+            string winningPlayer = "";
             while (isInLoop)
             {
                 for (int i = 0; i < players.Count; i++)
@@ -89,14 +90,30 @@ namespace Miniville_GroupeC
                     piecesPlayers[i] = currentPlayers.nbPiece;
                     if (currentPlayers.nbPiece >= this.nbPieceVictory)
                     {
-                        
-                        isInLoop = false;
-                        break;
+                        if (expertMode && currentPlayers.playercard.Contains(new FarmCard()) &&
+                            currentPlayers.playercard.Contains(new CafeCard()) &&
+                            currentPlayers.playercard.Contains(new RestaurantCard()) &&
+                            currentPlayers.playercard.Contains(new WheatFieldCard()) &&
+                            currentPlayers.playercard.Contains(new BakeryCard()) &&
+                            currentPlayers.playercard.Contains(new MiniMarketCard()) &&
+                            currentPlayers.playercard.Contains(new ForestCard()) &&
+                            currentPlayers.playercard.Contains(new StadiumCard()))
+                        {
+                            winningPlayer = currentPlayers.name;
+                            isInLoop = false;
+                            break;
+                        }
+                        else
+                        {
+                            winningPlayer = currentPlayers.name;
+                            isInLoop = false;
+                            break;
+                        }
                     }
                 }
             }
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.WriteLine("Bravo au joueur " + namePlayers[CheckWinner(piecesPlayers)] + " qui a gagné !!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Bravo au joueur " + winningPlayer + " qui a gagné !!");
             Console.ResetColor();
         }
 
