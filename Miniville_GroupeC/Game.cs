@@ -16,17 +16,19 @@ namespace Miniville_GroupeC
         public List<string> namePlayers = new List<string>();
         private List<MasterCard> initialCards = new List<MasterCard>();
         private bool expertMode;
-        private bool doubleDe;
+        private bool reelMode;
         public Pile pile;
+        public static bool hasCentreCommercial = false;
 
         #endregion
 
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool reelMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
+            this.reelMode = reelMode;
             this.namePlayers = namePlayers;
             pile = new Pile();
 
@@ -64,44 +66,23 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    #region Nombre de dés pour la partie7
-                    int errorTryCatch = 0;
-                    do
-                    {
-                        Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
-                        Console.WriteLine("1 -- Avec un dé !");
-                        Console.WriteLine("2 -- Avec deux dés !");
-                        string DoubleDe = Console.ReadLine();
-
-                        switch (DoubleDe)
-                        {
-                            case "1":
-                                doubleDe = false;
-                                errorTryCatch = 0;
-                                break;
-                            case "2":
-                                doubleDe = true;
-                                errorTryCatch = 0;
-                                break;
-                            default:
-                                Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
-                                errorTryCatch = 1;
-                                break;
-                        }
-                    } while (errorTryCatch == 1);
-                    #endregion
-
                     //Données du joueur et du dé
                     currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
-					int valueTotal = this.playDice.activeValueOfDice;
-                    if(doubleDe)
-						valueTotal += this.playDice.activeValueOfSecondDice;
-
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write(currentPlayer.nbPiece);
                     Console.ResetColor();
                     Console.WriteLine(" pièces !");
+
+					int valueDice1 = this.playDice.activeValueOfDice;
+                    int valueDice2 =0;
+                    var GareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
+                    if (GareCard.Count >= 1)
+                    {
+                        valueDice2 = this.playDice.activeValueOfSecondDice;
+                    }
+                        
+                    int valueTotal = valueDice1 + valueDice2;
 
                     Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -109,15 +90,56 @@ namespace Miniville_GroupeC
                     Console.ResetColor();
                     Console.WriteLine();               
 
+                    var TourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
+                    if(TourRadioCard.Count >= 1)
+                    {
+                        Console.WriteLine("Voulez-vous relancer les dés ?\n");
+                        Console.WriteLine("o -- Oui");
+                        Console.WriteLine("n -- Non");
+                        string tourRadio = Console.ReadLine();
+                        if (tourRadio == "o")
+                        {
+                            valueDice1 = this.playDice.activeValueOfDice;
+
+                            valueDice2 = this.playDice.activeValueOfSecondDice;
+                            valueTotal = valueDice1 + valueDice2;
+
+                            Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.Write(valueTotal);
+                            Console.ResetColor();
+                            Console.WriteLine();
+
+                        }
+                    }
+                    var CentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
+                    if (CentreCommercialCard.Count >= 1)
+                    {
+                        hasCentreCommercial = true;
+                    }
+                    
                     //Activation de cartes et achats
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
                     currentPlayer.CheckCardToActivate(valueTotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayer.BuyCard();
-
+                    hasCentreCommercial = false;
                     //Conditions de victoires
                     if (currentPlayer.nbPiece >= this.nbPieceVictory)
                     {
+                        if (reelMode)
+                        {
+                            var amountTourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
+                            var amountGareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
+                            var amountParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList();
+                            var amountCentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
+                            if(amountCentreCommercialCard.Count * amountGareCard.Count * amountParcAttractionsCard.Count * amountTourRadioCard.Count > 0)
+                            {
+                                winningPlayer = currentPlayer.name;
+                                isInLoop = false;
+                                break;
+                            }
+                        }
                         if (expertMode)
                         {
                             //Retourne le nombre restant dans la main du joueur de chaque type de carte (si elles y sont toutes, le joueur gagne le mode expert) 
@@ -151,6 +173,11 @@ namespace Miniville_GroupeC
                             isInLoop = false;
                             break;
                         }
+                    }
+                    var ParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList(); 
+                    if (ParcAttractionsCard.Count >= 1 && valueDice2 == valueDice1)
+                    {
+                        break;
                     }
                 }
                 Console.Clear();
