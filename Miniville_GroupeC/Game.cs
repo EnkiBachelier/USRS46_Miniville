@@ -8,7 +8,6 @@ namespace Miniville_GroupeC
     public class Game
     {
         #region Déclaration des variables
-
         public List<Player> players = new List<Player>();
         public Player currentPlayer;
         public Dice playDice;
@@ -18,7 +17,6 @@ namespace Miniville_GroupeC
         private bool expertMode;
         private bool doubleDe;
         public Pile pile;
-
         #endregion
 
         #region Constructeur
@@ -52,37 +50,33 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Méthodes
-
         //Effectue la boucle de jeu en affichant les données du joueur et du dé, en vérifiant si des cartes doivent être activées et en demandant si le joueur souhaite acheter une carte
         //Vérifie également la condition de fin et affiche le gagnant
         public void GameLoop()
         {
-
             bool isInLoop = true;
             string winningPlayer = "";
-
             while (isInLoop)
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-
-                    //Données du joueur et du dé
+                    //Données du joueur
                     currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
-					int valueTotal = this.playDice.activeValueOfDice;
-                    if(doubleDe)
-						valueTotal += this.playDice.activeValueOfSecondDice;
-
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write(currentPlayer.nbPiece);
                     Console.ResetColor();
                     Console.WriteLine(" pièces !");
 
+					//Données des dés
+                    int valueTotal = this.playDice.activeValueOfDice;
+                    if(doubleDe)
+						valueTotal += this.playDice.activeValueOfSecondDice;
                     Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write(valueTotal);
                     Console.ResetColor();
-                    Console.WriteLine();               
+                    Console.WriteLine();   
 
                     //Activation de cartes et achats
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
@@ -149,7 +143,6 @@ namespace Miniville_GroupeC
 
 
         }
-
         #endregion
 
     }

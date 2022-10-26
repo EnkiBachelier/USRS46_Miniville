@@ -64,7 +64,7 @@ namespace Miniville_GroupeC
     #region Class : FarmCard (Dérivée de MasterCard)
     public class FarmCard : MasterCard
     {
-        public FarmCard() : base(1, CardColor.BLUE, "Ferme", 2)
+        public FarmCard() : base(2, CardColor.BLUE, "Ferme", 2)
         {
         }
 
@@ -87,7 +87,7 @@ namespace Miniville_GroupeC
         //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-            if (playerOwner == playerWhosPlaying && diceResult == activationValue)
+            if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 3))
                 playerOwner.nbPiece += 2;
         }
     }
@@ -143,26 +143,6 @@ namespace Miniville_GroupeC
         }
     }
     #endregion
-
-    #region Class : RestaurantCard (Dérivée de MasterCard)
-    public class RestaurantCard : MasterCard
-    {
-        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 4)
-        {
-        }
-
-        //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            if (diceResult == activationValue || diceResult == 10)
-            {
-                playerWhosPlaying.nbPiece -= 2;
-                playerOwner.nbPiece += 2;
-            }
-        }
-    }
-    #endregion
-
     #region Class : StadiumCard (Dérivée de MasterCard)
     public class StadiumCard : MasterCard
     {
@@ -225,6 +205,25 @@ namespace Miniville_GroupeC
             if (diceResult == activationValue)
             {
                 playerOwner.nbPiece += 5;
+            }
+        }
+    }
+    #endregion
+
+    #region Class : RestaurantCard (Dérivée de MasterCard)
+    public class RestaurantCard : MasterCard
+    {
+        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 4)
+        {
+        }
+
+        //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            if (diceResult == activationValue || diceResult == 10)
+            {
+                playerWhosPlaying.nbPiece -= 2;
+                playerOwner.nbPiece += 2;
             }
         }
     }
