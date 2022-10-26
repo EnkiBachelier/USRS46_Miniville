@@ -15,7 +15,6 @@ namespace Miniville_GroupeC
             int errorTryCatch = 0;
             bool expertMode = false;
             int nbPiecesToWin = 0;
-            bool doubleDe = false;
             #endregion
 
             #region Textes de lancement
@@ -114,7 +113,6 @@ namespace Miniville_GroupeC
             theGame.GameLoop();
             #endregion
         }
-
         #region Méthodes
         //Marque une pause de n-secondes
         public static void Wait(float second)

@@ -8,7 +8,6 @@ namespace Miniville_GroupeC
     public class Game
     {
         #region Déclaration des variables
-
         public List<Player> players = new List<Player>();
         public Player currentPlayer;
         public Dice playDice;
@@ -18,7 +17,6 @@ namespace Miniville_GroupeC
         private bool expertMode;
         private bool doubleDe;
         public Pile pile;
-
         #endregion
 
         #region Constructeur
@@ -51,20 +49,28 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Méthodes
-
         //Effectue la boucle de jeu en affichant les données du joueur et du dé, en vérifiant si des cartes doivent être activées et en demandant si le joueur souhaite acheter une carte
         //Vérifie également la condition de fin et affiche le gagnant
         public void GameLoop()
         {
-
             bool isInLoop = true;
             string winningPlayer = "";
-
             while (isInLoop)
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    #region Nombre de dés pour la partie7
+
+                    #region Données du joueur
+                    currentPlayer = players[i];
+                    Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write(currentPlayer.nbPiece);
+                    Console.ResetColor();
+                    Console.WriteLine(" pièces !");
+                    #endregion
+
+                    #region Données des dés
+                    //Choix nombre de dés
                     int errorTryCatch = 0;
                     do
                     {
@@ -89,74 +95,37 @@ namespace Miniville_GroupeC
                                 break;
                         }
                     } while (errorTryCatch == 1);
-                    #endregion
 
-                    //Données du joueur et du dé
-                    currentPlayer = players[i];
-                    Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
-					int valueTotal = this.playDice.activeValueOfDice;
+                    //Valeur totale des dés lancés
+                    int valueTotal = this.playDice.activeValueOfDice;
                     if(doubleDe)
 						valueTotal += this.playDice.activeValueOfSecondDice;
 
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write(currentPlayer.nbPiece);
-                    Console.ResetColor();
-                    Console.WriteLine(" pièces !");
-
+                    //Affichage valeur finale des dés
                     Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write(valueTotal);
                     Console.ResetColor();
-                    Console.WriteLine();               
+                    Console.WriteLine();
+                    #endregion
 
-                    //Activation de cartes et achats
+                    #region Activation de cartes et achats
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
                     currentPlayer.CheckCardToActivate(valueTotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayer.BuyCard();
+                    #endregion
 
-                    //Conditions de victoires
-                    if (currentPlayer.nbPiece >= this.nbPieceVictory)
-                    {
-                        if (expertMode)
-                        {
-                            //Retourne le nombre restant dans la main du joueur de chaque type de carte (si elles y sont toutes, le joueur gagne le mode expert) 
-                            var amountWheatFields = currentPlayer.playerCardList.Where(x => x is WheatFieldCard).ToList();
-                            var amountFarms = currentPlayer.playerCardList.Where(x => x is FarmCard).ToList();
-                            var amountBakeries = currentPlayer.playerCardList.Where(x => x is BakeryCard).ToList();
-                            var amountCoffees = currentPlayer.playerCardList.Where(x => x is CoffeeCard).ToList();
-                            var amountMiniMarkets = currentPlayer.playerCardList.Where(x => x is MiniMarketCard).ToList();
-                            var amountForests = currentPlayer.playerCardList.Where(x => x is ForestCard).ToList();
-                            var amountRestaurants = currentPlayer.playerCardList.Where(x => x is RestaurantCard).ToList();
-                            var amountStadiums = currentPlayer.playerCardList.Where(x => x is StadiumCard).ToList();
-                            var amountCheeseFactories = currentPlayer.playerCardList.Where(x => x is CheeseFactoryCard).ToList();
-                            var amountFurnitureFactories = currentPlayer.playerCardList.Where(x => x is FurnitureFactoryCard).ToList();
-                            var amountMines = currentPlayer.playerCardList.Where(x => x is MineCard).ToList();
-                            var amountOrchards = currentPlayer.playerCardList.Where(x => x is OrchardCard).ToList();
-                            var amountMarkets = currentPlayer.playerCardList.Where(x => x is MarketCard).ToList();
-
-                            if (amountWheatFields.Count * amountFarms.Count * amountBakeries.Count * amountCoffees.Count * amountMiniMarkets.Count *
-                                amountForests.Count * amountRestaurants.Count * amountStadiums.Count * amountCheeseFactories.Count *
-                                amountFurnitureFactories.Count * amountMines.Count * amountOrchards.Count * amountMarkets.Count > 0)
-                            {
-                                winningPlayer = currentPlayer.name;
-                                isInLoop = false;
-                                break;
-
-                            }
-                        }
-                        else
-                        {
-                            winningPlayer = currentPlayer.name;
-                            isInLoop = false;
-                            break;
-                        }
-                    }
+                    #region Détermination du gagnant (s'il y en a un)
+                    isInLoop = WhoWins(currentPlayer);
+                    if (!isInLoop)
+                        winningPlayer = currentPlayer.name;
+                    #endregion
                 }
                 Console.Clear();
             }
 
-            //Affichage du gagnant
+            #region Affichage du gagnant
             Console.Write("Bravo au grand maire ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Program.AffichageCharParChar(winningPlayer, 0.25f);
@@ -171,11 +140,44 @@ namespace Miniville_GroupeC
             Program.Wait(0.3f);
             Console.WriteLine("Depuis que le nouveau maire a renommé la ville, le taux de criminalité a fortement baissé, les petits vieux ne se sentent plus menacés.");
             Console.WriteLine("A vrai dire, c'est devenu le parfait opposé de l'ancienne ville, les petits vieux se mettent à attaquer les jeunes et à les humilier publiquement");
-
+            #endregion
 
         }
 
-        #endregion
+        //Retourne vrai si le currentPlayer a gagné la partie (selon les conditions de victoire déterminées par la difficulté
+        private bool WhoWins(Player currentPlayer)
+        {
+            bool isInLoop = true;
+            if (currentPlayer.nbPiece >= this.nbPieceVictory)
+            {
+                if (expertMode)
+                {
+                    //Retourne le nombre restant dans la main du joueur de chaque type de carte (si elles y sont toutes, le joueur gagne le mode expert) 
+                    var amountWheatFields = currentPlayer.playerCardList.Where(x => x is WheatFieldCard).ToList();
+                    var amountFarms = currentPlayer.playerCardList.Where(x => x is FarmCard).ToList();
+                    var amountBakeries = currentPlayer.playerCardList.Where(x => x is BakeryCard).ToList();
+                    var amountCoffees = currentPlayer.playerCardList.Where(x => x is CoffeeCard).ToList();
+                    var amountMiniMarkets = currentPlayer.playerCardList.Where(x => x is MiniMarketCard).ToList();
+                    var amountForests = currentPlayer.playerCardList.Where(x => x is ForestCard).ToList();
+                    var amountRestaurants = currentPlayer.playerCardList.Where(x => x is RestaurantCard).ToList();
+                    var amountStadiums = currentPlayer.playerCardList.Where(x => x is StadiumCard).ToList();
+                    var amountCheeseFactories = currentPlayer.playerCardList.Where(x => x is CheeseFactoryCard).ToList();
+                    var amountFurnitureFactories = currentPlayer.playerCardList.Where(x => x is FurnitureFactoryCard).ToList();
+                    var amountMines = currentPlayer.playerCardList.Where(x => x is MineCard).ToList();
+                    var amountOrchards = currentPlayer.playerCardList.Where(x => x is OrchardCard).ToList();
+                    var amountMarkets = currentPlayer.playerCardList.Where(x => x is MarketCard).ToList();
 
+                    if (amountWheatFields.Count * amountFarms.Count * amountBakeries.Count * amountCoffees.Count * amountMiniMarkets.Count *
+                        amountForests.Count * amountRestaurants.Count * amountStadiums.Count * amountCheeseFactories.Count *
+                        amountFurnitureFactories.Count * amountMines.Count * amountOrchards.Count * amountMarkets.Count > 0)
+                        isInLoop = false;
+
+                }
+                else
+                    isInLoop = false;
+            }
+            return isInLoop;
+        }
+        #endregion
     }
 }
