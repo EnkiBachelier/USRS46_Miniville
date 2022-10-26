@@ -128,6 +128,7 @@ namespace Miniville_GroupeC
                         }
                     }
                 }
+                Console.Clear();
             }
 
             //Affichage du gagnant

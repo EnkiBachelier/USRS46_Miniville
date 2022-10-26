@@ -52,7 +52,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountWheatFields.Count > 0)
                 {
-                    Console.Write("1 - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    Console.Write("1  - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
                     var amountPlayerWheatFields = playerCardList.Where(x => x is WheatFieldCard).ToList();
                     if (amountPlayerWheatFields.Count >= 1)
                     {
@@ -67,7 +67,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountFarms.Count > 0)
                 {
-                    Console.Write("2 - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    Console.Write("2  - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
                     var amountPlayerFarms = playerCardList.Where(x => x is FarmCard).ToList();
                     if (amountPlayerFarms.Count >= 1)
                     {
@@ -82,7 +82,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountBakeries.Count > 0)
                 {
-                    Console.Write("3 - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2 ");
+                    Console.Write("3  - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2 ");
                     var amountPlayerBakeries = playerCardList.Where(x => x is BakeryCard).ToList();
                     if (amountPlayerBakeries.Count >= 1)
                     {
@@ -97,7 +97,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 if (amountCoffees.Count > 0)
                 {
-                    Console.Write("4 - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3 ");
+                    Console.Write("4  - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3 ");
                     var amountPlayerCoffees = playerCardList.Where(x => x is CoffeeCard).ToList();
                     if (amountPlayerCoffees.Count >= 1)
                     {
@@ -112,7 +112,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountMiniMarkets.Count > 0)
                 {
-                    Console.Write("5 - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4 ");
+                    Console.Write("5  - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4 ");
                     var amountPlayerMiniMarkets = playerCardList.Where(x => x is MiniMarketCard).ToList();
                     if (amountPlayerMiniMarkets.Count >= 1)
                     {
@@ -127,7 +127,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountForests.Count > 0)
                 {
-                    Console.Write("6 - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5 ");
+                    Console.Write("6  - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5 ");
                     var amountPlayerForests = playerCardList.Where(x => x is ForestCard).ToList();
                     if (amountPlayerForests.Count >= 1)
                     {
@@ -142,7 +142,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 if (amountRestaurants.Count > 0)
                 {
-                    Console.Write("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10 ");
+                    Console.Write("7  - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10 ");
                     var amountPlayerRestaurants = playerCardList.Where(x => x is RestaurantCard).ToList();
                     if (amountPlayerRestaurants.Count >= 1)
                     {
@@ -157,7 +157,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountStadiums.Count > 0)
                 {
-                    Console.Write("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6 ");
+                    Console.Write("8  - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6 ");
                     var amountPlayerStadiums = playerCardList.Where(x => x is StadiumCard).ToList();
                     if (amountPlayerStadiums.Count >= 1)
                     {
@@ -172,7 +172,7 @@ namespace Miniville_GroupeC
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountCheeseFactories.Count > 0)
                 {
-                    Console.Write("9 - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7 ");
+                    Console.Write("9  - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7 ");
                     var amountPlayerCheeseFactories = playerCardList.Where(x => x is CheeseFactoryCard).ToList();
                     if (amountPlayerCheeseFactories.Count >= 1)
                     {
