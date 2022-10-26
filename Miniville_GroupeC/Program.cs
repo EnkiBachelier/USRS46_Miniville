@@ -27,7 +27,9 @@ namespace Miniville_GroupeC
             Console.ResetColor();
             Console.WriteLine(" que cette région ait connu.");
             Wait(0.4f);
-            Console.WriteLine("Si vous arrivez à suffisamment séduire le vieux maire de Miniville, il vous laissera sa place (en échange d'une retraire payée par vos soins)");
+            Console.WriteLine("Si vous arrivez à suffisamment séduire le vieux maire de Miniville, il vous laissera sa place (en échange d'une retraite payée par vos soins).");
+            Console.WriteLine("En effet, le vieux maire ne contrôle plus Miniville, où désormais les jeunes font la loi et tapent les petits vieux.");
+            Wait(0.4f);
             Console.WriteLine("\nMais bien évidemment, certains essayeront de vous mettre des bâtons dans les pattes...");
             Wait(0.4f);
             Console.Write("Etonnez-les avec votre ");
@@ -56,7 +58,6 @@ namespace Miniville_GroupeC
                     Console.WriteLine("Veuillez entrer un numéro valide !");
                     errorTryCatch = 1;
                 }
-
             } while (errorTryCatch == 1);
 
             //Noms des maires
@@ -71,31 +72,14 @@ namespace Miniville_GroupeC
             #region Niveau de difficultés des parties
             do
             {
+                errorTryCatch = 0;
                 //Affichage des difficultés
                 Console.WriteLine("\nQuel est le niveau de difficulté avec lequel vous souhaitez jouer ?\n");
                 Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
                 Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
                 Console.WriteLine("3 -- Partie longue (30 pièces pour gagner)");
                 Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
-
                 string difficulty = Console.ReadLine();
-
-                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
-                Console.WriteLine("1 -- Avec un dé !");
-                Console.WriteLine("2 -- Avec deux dés !");
-
-                string DoubleDe = Console.ReadLine();
-
-
-                switch (DoubleDe)
-                {
-                    case "1":
-                        doubleDe = false;
-                        break;
-                    case "2":
-                        doubleDe = true;
-                        break;
-                }
 
                 //Calibre les conditions de victoire selon la difficulté
                 switch (difficulty)
@@ -121,8 +105,33 @@ namespace Miniville_GroupeC
                         Console.WriteLine("Veuillez entrer un numéro valide");
                         errorTryCatch = 1;
                         break;
+                }
+            } while (errorTryCatch == 1);
+            #endregion
 
+            #region Nombre de dés pour la partie
+            do
+            {
+                errorTryCatch = 0;
+                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                Console.WriteLine("1 -- Avec un dé !");
+                Console.WriteLine("2 -- Avec deux dés !");
+                string DoubleDe = Console.ReadLine();
 
+                switch (DoubleDe)
+                {
+                    case "1":
+                        doubleDe = false;
+                        errorTryCatch = 0;
+                        break;
+                    case "2":
+                        doubleDe = true;
+                        errorTryCatch = 0;
+                        break;
+                    default:
+                        Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
+                        errorTryCatch = 1;
+                        break;
                 }
             } while (errorTryCatch == 1);
             #endregion
@@ -141,13 +150,13 @@ namespace Miniville_GroupeC
             Delay.Wait();
         }
 
-        //Affiche des char un par un
+        //Affiche des char un par un avec un délai de n-secondes entre chaque
         public static void AffichageCharParChar(string message, float second)
         {
             foreach (char thatChar in message)
             {
                 Console.Write(thatChar);
-                Wait(second);
+                Wait(0);
             }
         }
         #endregion

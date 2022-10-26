@@ -51,67 +51,197 @@ namespace Miniville_GroupeC
                 //Affichage des cartes de la pile selon la disponibilité dans la pile
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountWheatFields.Count > 0)
-                    Console.WriteLine("1 - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1");
+                {
+                    Console.Write("1  - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    var amountPlayerWheatFields = playerCardList.Where(x => x is WheatFieldCard).ToList();
+                    if (amountPlayerWheatFields.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerWheatFields.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountFarms.Count > 0)
-                    Console.WriteLine("2 - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1");
+                {
+                    Console.Write("2  - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    var amountPlayerFarms = playerCardList.Where(x => x is FarmCard).ToList();
+                    if (amountPlayerFarms.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerFarms.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountBakeries.Count > 0)
-                    Console.WriteLine("3 - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2");
+                {
+                    Console.Write("3  - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2 ");
+                    var amountPlayerBakeries = playerCardList.Where(x => x is BakeryCard).ToList();
+                    if (amountPlayerBakeries.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerBakeries.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 if (amountCoffees.Count > 0)
-                    Console.WriteLine("4 - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3");
+                {
+                    Console.Write("4  - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3 ");
+                    var amountPlayerCoffees = playerCardList.Where(x => x is CoffeeCard).ToList();
+                    if (amountPlayerCoffees.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerCoffees.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountMiniMarkets.Count > 0)
-                    Console.WriteLine("5 - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4");
+                {
+                    Console.Write("5  - Une superette (2$) ? Recevez 3 pièces lorsque le dé affiche 4 ");
+                    var amountPlayerMiniMarkets = playerCardList.Where(x => x is MiniMarketCard).ToList();
+                    if (amountPlayerMiniMarkets.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerMiniMarkets.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountForests.Count > 0)
-                    Console.WriteLine("6 - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5");
+                {
+                    Console.Write("6  - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5 ");
+                    var amountPlayerForests = playerCardList.Where(x => x is ForestCard).ToList();
+                    if (amountPlayerForests.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerForests.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 if (amountRestaurants.Count > 0)
-                    Console.WriteLine("7 - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10");
+                {
+                    Console.Write("7  - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10 ");
+                    var amountPlayerRestaurants = playerCardList.Where(x => x is RestaurantCard).ToList();
+                    if (amountPlayerRestaurants.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerRestaurants.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountStadiums.Count > 0)
-                    Console.WriteLine("8 - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6");
+                {
+                    Console.Write("8  - Un stade (6$) ? Recevez 4 pièces lorsque le dé affiche 6 ");
+                    var amountPlayerStadiums = playerCardList.Where(x => x is StadiumCard).ToList();
+                    if (amountPlayerStadiums.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerStadiums.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountCheeseFactories.Count > 0)
-                    Console.WriteLine("9 - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7");
+                {
+                    Console.Write("9  - Une fromagerie (5$) ? Recevez 3 pièces lorsque le dé affiche 7 ");
+                    var amountPlayerCheeseFactories = playerCardList.Where(x => x is CheeseFactoryCard).ToList();
+                    if (amountPlayerCheeseFactories.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerCheeseFactories.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountFurnitureFactories.Count > 0)
-                    Console.WriteLine("10 - Une fabrique de meuble (3$) ? Recevez 3 pièces lorsque le dé affiche 8");
+                {
+                    Console.Write("10 - Une fabrique de meuble (3$) ? Recevez 3 pièces lorsque le dé affiche 8 ");
+                    var amountPlayerFurnitureFactories = playerCardList.Where(x => x is FurnitureFactoryCard).ToList();
+                    if (amountPlayerFurnitureFactories.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerFurnitureFactories.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountMines.Count > 0)
-                    Console.WriteLine("11 - Une mine (6$) ? Recevez 5 pièces lorsque le dé affiche 9");
+                {
+                    Console.Write("11 - Une mine (6$) ? Recevez 5 pièces lorsque le dé affiche 9 ");
+                    var amountPlayerMines = playerCardList.Where(x => x is MineCard).ToList();
+                    if (amountPlayerMines.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerMines.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 if (amountOrchards.Count > 0)
-                    Console.WriteLine("12 - Un verger (3$) ? Recevez 4 pièces lorsque le dé affiche 10");
+                {
+                    Console.Write("12 - Un verger (3$) ? Recevez 4 pièces lorsque le dé affiche 10 ");
+                    var amountPlayerOrchards = playerCardList.Where(x => x is OrchardCard).ToList();
+                    if (amountPlayerOrchards.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerOrchards.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (amountMarkets.Count > 0)
-                    Console.WriteLine("13 - Un marché (2$) ? Recevez 2 pièces lorsque le dé affiche 11");
+                {
+                    Console.Write("13 - Un marché (2$) ? Recevez 2 pièces lorsque le dé affiche 11 ");
+                    var amountPlayerMarkets = playerCardList.Where(x => x is MarketCard).ToList();
+                    if (amountPlayerMarkets.Count >= 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("(" + amountPlayerMarkets.Count + " en main)\n");
+                    }
+                    else
+                        Console.WriteLine();
+                }
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.Gray;
