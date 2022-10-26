@@ -109,35 +109,8 @@ namespace Miniville_GroupeC
             } while (errorTryCatch == 1);
             #endregion
 
-            #region Nombre de dés pour la partie
-            do
-            {
-                errorTryCatch = 0;
-                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
-                Console.WriteLine("1 -- Avec un dé !");
-                Console.WriteLine("2 -- Avec deux dés !");
-                string DoubleDe = Console.ReadLine();
-
-                switch (DoubleDe)
-                {
-                    case "1":
-                        doubleDe = false;
-                        errorTryCatch = 0;
-                        break;
-                    case "2":
-                        doubleDe = true;
-                        errorTryCatch = 0;
-                        break;
-                    default:
-                        Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
-                        errorTryCatch = 1;
-                        break;
-                }
-            } while (errorTryCatch == 1);
-            #endregion
-
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode, doubleDe);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
             theGame.GameLoop();
             #endregion
         }

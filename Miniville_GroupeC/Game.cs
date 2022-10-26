@@ -20,13 +20,12 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool doubleDe = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
             this.namePlayers = namePlayers;
-            this.doubleDe = doubleDe;
             pile = new Pile();
 
             //On initialise chaque joueur avec une boulangerie et un champ de blé ainsi que 3 pièces
@@ -60,7 +59,34 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    //Données du joueur
+
+                    #region Nombre de dés pour la partie7
+                    int errorTryCatch = 0;
+                    do
+                    {
+                        Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                        Console.WriteLine("1 -- Avec un dé !");
+                        Console.WriteLine("2 -- Avec deux dés !");
+                        string DoubleDe = Console.ReadLine();
+
+                        switch (DoubleDe)
+                        {
+                            case "1":
+                                doubleDe = false;
+                                errorTryCatch = 0;
+                                break;
+                            case "2":
+                                doubleDe = true;
+                                errorTryCatch = 0;
+                                break;
+                            default:
+                                Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
+                                errorTryCatch = 1;
+                                break;
+                        }
+                    } while (errorTryCatch == 1);
+                    #endregion
+
                     currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
