@@ -26,11 +26,12 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Méthodes
-
         //Affiche les différentes cartes qu'on peut acheter et réalise l'achat si le joueur a assez d'argent
         public void BuyCard()
         {
             int choice = -1;
+
+            #region Compteurs du nombre restant de chaque type de carte dans la pile
             //Retourne le nombre restant dans la pile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
             var amountWheatFields = pile.mainPile.Where(x => x is WheatFieldCard).ToList();
             var amountFarms = pile.mainPile.Where(x => x is FarmCard).ToList();
@@ -45,14 +46,18 @@ namespace Miniville_GroupeC
             var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
             var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
             var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
+            #endregion
 
+            #region Affichage Cartes de la pile selon leur disponibilité
             do
             {
-                //Affichage des cartes de la pile selon la disponibilité dans la pile
+                //On affiche la ligne dans la couleur de la carte
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
+                //On affiche la description de la carte si elle est encore disponible
                 if (amountWheatFields.Count > 0)
                 {
                     Console.Write("1  - Un champ de blé (1$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    //Si le joueur possède déjà cette carte, on affiche le nombre dans sa main
                     var amountPlayerWheatFields = playerCardList.Where(x => x is WheatFieldCard).ToList();
                     if (amountPlayerWheatFields.Count >= 1)
                     {
@@ -64,10 +69,13 @@ namespace Miniville_GroupeC
                 }
                 Console.ResetColor();
 
+                //On affiche la ligne dans la couleur de la carte
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
+                //On affiche la description de la carte si elle est encore disponible
                 if (amountFarms.Count > 0)
                 {
                     Console.Write("2  - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                    //Si le joueur possède déjà cette carte, on affiche le nombre dans sa main
                     var amountPlayerFarms = playerCardList.Where(x => x is FarmCard).ToList();
                     if (amountPlayerFarms.Count >= 1)
                     {
@@ -79,10 +87,13 @@ namespace Miniville_GroupeC
                 }
                 Console.ResetColor();
 
+                //On affiche la ligne dans la couleur de la carte
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
+                //On affiche la description de la carte si elle est encore disponible
                 if (amountBakeries.Count > 0)
                 {
                     Console.Write("3  - Une boulangerie (1$) ? Recevez 2 pièces lorsque le dé affiche 2 ");
+                    //Si le joueur possède déjà cette carte, on affiche le nombre dans sa main
                     var amountPlayerBakeries = playerCardList.Where(x => x is BakeryCard).ToList();
                     if (amountPlayerBakeries.Count >= 1)
                     {
@@ -249,40 +260,47 @@ namespace Miniville_GroupeC
                 Console.ResetColor();
 
             } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 14);
+            #endregion
 
+            #region Effectue l'achat si c'est possible (carte disponible et assez d'argent)
             switch (choice)
             {
-                //Selon le choix du joueur et la disponibilité de la carte dans la pile, réalise l'achat via CanBuyCard()
                 case 1:
                     var wheatFieldCard = new WheatFieldCard();
+                    //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountWheatFields.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
                         break;
                     }
+                    //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(wheatFieldCard);
                     Console.WriteLine("Vous avez choisi d'acheter un champ de blé\n");
                     break;
                 case 2:
                     var farm = new FarmCard();
+                    //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountFarms.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
                         break;
                     }
+                    //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(farm);
                     Console.WriteLine("Vous avez choisi d'acheter une ferme\n");
                     break;
                 case 3:
                     var bakery = new BakeryCard();
+                    //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountBakeries.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         BuyCard();
                         break;
                     }
+                    //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(bakery);
                     Console.WriteLine("Vous avez choisi d'acheter une boulangerie\n");
                     break;
@@ -400,11 +418,13 @@ namespace Miniville_GroupeC
                     Console.WriteLine("Vous avez passé votre tour\n");
                     break;
             }
+            #endregion
         }
 
         //Si le joueur a assez d'argent, achète la carte sinon relance BuyCard()
         private void CanBuyCard(MasterCard card)
         {
+            //Le joueur a assez d'argent
             if (nbPiece >= card.costValue)
             {
                 nbPiece -= card.costValue;
@@ -412,6 +432,7 @@ namespace Miniville_GroupeC
                 game.pile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
             }
+            //Le joueur n'a pas assez d'argent
             else
             {
                 Console.WriteLine("Vous n'avez pas assez de pièces. Veuillez choisir une autre carte !\n");

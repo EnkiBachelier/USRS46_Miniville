@@ -143,6 +143,7 @@ namespace Miniville_GroupeC
         }
     }
     #endregion
+
     #region Class : StadiumCard (Dérivée de MasterCard)
     public class StadiumCard : MasterCard
     {
@@ -164,14 +165,13 @@ namespace Miniville_GroupeC
     {
         public CheeseFactoryCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
         {
-
         }
+
+        //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
-            {
                 playerOwner.nbPiece += 3;
-            }
         }
     }
     #endregion
@@ -181,14 +181,13 @@ namespace Miniville_GroupeC
     {
         public FurnitureFactoryCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
         {
-
         }
+
+        //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
-            {
                 playerOwner.nbPiece += 3;
-            }
         }
     }
     #endregion
@@ -198,14 +197,13 @@ namespace Miniville_GroupeC
     {
         public MineCard() : base(9, CardColor.BLUE, "Mine", 6)
         {
-
         }
+
+        //Ajoute 5$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
-            {
                 playerOwner.nbPiece += 5;
-            }
         }
     }
     #endregion
@@ -234,15 +232,13 @@ namespace Miniville_GroupeC
     {
         public OrchardCard() : base(10, CardColor.BLUE, "Verger", 3)
         {
-
         }
 
+        //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (diceResult == activationValue)
-            {
                 playerOwner.nbPiece += 3;
-            }
         }
     }
     #endregion
@@ -252,14 +248,13 @@ namespace Miniville_GroupeC
     {
         public MarketCard() : base(11, CardColor.GREEN, "Marche de fruits et légumes", 2)
         {
-
         }
+
+        //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
             if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 12))
-            {
                 playerOwner.nbPiece += 2;
-            }
         }
     }
     #endregion
