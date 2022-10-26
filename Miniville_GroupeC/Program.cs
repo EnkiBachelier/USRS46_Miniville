@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Miniville_GroupeC
 {
@@ -11,6 +13,11 @@ namespace Miniville_GroupeC
             #region Déclaration des variables
             Dice playDice = new Dice();
             List<string> namePlayers = new List<string>();
+            Console.WriteLine("Bienvenue dans Miniville !");
+
+            bool Multiplayer = false;
+            int errorMulti = 0;
+            string ModePlay = "";
             int nbMayors = 0;
             int errorTryCatch = 0;
             bool expertMode = false;
@@ -43,14 +50,51 @@ namespace Miniville_GroupeC
             #endregion
 
             #region Données des maires
+			do
+            {
+                Console.WriteLine("Veiller choisir un mode de jeu");
+                Console.WriteLine("1 - Multijoueur");
+                Console.WriteLine("2 - Contre l'Ordinateur\n");
+
+                ModePlay = Console.ReadLine();
+
+                if(ModePlay == "1")
+                {
+                    errorMulti = 1;
+                    Multiplayer = true;
+                    Console.WriteLine("Vous avez sélectionné le mode multijoueur !\n");
+                }
+                else if (ModePlay == "2")
+                {
+                    errorMulti = 1;
+                    Multiplayer = false;
+                    Console.WriteLine("Vous avez sélectionné le mode contre l'ordinateur !\n");
+                }
+                else 
+                {
+                    errorMulti = 0;
+                    Console.WriteLine("Veiller noter une entrée valide...\n");
+                }
+                    
+            
+            } while(errorMulti == 0);
             do
             {
                 //Nombres de maires
                 try
                 {
-                    Console.Write("Combien de maires souhaitent jouer ? ");
+                    if(Multiplayer == false) // Mode contre l'ordi
+                    {
+                        Console.Write("Avec combien d'ordinateur souhaitez-vous jouer ? ");
+                        nbMayors = int.Parse(Console.ReadLine()) + 1; //on rajoute 1 car on ne compte pas ici le joueur mais seulement les IAs
+                        errorTryCatch = 0;
+                    }
+                    else // mode multijoueur
+                    {
+                        Console.Write("Combien de maires souhaitent jouer ? ");
                     nbMayors = int.Parse(Console.ReadLine());
                     errorTryCatch = 0;
+                    }
                 }
                 catch
                 {
@@ -62,9 +106,27 @@ namespace Miniville_GroupeC
             //Noms des maires
             for (int i = 0; i < nbMayors; i++)
             {
-                Console.Write("\nQuel est le nom du maire n°" + (i + 1) + "? ");
-                string name = Console.ReadLine();
-                namePlayers.Add(name);
+                if(Multiplayer == false) //Si mode de jeu contre l'ordi
+                {
+                    if(i == 0)
+                    {
+                        Console.Write("\nQuel est votre nom ?");
+                        string name = Console.ReadLine();
+                        namePlayers.Add(name);
+                    }
+                    else
+                    {
+                        Console.Write("\nQuel est le nom du maire n°" + (i + 1) + "? ");
+						string name = Console.ReadLine();
+						namePlayers.Add(name);
+                    }
+                }
+                else // si mode de jeu multijoueur
+                {
+                    Console.Write("\nQuel est le nom du maire n°" + (i + 1) + "? ");
+                    string name = Console.ReadLine();
+                    namePlayers.Add(name);
+                }
             }
             #endregion
 
@@ -109,7 +171,7 @@ namespace Miniville_GroupeC
             #endregion
 
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, expertMode, Multiplayer);
             theGame.GameLoop();
             #endregion
         }

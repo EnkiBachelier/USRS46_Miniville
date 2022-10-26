@@ -17,34 +17,66 @@ namespace Miniville_GroupeC
         private bool expertMode;
         private bool doubleDe;
         public Pile pile;
-        #endregion
-
+        public bool multiplayer = false;
+		#endregion
+		
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false,bool multiplayer = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.expertMode = expertMode;
             this.namePlayers = namePlayers;
+            this.multiplayer = multiplayer;
             pile = new Pile();
-
-            //On initialise chaque joueur avec une boulangerie et un champ de blé ainsi que 3 pièces
-            foreach (string thatName in namePlayers)
+            
+            for (int i = 0; i < namePlayers.Count; i++)
             {
-                MasterCard cardIniWheatField = new WheatFieldCard();
-                MasterCard cardIniBakery = new BakeryCard();
-                this.initialCards = new List<MasterCard>()
-                {
-                    cardIniWheatField,
-                    cardIniBakery
-                };
-                Player thatPlayer = new Player(3, this.initialCards, this, thatName, this.pile);
+                Console.WriteLine("lol");
+                string thatName = namePlayers[i];
+                bool ordi = true;
 
-                //On associe les cartes au joueur
-                cardIniWheatField.SetPlayerOwner(thatPlayer);
-                cardIniBakery.SetPlayerOwner(thatPlayer);
-                players.Add(thatPlayer);
+                if(this.multiplayer == false) //Partie contre ordinateur
+                {
+                    MasterCard cardCham = new WheatFieldCard();
+                    MasterCard cardBak = new BakeryCard();
+                    this.initialCards = new List<MasterCard>()
+                    {
+                        cardCham,
+                        cardBak
+                    };
+                    if (i == 0) // Si c'est le joueur 
+                    {
+                        ordi = false;  
+                    }
+                    else // Si c'est un ordinateur
+                    {
+                        ordi = true;
+                    }
+                    Player thatPlayer = new Player(3, this.initialCards, this, thatName, ordi);
+                    cardCham.SetPlayerOwner(thatPlayer);
+                    cardBak.SetPlayerOwner(thatPlayer);
+                    players.Add(thatPlayer);
+                }
+                else //Partie en multijoueur
+                {
+                    foreach (string thatName2 in namePlayers)
+                    {
+                        MasterCard cardCham = new WheatFieldCard();
+                        MasterCard cardBak = new BakeryCard();
+                        this.initialCards = new List<MasterCard>()
+                        {
+                            cardCham,
+                            cardBak
+                        };
+                        Player thatPlayer = new Player(3, this.initialCards, this, thatName, ordi);
+                        cardCham.SetPlayerOwner(thatPlayer);
+                        cardBak.SetPlayerOwner(thatPlayer);
+                        players.Add(thatPlayer);
+                    }
+                }
             }
+            
         }
         #endregion
 
@@ -59,7 +91,12 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
+                    currentPlayers = players[i];
+                    int valueDice = this.playDice.De;
 
+                    if (this.multiplayer == false) //une partie contre l'ordinateur
+                    {
+						
                     #region Données du joueur
                     currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
@@ -109,20 +146,94 @@ namespace Miniville_GroupeC
                     Console.WriteLine();
                     #endregion
 
-                    #region Activation de cartes et achats
-                    Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
-                    currentPlayer.CheckCardToActivate(valueTotal);
-                    Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
-                    currentPlayer.BuyCard();
-                    #endregion
+                        if (i == 0) //Si tour du Joueur
+                        {
+                            Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
+                            currentPlayers.CheckCardToActivate(valueDice);
+                            Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
+                            currentPlayers.BuyCard();
+                        }
+                        else //Si tour de(s) l'ordinateur(s)
+                        {
+                            Console.WriteLine("L'Ordinateur a joué");
+                            currentPlayers.CheckCardToActivate(valueDice);
+                            currentPlayers.BuyCard();
+                        }
 
-                    #region Détermination du gagnant (s'il y en a un)
+                        #region Détermination du gagnant (s'il y en a un)
                     isInLoop = WhoWins(currentPlayer);
                     if (!isInLoop)
                         winningPlayer = currentPlayer.name;
                     #endregion
+                    }
+                    else //Une partie multijoueur
+                    {
+                        #region Données du joueur
+                    currentPlayer = players[i];
+                    Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write(currentPlayer.nbPiece);
+                    Console.ResetColor();
+                    Console.WriteLine(" pièces !");
+                    #endregion
+
+                    #region Données des dés
+                    //Choix nombre de dés
+                    int errorTryCatch = 0;
+                    do
+                    {
+                        Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                        Console.WriteLine("1 -- Avec un dé !");
+                        Console.WriteLine("2 -- Avec deux dés !");
+                        string DoubleDe = Console.ReadLine();
+
+                        switch (DoubleDe)
+                        {
+                            case "1":
+                                doubleDe = false;
+                                errorTryCatch = 0;
+                                break;
+                            case "2":
+                                doubleDe = true;
+                                errorTryCatch = 0;
+                                break;
+                            default:
+                                Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
+                                errorTryCatch = 1;
+                                break;
+                        }
+                    } while (errorTryCatch == 1);
+
+                    //Valeur totale des dés lancés
+                    int valueTotal = this.playDice.activeValueOfDice;
+                    if(doubleDe)
+						valueTotal += this.playDice.activeValueOfSecondDice;
+
+                    //Affichage valeur finale des dés
+                    Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write(valueTotal);
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    #endregion
+
+                        Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
+                        currentPlayers.CheckCardToActivate(valueDice);
+                        Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
+                        currentPlayers.BuyCard();
+
+                        #region Détermination du gagnant (s'il y en a un)
+                    isInLoop = WhoWins(currentPlayer);
+                    if (!isInLoop)
+                        winningPlayer = currentPlayer.name;
+                    #endregion
+                    }
                 }
+                
+
+                    
                 Console.Clear();
+
             }
 
             #region Affichage du gagnant
@@ -179,5 +290,6 @@ namespace Miniville_GroupeC
             return isInLoop;
         }
         #endregion
+
     }
 }
