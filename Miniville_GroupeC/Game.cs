@@ -15,23 +15,23 @@ namespace Miniville_GroupeC
         public List<string> namePlayers = new List<string>();
         private List<MasterCard> initialCards = new List<MasterCard>();
         private bool isExpertModeOn;
-        private bool doubleDe;
+        private bool isDoubleDeActive;
         public Pile pile;
         private bool isMultiplayerOn = false;
 		public static bool hasCentreCommercial = false;
-		private bool reelMode;
+		private bool isReelModeOn;
         #endregion
 
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool reelMode = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool isExpertModeOn = false, bool isMultiplayerOn = false, bool isReelModeOn = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.isExpertModeOn = isExpertModeOn;
-            this.reelMode = reelMode;
+            this.isReelModeOn = isReelModeOn;
             this.namePlayers = namePlayers;
             this.isMultiplayerOn = isMultiplayerOn;
-            pile = new Pile();
+            pile = new Pile(this.namePlayers.Count);
 
             for (int i = 0; i < namePlayers.Count; i++)
             {
@@ -102,46 +102,44 @@ namespace Miniville_GroupeC
                     //Choix nombre de dés
                     if (currentPlayer.isItAnAI)
                     {
-                        doubleDe = true;
+                        isDoubleDeActive = true;
                     }
                     else
                     {
-                        int errorTryCatch = 0;
-                        do
+                        var GareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
+                        if (GareCard.Count >= 1)
                         {
-                            Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
-                            Console.WriteLine("1 -- Avec un dé !");
-                            Console.WriteLine("2 -- Avec deux dés !");
-                            string DoubleDe = Console.ReadLine();
-
-                            switch (DoubleDe)
+                            int errorTryCatch = 0;
+                            do
                             {
-                                case "1":
-                                    doubleDe = false;
-                                    errorTryCatch = 0;
-                                    break;
-                                case "2":
-                                    doubleDe = true;
-                                    errorTryCatch = 0;
-                                    break;
-                                default:
-                                    Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
-                                    errorTryCatch = 1;
-                                    break;
-                            }
-                        } while (errorTryCatch == 1);
-                    }
+                                Console.WriteLine("\nAvec combien de dé voulez vous jouer\n");
+                                Console.WriteLine("1 -- Avec un dé !");
+                                Console.WriteLine("2 -- Avec deux dés !");
+                                string responseDoubleDe = Console.ReadLine();
 
-                    //Valeur totale des dés lancés
-                    int valueTotal = this.playDice.activeValueOfDice;
-                    if (doubleDe)
-                        valueTotal += this.playDice.activeValueOfSecondDice;
+                                switch (responseDoubleDe)
+                                {
+                                    case "1":
+                                        isDoubleDeActive = false;
+                                        errorTryCatch = 0;
+                                        break;
+                                    case "2":
+                                        isDoubleDeActive = true;
+                                        errorTryCatch = 0;
+                                        break;
+                                    default:
+                                        Console.WriteLine("Veuillez choisir une valeur valide (1 ou 2)");
+                                        errorTryCatch = 1;
+                                        break;
+                                }
+                            } while (errorTryCatch == 1);
+                        }
+                    }
 
                     //Affichage valeur finale des dés
 					int valueDice1 = this.playDice.activeValueOfDice;
-                    int valueDice2 =0;
-                    var GareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
-                    if (GareCard.Count >= 1)
+                    int valueDice2 = 0;
+                    if (isDoubleDeActive)
                     {
                         valueDice2 = this.playDice.activeValueOfSecondDice;
                     }
@@ -250,13 +248,14 @@ namespace Miniville_GroupeC
                     var amountMines = currentPlayer.playerCardList.Where(x => x is MineCard).ToList();
                     var amountOrchards = currentPlayer.playerCardList.Where(x => x is OrchardCard).ToList();
                     var amountMarkets = currentPlayer.playerCardList.Where(x => x is MarketCard).ToList();
+                    
 
                     if (amountWheatFields.Count * amountFarms.Count * amountBakeries.Count * amountCoffees.Count * amountMiniMarkets.Count *
                         amountForests.Count * amountRestaurants.Count * amountStadiums.Count * amountCheeseFactories.Count *
                         amountFurnitureFactories.Count * amountMines.Count * amountOrchards.Count * amountMarkets.Count > 0)
                         isInLoop = false;
                 }
-                else if (reelMode)
+                else if (isReelModeOn)
                         {
                             var amountTourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
                             var amountGareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();

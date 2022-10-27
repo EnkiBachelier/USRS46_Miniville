@@ -280,7 +280,7 @@ namespace Miniville_GroupeC
     }
     #endregion
 
-    #region Class ParcAttractionsCard (Dérivée de MasterCard)
+    #region Class : ParcAttractionsCard (Dérivée de MasterCard)
     public class ParcAttractionsCard : MasterCard
     {
         public ParcAttractionsCard() : base(0, CardColor.YELLOW, "Parc d'Attractions", 16)

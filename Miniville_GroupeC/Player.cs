@@ -50,6 +50,7 @@ namespace Miniville_GroupeC
             var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
             var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
             var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
+            var amountCentreCommercial = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
             #endregion
 
             //Le joueur n'est pas une IA

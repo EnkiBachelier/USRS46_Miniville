@@ -18,7 +18,7 @@ namespace Miniville_GroupeC
             int nbMayors = 0;
             int errorTryCatch = 0;
             bool isExpertModeOn = false;
-            bool reelMode = false;
+            bool isReelModeOn = false;
             int nbPiecesToWin = 0;
             #endregion
 
@@ -165,7 +165,7 @@ namespace Miniville_GroupeC
                         errorTryCatch = 0;
                         break;
                     case "5":
-                        reelMode = true;
+                        isReelModeOn = true;
                         errorTryCatch=0;
                         break;
                     default:
@@ -177,7 +177,7 @@ namespace Miniville_GroupeC
             #endregion
 
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, isExpertModeOn, isMultiplayerOn, reelMode);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, isExpertModeOn, isMultiplayerOn, isReelModeOn);
             theGame.GameLoop();
             #endregion
         }
