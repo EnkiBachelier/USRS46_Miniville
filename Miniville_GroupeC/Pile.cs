@@ -9,7 +9,7 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Constructeur
-        public Pile()
+        public Pile(int nbCountPlayers)
         {
             int nb = 0;
             for (int i = 0; i < 6 * 13; i++)
@@ -19,6 +19,7 @@ namespace Miniville_GroupeC
                     nb++;
                 AddCardToPile(nb);
             }
+            //FOR POUR 2 : mOnuments
         }
         #endregion
 

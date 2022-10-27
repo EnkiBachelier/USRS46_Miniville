@@ -18,6 +18,7 @@ namespace Miniville_GroupeC
             int nbMayors = 0;
             int errorTryCatch = 0;
             bool isExpertModeOn = false;
+            bool isReelModeOn = false;
             int nbPiecesToWin = 0;
             #endregion
 
@@ -139,7 +140,8 @@ namespace Miniville_GroupeC
                 Console.WriteLine("1 -- Partie rapide (10 pièces pour gagner)");
                 Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
                 Console.WriteLine("3 -- Partie longue (30 pièces pour gagner)");
-                Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)\n");
+                Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)");
+                Console.WriteLine("5 -- Partie se rapprochant du vrai jeu\n");
                 string difficulty = Console.ReadLine();
 
                 //Calibre les conditions de victoire selon la difficulté
@@ -162,6 +164,10 @@ namespace Miniville_GroupeC
                         isExpertModeOn = true;
                         errorTryCatch = 0;
                         break;
+                    case "5":
+                        isReelModeOn = true;
+                        errorTryCatch=0;
+                        break;
                     default:
                         Console.WriteLine("Veuillez entrer un numéro valide");
                         errorTryCatch = 1;
@@ -171,7 +177,7 @@ namespace Miniville_GroupeC
             #endregion
 
             #region Lancement du jeu
-            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, isExpertModeOn, isMultiplayerOn);
+            Game theGame = new Game(playDice, nbPiecesToWin, namePlayers, isExpertModeOn, isMultiplayerOn, isReelModeOn);
             theGame.GameLoop();
             #endregion
         }
