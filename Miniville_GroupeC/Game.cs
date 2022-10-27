@@ -18,14 +18,17 @@ namespace Miniville_GroupeC
         private bool doubleDe;
         public Pile pile;
         private bool isMultiplayerOn = false;
+		public static bool hasCentreCommercial = false;
+		private bool reelMode;
         #endregion
 
         #region Constructeur
-        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool isExpertModeOn = false, bool isMultiplayerOn = false)
+        public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false, bool reelMode = false)
         {
             this.playDice = playDice;
             this.nbPieceVictory = nbPieceVictory;
             this.isExpertModeOn = isExpertModeOn;
+            this.reelMode = reelMode;
             this.namePlayers = namePlayers;
             this.isMultiplayerOn = isMultiplayerOn;
             pile = new Pile();
@@ -85,6 +88,7 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
+
                     #region Données du joueur
                     currentPlayer = players[i];
                     Console.Write("\n\nC'est au tour de " + currentPlayer.name + " qui a un total de ");
@@ -134,6 +138,16 @@ namespace Miniville_GroupeC
                         valueTotal += this.playDice.activeValueOfSecondDice;
 
                     //Affichage valeur finale des dés
+					int valueDice1 = this.playDice.activeValueOfDice;
+                    int valueDice2 =0;
+                    var GareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
+                    if (GareCard.Count >= 1)
+                    {
+                        valueDice2 = this.playDice.activeValueOfSecondDice;
+                    }
+                        
+                    int valueTotal = valueDice1 + valueDice2;
+
                     Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write(valueTotal);
@@ -142,6 +156,34 @@ namespace Miniville_GroupeC
                     #endregion
 
                     #region Activation et Achats
+                    var TourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
+                    if(TourRadioCard.Count >= 1)
+                    {
+                        Console.WriteLine("Voulez-vous relancer les dés ?\n");
+                        Console.WriteLine("o -- Oui");
+                        Console.WriteLine("n -- Non");
+                        string tourRadio = Console.ReadLine();
+                        if (tourRadio == "o")
+                        {
+                            valueDice1 = this.playDice.activeValueOfDice;
+
+                            valueDice2 = this.playDice.activeValueOfSecondDice;
+                            valueTotal = valueDice1 + valueDice2;
+
+                            Console.Write("Le(s) dé(s) affiche(nt) une valeur de ");
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.Write(valueTotal);
+                            Console.ResetColor();
+                            Console.WriteLine();
+
+                        }
+                    }
+                    var CentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
+                    if (CentreCommercialCard.Count >= 1)
+                    {
+                        hasCentreCommercial = true;
+                    }
+                 
                     Console.WriteLine("Nous regardons si les joueurs ont des cartes qui doivent être activées\n");
                     currentPlayer.CheckCardToActivate(valueTotal);
                     Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
@@ -153,6 +195,14 @@ namespace Miniville_GroupeC
                     if (!isInLoop)
                         winningPlayer = currentPlayer.name;
                     #endregion
+					
+                    hasCentreCommercial = false;
+                    
+                    var ParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList(); 
+                    if (ParcAttractionsCard.Count >= 1 && valueDice2 == valueDice1)
+                    {
+                        break;
+                    }
                 }
                 #region Nettoyer la console à chaque nouveau tour
                 Console.Write("\n\n(Presser une touche pour continuer)");
@@ -206,8 +256,21 @@ namespace Miniville_GroupeC
                         amountFurnitureFactories.Count * amountMines.Count * amountOrchards.Count * amountMarkets.Count > 0)
                         isInLoop = false;
                 }
-                else
-                    isInLoop = false;
+                else if (reelMode)
+                        {
+                            var amountTourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
+                            var amountGareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
+                            var amountParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList();
+                            var amountCentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
+                            if(amountCentreCommercialCard.Count * amountGareCard.Count * amountParcAttractionsCard.Count * amountTourRadioCard.Count > 0)
+                            {
+                                isInLoop = false;
+                            }
+                        }
+						else{
+							isInLoop = false;
+						}
+                    
             }
             return isInLoop;
         }

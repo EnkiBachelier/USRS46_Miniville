@@ -6,7 +6,8 @@ namespace Miniville_GroupeC
     {
         RED,
         GREEN,
-        BLUE
+        BLUE,
+        YELLOW
     }
     #endregion
 
@@ -87,8 +88,16 @@ namespace Miniville_GroupeC
         //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
+
             if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 3))
+            {
                 playerOwner.nbPiece += 2;
+                if (Game.hasCentreCommercial)
+                {
+                    playerOwner.nbPiece++;
+                }
+            }
+            
         }
     }
     #endregion
@@ -107,6 +116,10 @@ namespace Miniville_GroupeC
             {
                 playerOwner.nbPiece++;
                 playerWhosPlaying.nbPiece--;
+                if (Game.hasCentreCommercial)
+                {
+                    playerOwner.nbPiece++;
+                }
             }
         }
     }
@@ -124,6 +137,10 @@ namespace Miniville_GroupeC
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
                 playerOwner.nbPiece += 3;
+            if (Game.hasCentreCommercial)
+            {
+                playerOwner.nbPiece++;
+            }
         }
     }
     #endregion
@@ -222,6 +239,10 @@ namespace Miniville_GroupeC
             {
                 playerWhosPlaying.nbPiece -= 2;
                 playerOwner.nbPiece += 2;
+				if (Game.hasCentreCommercial)
+                {
+                    playerOwner.nbPiece++;
+                }
             }
         }
     }
@@ -255,6 +276,62 @@ namespace Miniville_GroupeC
         {
             if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 12))
                 playerOwner.nbPiece += 2;
+        }
+    }
+    #endregion
+
+    #region Class ParcAttractionsCard (Dérivée de MasterCard)
+    public class ParcAttractionsCard : MasterCard
+    {
+        public ParcAttractionsCard() : base(0, CardColor.YELLOW, "Parc d'Attractions", 16)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            
+        }
+    }
+    #endregion
+
+    #region Class : TourRadioCard (Dérivée de MAsterCard)
+    public class TourRadioCard : MasterCard
+    {
+        public TourRadioCard() : base(0, CardColor.YELLOW, "Tour Radio", 22)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            
+        }
+    }
+    #endregion
+
+    #region Class : GareCard (Dérivée de MasterCard)
+    public class GareCard : MasterCard
+    {
+        public GareCard() : base(0, CardColor.YELLOW, "Gare", 4)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            
+        }
+    }
+    #endregion
+
+    #region Class : CentreCommercialCard (Dérivée de MasterCard)
+    public class CentreCommercialCard : MasterCard
+    {
+        public CentreCommercialCard() : base(0, CardColor.YELLOW, "Centre Commercial", 10)
+        {
+
+        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
+        {
+            
         }
     }
     #endregion
