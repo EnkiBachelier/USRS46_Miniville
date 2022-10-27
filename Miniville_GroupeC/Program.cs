@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Reflection;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Miniville_GroupeC
 {
@@ -20,6 +23,9 @@ namespace Miniville_GroupeC
             bool isExpertModeOn = false;
             bool isReelModeOn = false;
             int nbPiecesToWin = 0;
+            Random rnd = new Random();
+            string[] IAName = { "Rufus", "Bear", "Dakota", "Fido", "Vanya", "Samuel", "Koani", "Volodya", "Prince", "Yiska", "chicos", "chipie", "chiquita", "chouquette", "choupette", "azimut", "zazou", "zanzibar", "zebulon", "zephyr", "zigou", "zoupette", "volt", "dynamite", "mélo",
+                                        "mélopée", "michette", "mistik", "moustakoamande", "caramel", "chocolat", "noisette", "pistache", "pralinébibi", "bidou", "biloute", "barjès", "batilou", "bernik", "cachou", "cambo", "capoune", "capri", "clown", "dino", "doli", "flip", "indi", "djimi", "litz", "loutz", "pat", "patouille", "pipette", "pirouette", "pitikok", "poulette", "slim"};
             #endregion
 
             #region Textes de lancement
@@ -109,16 +115,17 @@ namespace Miniville_GroupeC
                     //Le nom du joueur
                     if (i == 0)
                     {
-                        Console.Write("\nQuel est votre nom ?");
+                        Console.Write("\nQuel est votre nom ? ");
                         string name = Console.ReadLine();
                         namePlayers.Add(name);
                     }
                     //Les noms des ordinateurs
                     else
                     {
-                        Console.Write("\nQuel est le nom du maire ordinateur n°" + (i + 1) + "? ");
-                        string name = Console.ReadLine();
+                        int mIndex = rnd.Next(IAName.Length);
+                        string name = IAName[mIndex];
                         namePlayers.Add(name);
+                        Console.Write("\nLe nom du maire ordinateur n°" + (i + 1)+" est {0}",name);
                     }
                 }
                 //Les noms de chaque joueur
