@@ -50,7 +50,11 @@ namespace Miniville_GroupeC
             var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
             var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
             var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
-            var amountCentreCommercial = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
+            var amountTourRadioCard = pile.mainPile.Where(x => x is TourRadioCard).ToList();
+            Console.WriteLine(amountTourRadioCard.Count);
+            var amountGareCard = pile.mainPile.Where(x => x is GareCard).ToList();
+            var amountParcAttractionsCard = pile.mainPile.Where(x => x is ParcAttractionsCard).ToList();
+            var amountCentreCommercialCard = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
             #endregion
 
             //Le joueur n'est pas une IA
@@ -263,11 +267,71 @@ namespace Miniville_GroupeC
                     }
                     Console.ResetColor();
 
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine("14 - Passer votre tour");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    if (amountGareCard.Count > 0)
+                    {
+                        Console.Write("14  - Une gare (4$) ? Vous pouvez lancer deux dés !");
+                        var amountPlayerGareCard = playerCardList.Where(x => x is GareCard).ToList();
+                        if (amountPlayerGareCard.Count >= 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("(" + amountPlayerGareCard.Count + " en main)\n");
+                        }
+                        else
+                            Console.WriteLine();
+                    }
                     Console.ResetColor();
 
-                } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 14);
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    if (amountParcAttractionsCard.Count > 0)
+                    {
+                        Console.Write("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rajoutez un tour après celui-ci !");
+                        var amountPlayerParcAttractionsCard = playerCardList.Where(x => x is ParcAttractionsCard).ToList();
+                        if (amountPlayerParcAttractionsCard.Count >= 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("(" + amountPlayerParcAttractionsCard.Count + " en main)\n");
+                        }
+                        else
+                            Console.WriteLine();
+                    }
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    if (amountTourRadioCard.Count > 0)
+                    {
+                        Console.Write("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
+                        var amountPlayerTourRadioCard = playerCardList.Where(x => x is TourRadioCard).ToList();
+                        if (amountPlayerTourRadioCard.Count >= 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("(" + amountPlayerTourRadioCard.Count + " en main)\n");
+                        }
+                        else
+                            Console.WriteLine();
+                    }
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    if (amountCentreCommercialCard.Count > 0)
+                    {
+                        Console.Write("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
+                        var amountPlayerCentreCommercialCard = playerCardList.Where(x => x is CentreCommercialCard).ToList();
+                        if (amountPlayerCentreCommercialCard.Count >= 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("(" + amountPlayerCentreCommercialCard.Count + " en main)\n");
+                        }
+                        else
+                            Console.WriteLine();
+                    }
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("18 - Passer votre tour");
+                    Console.ResetColor();
+
+                } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 18);
                 #endregion
             }
             //Le joueur est une IA
@@ -360,6 +424,10 @@ namespace Miniville_GroupeC
                     bool CardForet = false;
                     bool CardRestaurant = false;
                     bool CardStade = false;
+                    bool CardTourRadio = false;
+                    bool CardGare = false;
+                    bool CardCentreCommercial = false;
+                    bool CardParcAttraction = false;
                     foreach (MasterCard carte in this.playerCardList) //on teste si les cartes appartiennent au joueur
                     {
                         if (carte is WheatFieldCard) { CardChamp = true; }
@@ -370,6 +438,10 @@ namespace Miniville_GroupeC
                         if (carte is ForestCard) { CardForet = true; }
                         if (carte is RestaurantCard) { CardRestaurant = true; }
                         if (carte is StadiumCard) { CardStade = true; }
+                        if(carte is ParcAttractionsCard) { CardParcAttraction = true; }
+                        if (carte is TourRadioCard) { CardTourRadio = true; }
+                        if (carte is GareCard) { CardGare = true; }
+                        if (carte is CentreCommercialCard) { CardCentreCommercial = true; }
                     }
 
                     //si le joueur ne l'a pas on le la lui prend
@@ -381,13 +453,17 @@ namespace Miniville_GroupeC
                     if (CardForet == false) { if (nbPiece >= 2) { choice = 6; } }
                     if (CardRestaurant == false) { if (nbPiece >= 4) { choice = 7; } }
                     if (CardStade == false) { if (nbPiece >= 6) { choice = 8; } }
+                    if (CardGare == false) { if (nbPiece >= 4) { choice = 14; } }
+                    if (CardCentreCommercial == false) { if (nbPiece >= 10) { choice = 15; } }
+                    if (CardTourRadio == false) { if (nbPiece >= 22) { choice = 16; } }
+                    if (CardParcAttraction == false) { if (nbPiece >= 15) { choice = 17; } }
 
-                     
+
                 }
                 if (choice == -1 || isAILooping)
                 {
                     Random rdm = new Random();
-                    choice = rdm.Next(1, 15);
+                    choice = rdm.Next(1, 19);
                 }
             }
 
@@ -583,6 +659,62 @@ namespace Miniville_GroupeC
                     Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
                     break;
                 case 14:
+                    var gare = new GareCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        if (this.isItAnAI)
+                            BuyCard(true);
+                        else
+                            BuyCard();
+                        break;
+                    }
+                    CanBuyCard(gare);
+                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    break;
+                case 15:
+                    var parc = new ParcAttractionsCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        if (this.isItAnAI)
+                            BuyCard(true);
+                        else
+                            BuyCard();
+                        break;
+                    }
+                    CanBuyCard(parc);
+                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    break;
+                case 16:
+                    var tour = new TourRadioCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        if (this.isItAnAI)
+                            BuyCard(true);
+                        else
+                            BuyCard();
+                        break;
+                    }
+                    CanBuyCard(tour);
+                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    break;
+                case 17:
+                    var centre = new CentreCommercialCard();
+                    if (amountMarkets.Count <= 0)
+                    {
+                        Console.WriteLine("Cette carte n'est plus disponible...");
+                        if (this.isItAnAI)
+                            BuyCard(true);
+                        else
+                            BuyCard();
+                        break;
+                    }
+                    CanBuyCard(centre);
+                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    break;
+                case 18:
                     Console.WriteLine("{0} a passé son tour", this.name);
                     break;
 
@@ -603,6 +735,7 @@ namespace Miniville_GroupeC
                 playerCardList.Add(card);
                 game.pile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
+                
             }
             //Le joueur n'a pas assez d'argent
             else
