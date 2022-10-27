@@ -65,7 +65,7 @@ namespace Miniville_GroupeC
     #region Class : FarmCard (Dérivée de MasterCard)
     public class FarmCard : MasterCard
     {
-        public FarmCard() : base(2, CardColor.BLUE, "Ferme", 2)
+        public FarmCard() : base(2, CardColor.BLUE, "Ferme", 1)
         {
         }
 
@@ -148,7 +148,7 @@ namespace Miniville_GroupeC
     #region Class : ForestCard (Dérivée de MasterCard)
     public class ForestCard : MasterCard
     {
-        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 2)
+        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 3)
         {
         }
 
@@ -228,7 +228,7 @@ namespace Miniville_GroupeC
     #region Class : RestaurantCard (Dérivée de MasterCard)
     public class RestaurantCard : MasterCard
     {
-        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 4)
+        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 3)
         {
         }
 
