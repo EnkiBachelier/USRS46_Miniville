@@ -19,7 +19,14 @@ namespace Miniville_GroupeC
                     nb++;
                 AddCardToPile(nb);
             }
-            //FOR POUR 2 : mOnuments
+            int monument = 0;
+            for(int i = 0; i < nbCountPlayers * 4 ; i++)
+            {
+                if(i % nbCountPlayers == 0)
+                    monument++;
+                AddMonumentToPile(monument);
+                
+            }
         }
         #endregion
 
@@ -82,6 +89,26 @@ namespace Miniville_GroupeC
                     break;
                 case 13:
                     mainPile.Add(new MarketCard());
+                    break;
+                
+                
+            }
+        }
+        private void AddMonumentToPile(int monument)
+        {
+            switch (monument)
+            {
+                case 1:
+                    mainPile.Add(new GareCard());
+                    break;
+                case 2:
+                    mainPile.Add(new ParcAttractionsCard());
+                    break;
+                case 3:
+                    mainPile.Add(new TourRadioCard());
+                    break;
+                case 4:
+                    mainPile.Add(new CentreCommercialCard());
                     break;
             }
         }
