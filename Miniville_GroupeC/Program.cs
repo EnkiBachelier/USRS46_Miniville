@@ -24,7 +24,7 @@ namespace Miniville_GroupeC
             bool isReelModeOn = false;
             int nbPiecesToWin = 0;
             Random rnd = new Random();
-            string[] malePetNames = { "Rufus", "Bear", "Dakota", "Fido", "Vanya", "Samuel", "Koani", "Volodya", "Prince", "Yiska", "chicos", "chipie", "chiquita", "chouquette", "choupette", "azimut", "zazou", "zanzibar", "zebulon", "zephyr", "zigou", "zoupette", "volt", "dynamite", "mélo",
+            string[] IAName = { "Rufus", "Bear", "Dakota", "Fido", "Vanya", "Samuel", "Koani", "Volodya", "Prince", "Yiska", "chicos", "chipie", "chiquita", "chouquette", "choupette", "azimut", "zazou", "zanzibar", "zebulon", "zephyr", "zigou", "zoupette", "volt", "dynamite", "mélo",
                                         "mélopée", "michette", "mistik", "moustakoamande", "caramel", "chocolat", "noisette", "pistache", "pralinébibi", "bidou", "biloute", "barjès", "batilou", "bernik", "cachou", "cambo", "capoune", "capri", "clown", "dino", "doli", "flip", "indi", "djimi", "litz", "loutz", "pat", "patouille", "pipette", "pirouette", "pitikok", "poulette", "slim"};
             #endregion
 
@@ -122,8 +122,8 @@ namespace Miniville_GroupeC
                     //Les noms des ordinateurs
                     else
                     {
-                        int mIndex = rnd.Next(malePetNames.Length);
-                        string name = malePetNames[mIndex];
+                        int mIndex = rnd.Next(IAName.Length);
+                        string name = IAName[mIndex];
                         namePlayers.Add(name);
                         Console.Write("\nLe nom du maire ordinateur n°" + (i + 1)+" est {0}",name);
                     }
