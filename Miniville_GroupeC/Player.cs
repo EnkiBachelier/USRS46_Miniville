@@ -51,7 +51,6 @@ namespace Miniville_GroupeC
             var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
             var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
             var amountTourRadioCard = pile.mainPile.Where(x => x is TourRadioCard).ToList();
-            Console.WriteLine(amountTourRadioCard.Count);
             var amountGareCard = pile.mainPile.Where(x => x is GareCard).ToList();
             var amountParcAttractionsCard = pile.mainPile.Where(x => x is ParcAttractionsCard).ToList();
             var amountCentreCommercialCard = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
@@ -86,7 +85,7 @@ namespace Miniville_GroupeC
                     //On affiche la description de la carte si elle est encore disponible
                     if (amountFarms.Count > 0)
                     {
-                        Console.Write("2  - Une ferme (2$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
+                        Console.Write("2  - Une ferme (1$) ? Recevez 1 pièce lorsque le dé affiche 1 ");
                         //Si le joueur possède déjà cette carte, on affiche le nombre dans sa main
                         var amountPlayerFarms = playerCardList.Where(x => x is FarmCard).ToList();
                         if (amountPlayerFarms.Count >= 1)
@@ -120,7 +119,7 @@ namespace Miniville_GroupeC
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (amountCoffees.Count > 0)
                     {
-                        Console.Write("4  - Une café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3 ");
+                        Console.Write("4  - Un café (2$) ? Recevez 1 pièce du joueur qui a lancé le dé et qui affiche 3 ");
                         var amountPlayerCoffees = playerCardList.Where(x => x is CoffeeCard).ToList();
                         if (amountPlayerCoffees.Count >= 1)
                         {
@@ -150,7 +149,7 @@ namespace Miniville_GroupeC
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     if (amountForests.Count > 0)
                     {
-                        Console.Write("6  - Une forêt (2$) ? Recevez 1 pièce lorsque le dé affiche 5 ");
+                        Console.Write("6  - Une forêt (3$) ? Recevez 1 pièce lorsque le dé affiche 5 ");
                         var amountPlayerForests = playerCardList.Where(x => x is ForestCard).ToList();
                         if (amountPlayerForests.Count >= 1)
                         {
@@ -165,7 +164,7 @@ namespace Miniville_GroupeC
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (amountRestaurants.Count > 0)
                     {
-                        Console.Write("7  - Un restaurant (4$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10 ");
+                        Console.Write("7  - Un restaurant (3$) ? Recevez 2 pièces du joueur qui a lancé le dé et qui affiche 9 ou 10 ");
                         var amountPlayerRestaurants = playerCardList.Where(x => x is RestaurantCard).ToList();
                         if (amountPlayerRestaurants.Count >= 1)
                         {
@@ -660,7 +659,7 @@ namespace Miniville_GroupeC
                     break;
                 case 14:
                     var gare = new GareCard();
-                    if (amountMarkets.Count <= 0)
+                    if (amountGareCard.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         if (this.isItAnAI)
@@ -674,7 +673,7 @@ namespace Miniville_GroupeC
                     break;
                 case 15:
                     var parc = new ParcAttractionsCard();
-                    if (amountMarkets.Count <= 0)
+                    if (amountParcAttractionsCard.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         if (this.isItAnAI)
@@ -688,7 +687,7 @@ namespace Miniville_GroupeC
                     break;
                 case 16:
                     var tour = new TourRadioCard();
-                    if (amountMarkets.Count <= 0)
+                    if (amountTourRadioCard.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         if (this.isItAnAI)
@@ -702,7 +701,7 @@ namespace Miniville_GroupeC
                     break;
                 case 17:
                     var centre = new CentreCommercialCard();
-                    if (amountMarkets.Count <= 0)
+                    if (amountCentreCommercialCard.Count <= 0)
                     {
                         Console.WriteLine("Cette carte n'est plus disponible...");
                         if (this.isItAnAI)
