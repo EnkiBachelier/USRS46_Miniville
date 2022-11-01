@@ -91,7 +91,6 @@ namespace Miniville_GroupeC
             {
                 for (int i = 0; i < players.Count; i++)
                 {
-                    Console.WriteLine("TEST : On rentre dans la boucle for");
                     #region Données du joueur
                     if (needsToSkip)
                     {
@@ -193,7 +192,8 @@ namespace Miniville_GroupeC
                     Console.Write(currentPlayer.nbPiece);
                     Console.ResetColor();
                     Console.WriteLine(" pièce(s) !");
-                    Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
+                    if (!currentPlayer.isItAnAI)
+                        Console.WriteLine("Quel carte souhaitez-vous acheter ? \n");
                     currentPlayer.BuyCard();
                     #endregion
 
@@ -208,7 +208,7 @@ namespace Miniville_GroupeC
                     var ParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList();
                     if (ParcAttractionsCard.Count >= 1 && valueDice2 == valueDice1)
                     {
-                        Console.WriteLine("Vous avez fait un double et pouvez donc directement rejouer !\n");
+                        Console.WriteLine("{0} a fait un double et peut donc directement rejouer !\n", currentPlayer.name);
                         playerWhoSkipped = i;
                         needsToSkip = true;
                         break;
