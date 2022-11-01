@@ -31,6 +31,14 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Méthodes
+        public override string ToString()
+        {
+            string thisReturn = "";
+            foreach (MasterCard thisCard in mainPile)
+                thisReturn += thisCard.name + "\n";
+
+            return thisReturn;
+        }
         //Retire une carte précise (achetée par exemple) de la pile
         public void RemoveCardFromPile(MasterCard card)
         {

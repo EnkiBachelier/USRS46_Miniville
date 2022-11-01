@@ -14,6 +14,7 @@ namespace Miniville_GroupeC
         private Pile pile;
         public bool isItAnAI;
         public bool testCanBuy;
+        private bool stopBuying = false;
         #endregion
 
         #region Constructeur
@@ -59,6 +60,7 @@ namespace Miniville_GroupeC
             //Le joueur n'est pas une IA
             if (!isItAnAI)
             {
+                Console.WriteLine("TEST : On rentre dans le If Player");
                 #region Affichage Cartes de la pile selon leur disponibilité
                 do
                 {
@@ -332,10 +334,13 @@ namespace Miniville_GroupeC
 
                 } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 18);
                 #endregion
+                Console.WriteLine("TEST : On ressort des choix proposés pour le joueur");
+                Console.WriteLine("TEST : Le joueur a choisi le choix : " + choice);
             }
             //Le joueur est une IA
-            else  
+            else
             {
+                Console.WriteLine("TEST : On rentre dans la boucle de l'IA");
                 int Cagnote = 0;
                 foreach (Player perso in game.players)
                 {
@@ -437,7 +442,7 @@ namespace Miniville_GroupeC
                         if (carte is ForestCard) { CardForet = true; }
                         if (carte is RestaurantCard) { CardRestaurant = true; }
                         if (carte is StadiumCard) { CardStade = true; }
-                        if(carte is ParcAttractionsCard) { CardParcAttraction = true; }
+                        if (carte is ParcAttractionsCard) { CardParcAttraction = true; }
                         if (carte is TourRadioCard) { CardTourRadio = true; }
                         if (carte is GareCard) { CardGare = true; }
                         if (carte is CentreCommercialCard) { CardCentreCommercial = true; }
@@ -464,8 +469,10 @@ namespace Miniville_GroupeC
                     Random rdm = new Random();
                     choice = rdm.Next(1, 19);
                 }
+                Console.WriteLine("TEST : On ressort de la boucle de l'IA");
             }
 
+            Console.WriteLine("TEST : Le choix final est : " + choice);
             #region Effectue l'achat si c'est possible (carte disponible et assez d'argent)
             switch (choice)
             {
@@ -483,6 +490,11 @@ namespace Miniville_GroupeC
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(wheatFieldCard);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un champ de blé", this.name);
                     break;
                 case 2:
@@ -499,6 +511,11 @@ namespace Miniville_GroupeC
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(farm);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une ferme", this.name);
                     break;
                 case 3:
@@ -515,6 +532,11 @@ namespace Miniville_GroupeC
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(bakery);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une boulangerie", this.name);
                     break;
                 case 4:
@@ -529,6 +551,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(cafe);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un café", this.name);
                     break;
                 case 5:
@@ -543,6 +570,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(minimarket);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une superette", this.name);
                     break;
                 case 6:
@@ -557,6 +589,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(forest);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une forêt", this.name);
                     break;
                 case 7:
@@ -571,6 +608,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(restau);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un restaurant", this.name);
                     break;
                 case 8:
@@ -585,6 +627,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(stadium);
+                    if(stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un stade", this.name);
                     break;
                 case 9:
@@ -599,6 +646,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(cheeseFacto);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une fromagerie", this.name);
                     break;
                 case 10:
@@ -613,6 +665,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(furnitureFacto);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une fabrique de meuble", this.name);
                     break;
                 case 11:
@@ -627,6 +684,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(mine);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter une mine", this.name);
                     break;
                 case 12:
@@ -641,6 +703,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(orchard);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un verger", this.name);
                     break;
                 case 13:
@@ -655,6 +722,11 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(market);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
                     Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
                     break;
                 case 14:
@@ -669,7 +741,12 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(gare);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
+                    Console.WriteLine("{0} a choisi d'acheter une gare", this.name);
                     break;
                 case 15:
                     var parc = new ParcAttractionsCard();
@@ -683,7 +760,12 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(parc);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
+                    Console.WriteLine("{0} a choisi d'acheter un parc d'attractions", this.name);
                     break;
                 case 16:
                     var tour = new TourRadioCard();
@@ -697,7 +779,12 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(tour);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
+                    Console.WriteLine("{0} a choisi d'acheter une tour radio", this.name);
                     break;
                 case 17:
                     var centre = new CentreCommercialCard();
@@ -711,8 +798,14 @@ namespace Miniville_GroupeC
                         break;
                     }
                     CanBuyCard(centre);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (stopBuying)
+                    {
+                        stopBuying = false;
+                        break;
+                    }
+                    Console.WriteLine("{0} a choisi d'acheter un centre commercial", this.name);
                     break;
+
                 case 18:
                     Console.WriteLine("{0} a passé son tour", this.name);
                     break;
@@ -727,20 +820,26 @@ namespace Miniville_GroupeC
         //Si le joueur a assez d'argent, achète la carte sinon relance BuyCard()
         private void CanBuyCard(MasterCard card)
         {
+            Console.WriteLine("TEST : On rentre dans Can Buy Card");
             //Le joueur a assez d'argent
             if (nbPiece >= card.costValue)
             {
+                Console.WriteLine("TEST : Can buy Card approuvé");
                 nbPiece -= card.costValue;
                 playerCardList.Add(card);
                 game.pile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
-                
+
             }
             //Le joueur n'a pas assez d'argent
             else
             {
                 Console.WriteLine("{0} n'avez pas assez de pièces. Veuillez choisir une autre carte !\n", this.name);
-                BuyCard(true);
+                stopBuying = true;
+                if (this.isItAnAI)
+                    BuyCard(true);
+                else
+                    BuyCard();
             }
         }
 
