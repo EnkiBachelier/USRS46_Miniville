@@ -2,7 +2,7 @@
 namespace Miniville_GroupeC
 {
     #region Enum : CardColor
-    public enum CardColor
+    public enum CardColor  //Les différents types de cartes 
     {
         RED,
         GREEN,
@@ -14,11 +14,11 @@ namespace Miniville_GroupeC
     public abstract class MasterCard
     {
         #region Déclaration des variables
-        public string name;
-        public int activationValue;
-        public int costValue;
-        public CardColor cardColor;
-        public Player playerOwner;
+        public string name; //nom de la carte
+        public int activationValue;//valeur pour pouvoir activer la carte avec la valeur de son dé
+        public int costValue;//cout de la carte en money
+        public CardColor cardColor; //couleur/type de la carte
+        public Player playerOwner; //a qui appartient la carte 
         #endregion
 
         #region Constructeur

@@ -20,6 +20,7 @@ namespace Miniville_GroupeC
             Console.WriteLine("Hello World!");
 =======
             #region Déclaration des variables
+<<<<<<< Updated upstream
             Dice playDice = new Dice();
             List<string> namePlayers = new List<string>();
 <<<<<<< HEAD
@@ -68,10 +69,25 @@ namespace Miniville_GroupeC
             int errorTryCatch = 0;
             bool expertMode = false;
             int nbPiecesToWin = 0;
+=======
+            Dice playDice = new Dice(); //appelle de la classe Dice
+            List<string> namePlayers = new List<string>();//list des noms de tout les joueurs 
+            bool isMultiplayerOn = false;//si multijoueur activer ou non
+            int errorMulti = 0;  //pour le test d'entrée multijoueur 
+            int nbMayors = 0;//nombre de maires dans la parties
+            int errorTryCatch = 0;//pour la boucle de demande du choix de nombre de maires, et du choix de la difficulter
+            bool isExpertModeOn = false;//si mode expert activer
+            bool isReelModeOn = false;//si mode normal activer
+            int nbPiecesToWin = 0; //nombre de piéce pour pouvoir gagner
+            Random rnd = new Random(); //nombre random
+            string[] IAName = { "Rufus", "Bear", "Dakota", "Fido", "Vanya", "Samuel", "Koani", "Volodya", "Prince", "Yiska", "chicos", "chipie", "chiquita", "chouquette", "choupette", "azimut", "zazou", "zanzibar", "zebulon", "zephyr", "zigou", "zoupette", "volt", "dynamite", "mélo",
+                                        "mélopée", "michette", "mistik", "moustakoamande", "caramel", "chocolat", "noisette", "pistache", "pralinébibi", "bidou", "biloute", "barjès", "batilou", "bernik", "cachou", "cambo", "capoune", "capri", "clown", "dino", "doli", "flip", "indi", 
+                                        "djimi", "litz", "loutz", "pat", "patouille", "pipette", "pirouette", "pitikok", "poulette", "slim"}; //on génére un nom aléatoire pour l'IA
+>>>>>>> Stashed changes
             #endregion
 
             #region Textes de lancement
-            Console.WriteLine("                                         Bienvenue à MINIVILLE !!!");
+            Console.WriteLine("                                         Bienvenue à MINIVILLE !!!");  //Phrase de départ lors du lancement du jeu (le menu)
             Wait(0.4f);
             Console.Write("\nDans ce jeu, vous serez amené à devenir le maire le plus ");
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -95,6 +111,37 @@ namespace Miniville_GroupeC
             Console.WriteLine("\n");
             #endregion
 
+<<<<<<< Updated upstream
+=======
+            #region Mode de jeu Multijoueur vs IA
+            do  //Choisir entre contre l'ordinateur ou contre un autre joueuer 
+            {
+                Console.WriteLine("Veuillez choisir un mode de jeu");
+                Console.WriteLine("1 - Multijoueur");
+                Console.WriteLine("2 - Contre l'Ordinateur\n");
+                string modePlay = Console.ReadLine();
+
+                if (modePlay == "1")
+                {
+                    errorMulti = 1;
+                    isMultiplayerOn = true;
+                    Console.WriteLine("Vous avez sélectionné le mode multijoueur !\n");
+                }
+                else if (modePlay == "2")
+                {
+                    errorMulti = 1;
+                    isMultiplayerOn = false;
+                    Console.WriteLine("Vous avez sélectionné le mode contre l'ordinateur !\n");
+                }
+                else
+                {
+                    errorMulti = 0;
+                    Console.WriteLine("Veuillez choisir une entrée valide...\n");
+                }
+            } while (errorMulti == 0);
+            #endregion
+
+>>>>>>> Stashed changes
             #region Données des maires
             do
             {

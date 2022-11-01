@@ -26,6 +26,7 @@ namespace Miniville_GroupeC
         #region Déclaration de variables
         public List<MasterCard> playerCardList = new List<MasterCard>();
         public int nbPiece;
+<<<<<<< Updated upstream
         public Game game;
         public string name;
 <<<<<<< HEAD
@@ -36,6 +37,14 @@ namespace Miniville_GroupeC
         public Player(int piece, List<MasterCard> Mastercard, Game game, string name, bool ordi)
 =======
         private Pile pile;
+=======
+        public Game game; //on appelle la fonction game pour tester ce qu'il y a dedans 
+        public string name;//nom du joueur
+        private Pile pile;//pile des cartes pour pouvoir tester 
+        public bool isItAnAI; //si le joueur est une IA ou non 
+        public bool testCanBuy; //tester si on peut acheter la carte
+        private bool stopBuying = false; //on demande d'arreter d'acheter pour eviter les boucles
+>>>>>>> Stashed changes
         #endregion
 
         #region Constructeur

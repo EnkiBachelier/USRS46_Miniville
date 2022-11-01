@@ -10,6 +10,7 @@ namespace Miniville_GroupeC
 <<<<<<< Updated upstream
 =======
         #region Déclaration des variables
+<<<<<<< Updated upstream
         public List<Player> players = new List<Player>();
         public Player currentPlayer;
         public Dice playDice;
@@ -24,6 +25,20 @@ namespace Miniville_GroupeC
 
         public Game(Dice playDice, int nbPieceVictory, List<string> namePlayers, bool expertMode = false,bool multiplayer = false)
 =======
+=======
+        public List<Player> players = new List<Player>(); //list de chaque joueur
+        public Player currentPlayer; //selection du joueur entraint de jouer
+        public Dice playDice; //apelle de la classe Dice pour faire les lancers de dé
+        public int nbPieceVictory; //nombre de piéce pour pouvoir gagner
+        public List<string> namePlayers = new List<string>(); //list des noms de tout les joueurs 
+        private List<MasterCard> initialCards = new List<MasterCard>(); //carte ajouter au début de la partie (chant de blé et boulangerie)
+        private bool isExpertModeOn; //mode expert activer ou non
+        private bool isDoubleDeActive;//mode double dé activer ou non
+        public Pile pile; //appelle de la classe pile pour pouvoir gerer les cartes
+        private bool isMultiplayerOn = false; //mode multijoueur activer ou non
+        public static bool hasCentreCommercial = false; //test si il y a un centre commercial 
+        private bool isReelModeOn; //si le mode est normal et donc n'est pas expert
+>>>>>>> Stashed changes
         #endregion
 
         #region Constructeur

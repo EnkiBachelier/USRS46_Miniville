@@ -7,7 +7,7 @@ namespace Miniville_GroupeC
 <<<<<<< Updated upstream
 =======
         #region Déclaration des variables
-        public List<MasterCard> mainPile = new List<MasterCard>();
+        public List<MasterCard> mainPile = new List<MasterCard>(); //la pile avec toutes les cartes
         #endregion
 
         #region Constructeur
@@ -21,6 +21,18 @@ namespace Miniville_GroupeC
                     nb++;
                 AddCardToPile(nb);
             }
+<<<<<<< Updated upstream
+=======
+            int monument = 0;
+            for(int i = 0; i < nbCountPlayers * 4 ; i++)
+            {
+                //on répéte l'opération avec les monuments
+                if(i % nbCountPlayers == 0)
+                    monument++;
+                AddMonumentToPile(monument);
+                
+            }
+>>>>>>> Stashed changes
         }
         #endregion
 
@@ -84,6 +96,30 @@ namespace Miniville_GroupeC
                 case 13:
                     mainPile.Add(new MarketCard());
                     break;
+<<<<<<< Updated upstream
+=======
+                
+                
+            }
+        }
+        private void AddMonumentToPile(int monument)
+        {
+            //Selon un numéro, ajoute une instance de type monument de la carte correspondante à la pile
+            switch (monument)
+            {
+                case 1:
+                    mainPile.Add(new GareCard());
+                    break;
+                case 2:
+                    mainPile.Add(new ParcAttractionsCard());
+                    break;
+                case 3:
+                    mainPile.Add(new TourRadioCard());
+                    break;
+                case 4:
+                    mainPile.Add(new CentreCommercialCard());
+                    break;
+>>>>>>> Stashed changes
             }
         }
         #endregion
