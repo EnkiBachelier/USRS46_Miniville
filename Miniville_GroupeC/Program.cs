@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Reflection;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Miniville_GroupeC
 {
@@ -151,7 +146,7 @@ namespace Miniville_GroupeC
                 Console.WriteLine("2 -- Partie standard (20 pièces pour gagner)");
                 Console.WriteLine("3 -- Partie longue (30 pièces pour gagner)");
                 Console.WriteLine("4 -- Partie experte (20 pièces et un exemplaire de chaque carte pour gagner)");
-                Console.WriteLine("5 -- Partie se rapprochant du vrai jeu\n");
+                Console.WriteLine("5 -- Partie se rapprochant du vrai jeu (posséder un exemplaire de chaque monument)\n");
                 string difficulty = Console.ReadLine();
 
                 //Calibre les conditions de victoire selon la difficulté
@@ -191,6 +186,7 @@ namespace Miniville_GroupeC
             theGame.GameLoop();
             #endregion
         }
+
         #region Méthodes
         //Marque une pause de n-secondes
         public static void Wait(float second)
@@ -205,7 +201,7 @@ namespace Miniville_GroupeC
             foreach (char thatChar in message)
             {
                 Console.Write(thatChar);
-                Wait(0);
+                Wait(second);
             }
         }
         #endregion
