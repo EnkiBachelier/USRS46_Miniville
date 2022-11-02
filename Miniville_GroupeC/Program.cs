@@ -205,7 +205,7 @@ namespace Miniville_GroupeC
             foreach (char thatChar in message)
             {
                 Console.Write(thatChar);
-                Wait(0);
+                Wait(second);
             }
         }
         #endregion
