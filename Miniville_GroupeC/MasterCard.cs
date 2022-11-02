@@ -84,7 +84,7 @@ namespace Miniville_GroupeC
             if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 3))
             {
                 playerOwner.nbPiece += 2;
-                if (Game.hasCentreCommercial)
+                if (Game.hasShoppingCentre)
                     playerOwner.nbPiece++;
             }
         }
@@ -103,7 +103,7 @@ namespace Miniville_GroupeC
             {
                 playerOwner.nbPiece++;
                 playerWhosPlaying.nbPiece--;
-                if (Game.hasCentreCommercial)
+                if (Game.hasShoppingCentre)
                     playerOwner.nbPiece++;
             }
         }
@@ -120,7 +120,7 @@ namespace Miniville_GroupeC
         {
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
                 playerOwner.nbPiece += 3;
-            if (Game.hasCentreCommercial)
+            if (Game.hasShoppingCentre)
                 playerOwner.nbPiece++;
         }
     }
@@ -208,7 +208,7 @@ namespace Miniville_GroupeC
             {
                 playerWhosPlaying.nbPiece -= 2;
                 playerOwner.nbPiece += 2;
-                if (Game.hasCentreCommercial)
+                if (Game.hasShoppingCentre)
                     playerOwner.nbPiece++;
             }
         }

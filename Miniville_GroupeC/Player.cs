@@ -11,20 +11,20 @@ namespace Miniville_GroupeC
         public int nbPiece;
         public Game game;
         public string name;
-        private Pile pile;
+        private Pile playPile;
         public bool isItAnAI;
         public bool testCanBuy;
         public bool isChoiceNotPossible = false;
         #endregion
 
         #region Constructeur
-        public Player(int piece, List<MasterCard> Mastercard, Game game, string name, Pile pile, bool isItAnAI)
+        public Player(int piece, List<MasterCard> Mastercard, Game game, string name, Pile playPile, bool isItAnAI)
         {
             this.nbPiece = piece;
             this.playerCardList = Mastercard;
             this.game = game;
             this.name = name;
-            this.pile = pile;
+            this.playPile = playPile;
             this.isItAnAI = isItAnAI;
         }
         #endregion
@@ -36,31 +36,31 @@ namespace Miniville_GroupeC
         {
 
             int choice = -1;
-            #region Compteurs du nombre restant de chaque type de carte dans la pile
-            //Retourne le nombre restant dans la pile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
-            var amountWheatFields = pile.mainPile.Where(x => x is WheatFieldCard).ToList();
-            var amountFarms = pile.mainPile.Where(x => x is FarmCard).ToList();
-            var amountBakeries = pile.mainPile.Where(x => x is BakeryCard).ToList();
-            var amountCoffees = pile.mainPile.Where(x => x is CoffeeCard).ToList();
-            var amountMiniMarkets = pile.mainPile.Where(x => x is MiniMarketCard).ToList();
-            var amountForests = pile.mainPile.Where(x => x is ForestCard).ToList();
-            var amountRestaurants = pile.mainPile.Where(x => x is RestaurantCard).ToList();
-            var amountStadiums = pile.mainPile.Where(x => x is StadiumCard).ToList();
-            var amountCheeseFactories = pile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
-            var amountFurnitureFactories = pile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
-            var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
-            var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
-            var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
-            var amountRadioTowerCard = pile.mainPile.Where(x => x is RadioTowerCard).ToList();
-            var amountTrainStationCard = pile.mainPile.Where(x => x is TrainStationCard).ToList();
-            var amountAmusementParcCard = pile.mainPile.Where(x => x is AmusementParcCard).ToList();
-            var amountShoppingCentreCard = pile.mainPile.Where(x => x is ShoppingCentreCard).ToList();
+            #region Compteurs du nombre restant de chaque type de carte dans la playPile
+            //Retourne le nombre restant dans la playPile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
+            var amountWheatFields = playPile.mainPile.Where(x => x is WheatFieldCard).ToList();
+            var amountFarms = playPile.mainPile.Where(x => x is FarmCard).ToList();
+            var amountBakeries = playPile.mainPile.Where(x => x is BakeryCard).ToList();
+            var amountCoffees = playPile.mainPile.Where(x => x is CoffeeCard).ToList();
+            var amountMiniMarkets = playPile.mainPile.Where(x => x is MiniMarketCard).ToList();
+            var amountForests = playPile.mainPile.Where(x => x is ForestCard).ToList();
+            var amountRestaurants = playPile.mainPile.Where(x => x is RestaurantCard).ToList();
+            var amountStadiums = playPile.mainPile.Where(x => x is StadiumCard).ToList();
+            var amountCheeseFactories = playPile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
+            var amountFurnitureFactories = playPile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
+            var amountMines = playPile.mainPile.Where(x => x is MineCard).ToList();
+            var amountOrchards = playPile.mainPile.Where(x => x is OrchardCard).ToList();
+            var amountMarkets = playPile.mainPile.Where(x => x is MarketCard).ToList();
+            var amountRadioTowerCard = playPile.mainPile.Where(x => x is RadioTowerCard).ToList();
+            var amountTrainStationCard = playPile.mainPile.Where(x => x is TrainStationCard).ToList();
+            var amountAmusementParcCard = playPile.mainPile.Where(x => x is AmusementParcCard).ToList();
+            var amountShoppingCentreCard = playPile.mainPile.Where(x => x is ShoppingCentreCard).ToList();
             #endregion
 
             //Le joueur n'est pas une IA
             if (!isItAnAI)
             {
-                #region Affichage Cartes de la pile selon leur disponibilité
+                #region Affichage Cartes de la playPile selon leur disponibilité
                 do
                 {
                     //On affiche la ligne dans la couleur de la carte
@@ -338,14 +338,14 @@ namespace Miniville_GroupeC
             else
             {
                 int Cagnote = 0;
-                foreach (Player perso in game.players)
+                foreach (Player perso in game.playersInGame)
                 {
                     if (perso.nbPiece < game.nbPieceVictory / 2) { }
                     else { Cagnote++; }
                 }
 
                 int maxforet = 0;
-                foreach (Player perso in game.players) //Parcour tout les joueurs
+                foreach (Player perso in game.playersInGame) //Parcour tout les joueurs
                 {
                     int testforet = 0;
 
@@ -367,7 +367,7 @@ namespace Miniville_GroupeC
 
 
                 int maxchamp = 0;
-                foreach (Player perso in game.players) //Parcour tout les joueurs
+                foreach (Player perso in game.playersInGame) //Parcour tout les joueurs
                 {
                     int testchamp = 0;
 
@@ -746,7 +746,7 @@ namespace Miniville_GroupeC
                 isChoiceNotPossible = false;
                 nbPiece -= card.costValue;
                 playerCardList.Add(card);
-                game.pile.RemoveCardFromPile(card);
+                game.playPile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
 
             }
