@@ -14,6 +14,7 @@ namespace Miniville_GroupeC
         private Pile pile;
         public bool isItAnAI;
         public bool testCanBuy;
+        public bool isChoiceNotPossible = false;
         #endregion
 
         #region Constructeur
@@ -334,7 +335,7 @@ namespace Miniville_GroupeC
                 #endregion
             }
             //Le joueur est une IA
-            else  
+            else
             {
                 int Cagnote = 0;
                 foreach (Player perso in game.players)
@@ -437,7 +438,7 @@ namespace Miniville_GroupeC
                         if (carte is ForestCard) { CardForet = true; }
                         if (carte is RestaurantCard) { CardRestaurant = true; }
                         if (carte is StadiumCard) { CardStade = true; }
-                        if(carte is ParcAttractionsCard) { CardParcAttraction = true; }
+                        if (carte is ParcAttractionsCard) { CardParcAttraction = true; }
                         if (carte is TourRadioCard) { CardTourRadio = true; }
                         if (carte is GareCard) { CardGare = true; }
                         if (carte is CentreCommercialCard) { CardCentreCommercial = true; }
@@ -474,15 +475,15 @@ namespace Miniville_GroupeC
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountWheatFields.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(wheatFieldCard);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un champ de blé", this.name);
                     break;
                 case 2:
@@ -490,15 +491,15 @@ namespace Miniville_GroupeC
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountFarms.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(farm);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une ferme", this.name);
                     break;
                 case 3:
@@ -506,213 +507,214 @@ namespace Miniville_GroupeC
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountBakeries.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
                     CanBuyCard(bakery);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une boulangerie", this.name);
                     break;
                 case 4:
                     var cafe = new CoffeeCard();
                     if (amountCoffees.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(cafe);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un café", this.name);
                     break;
                 case 5:
                     var minimarket = new MiniMarketCard();
                     if (amountMiniMarkets.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(minimarket);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une superette", this.name);
                     break;
                 case 6:
                     var forest = new ForestCard();
                     if (amountForests.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(forest);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une forêt", this.name);
                     break;
                 case 7:
                     var restau = new RestaurantCard();
                     if (amountRestaurants.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(restau);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un restaurant", this.name);
                     break;
                 case 8:
                     var stadium = new StadiumCard();
                     if (amountStadiums.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(stadium);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un stade", this.name);
                     break;
                 case 9:
                     var cheeseFacto = new CheeseFactoryCard();
                     if (amountCheeseFactories.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(cheeseFacto);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une fromagerie", this.name);
                     break;
                 case 10:
                     var furnitureFacto = new FurnitureFactoryCard();
                     if (amountFurnitureFactories.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(furnitureFacto);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une fabrique de meuble", this.name);
                     break;
                 case 11:
                     var mine = new StadiumCard();
                     if (amountMines.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(mine);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter une mine", this.name);
                     break;
                 case 12:
                     var orchard = new OrchardCard();
                     if (amountOrchards.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(orchard);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un verger", this.name);
                     break;
                 case 13:
                     var market = new MarketCard();
                     if (amountMarkets.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(market);
+                    if (isChoiceNotPossible)
+                        break;
                     Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
                     break;
                 case 14:
                     var gare = new GareCard();
                     if (amountGareCard.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(gare);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (isChoiceNotPossible)
+                        break;
+                    Console.WriteLine("{0} a choisi d'acheter une gare", this.name);
                     break;
                 case 15:
                     var parc = new ParcAttractionsCard();
                     if (amountParcAttractionsCard.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(parc);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (isChoiceNotPossible)
+                        break;
+                    Console.WriteLine("{0} a choisi d'acheter un parc d'attractions", this.name);
                     break;
                 case 16:
                     var tour = new TourRadioCard();
                     if (amountTourRadioCard.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(tour);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (isChoiceNotPossible)
+                        break;
+                    Console.WriteLine("{0} a choisi d'acheter une tour radio", this.name);
                     break;
                 case 17:
                     var centre = new CentreCommercialCard();
                     if (amountCentreCommercialCard.Count <= 0)
                     {
-                        Console.WriteLine("Cette carte n'est plus disponible...");
-                        if (this.isItAnAI)
-                            BuyCard(true);
-                        else
-                            BuyCard();
+                        if(!this.isItAnAI)
+                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        isChoiceNotPossible = true;
                         break;
                     }
                     CanBuyCard(centre);
-                    Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    if (isChoiceNotPossible)
+                        break;
+                    Console.WriteLine("{0} a choisi d'acheter un centre commercial", this.name);
                     break;
+
                 case 18:
                     Console.WriteLine("{0} a passé son tour", this.name);
                     break;
@@ -720,6 +722,17 @@ namespace Miniville_GroupeC
                 default:
                     Console.WriteLine("Default");
                     break;
+            }
+            #endregion
+
+            #region Relancer la fonction si le choix n'a pas été possible
+            if (isChoiceNotPossible)
+            {
+                isChoiceNotPossible = false;
+                if (this.isItAnAI)
+                    BuyCard(true);
+                else
+                    BuyCard();
             }
             #endregion
         }
@@ -730,17 +743,19 @@ namespace Miniville_GroupeC
             //Le joueur a assez d'argent
             if (nbPiece >= card.costValue)
             {
+                isChoiceNotPossible = false;
                 nbPiece -= card.costValue;
                 playerCardList.Add(card);
                 game.pile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
-                
+
             }
             //Le joueur n'a pas assez d'argent
             else
             {
-                Console.WriteLine("{0} n'avez pas assez de pièces. Veuillez choisir une autre carte !\n", this.name);
-                BuyCard(true);
+                if(!this.isItAnAI)
+                    Console.WriteLine("{0} n'a pas assez de pièces. Veuillez choisir une autre carte !\n", this.name);
+                isChoiceNotPossible = true;
             }
         }
 
