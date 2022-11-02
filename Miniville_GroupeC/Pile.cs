@@ -107,16 +107,16 @@ namespace Miniville_GroupeC
             switch (monument)
             {
                 case 1:
-                    mainPile.Add(new GareCard());
+                    mainPile.Add(new TrainStationCard());
                     break;
                 case 2:
-                    mainPile.Add(new ParcAttractionsCard());
+                    mainPile.Add(new AmusementParcCard());
                     break;
                 case 3:
-                    mainPile.Add(new TourRadioCard());
+                    mainPile.Add(new RadioTowerCard());
                     break;
                 case 4:
-                    mainPile.Add(new CentreCommercialCard());
+                    mainPile.Add(new ShoppingCentreCard());
                     break;
             }
         }

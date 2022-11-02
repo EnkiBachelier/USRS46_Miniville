@@ -51,10 +51,10 @@ namespace Miniville_GroupeC
             var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
             var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
             var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
-            var amountTourRadioCard = pile.mainPile.Where(x => x is TourRadioCard).ToList();
-            var amountGareCard = pile.mainPile.Where(x => x is GareCard).ToList();
-            var amountParcAttractionsCard = pile.mainPile.Where(x => x is ParcAttractionsCard).ToList();
-            var amountCentreCommercialCard = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
+            var amountRadioTowerCard = pile.mainPile.Where(x => x is RadioTowerCard).ToList();
+            var amountTrainStationCard = pile.mainPile.Where(x => x is TrainStationCard).ToList();
+            var amountAmusementParcCard = pile.mainPile.Where(x => x is AmusementParcCard).ToList();
+            var amountShoppingCentreCard = pile.mainPile.Where(x => x is ShoppingCentreCard).ToList();
             #endregion
 
             //Le joueur n'est pas une IA
@@ -268,14 +268,14 @@ namespace Miniville_GroupeC
                     Console.ResetColor();
 
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountGareCard.Count > 0)
+                    if (amountTrainStationCard.Count > 0)
                     {
                         Console.Write("14  - Une gare (4$) ? Vous pouvez lancer deux dés !");
-                        var amountPlayerGareCard = playerCardList.Where(x => x is GareCard).ToList();
-                        if (amountPlayerGareCard.Count >= 1)
+                        var amountPlayerTrainStationCard = playerCardList.Where(x => x is TrainStationCard).ToList();
+                        if (amountPlayerTrainStationCard.Count >= 1)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerGareCard.Count + " en main)\n");
+                            Console.Write("(" + amountPlayerTrainStationCard.Count + " en main)\n");
                         }
                         else
                             Console.WriteLine();
@@ -283,14 +283,14 @@ namespace Miniville_GroupeC
                     Console.ResetColor();
 
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountParcAttractionsCard.Count > 0)
+                    if (amountAmusementParcCard.Count > 0)
                     {
                         Console.Write("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rajoutez un tour après celui-ci !");
-                        var amountPlayerParcAttractionsCard = playerCardList.Where(x => x is ParcAttractionsCard).ToList();
-                        if (amountPlayerParcAttractionsCard.Count >= 1)
+                        var amountPlayerAmusementParcCard = playerCardList.Where(x => x is AmusementParcCard).ToList();
+                        if (amountPlayerAmusementParcCard.Count >= 1)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerParcAttractionsCard.Count + " en main)\n");
+                            Console.Write("(" + amountPlayerAmusementParcCard.Count + " en main)\n");
                         }
                         else
                             Console.WriteLine();
@@ -298,14 +298,14 @@ namespace Miniville_GroupeC
                     Console.ResetColor();
 
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountTourRadioCard.Count > 0)
+                    if (amountRadioTowerCard.Count > 0)
                     {
                         Console.Write("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
-                        var amountPlayerTourRadioCard = playerCardList.Where(x => x is TourRadioCard).ToList();
-                        if (amountPlayerTourRadioCard.Count >= 1)
+                        var amountPlayerRadioTowerCard = playerCardList.Where(x => x is RadioTowerCard).ToList();
+                        if (amountPlayerRadioTowerCard.Count >= 1)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerTourRadioCard.Count + " en main)\n");
+                            Console.Write("(" + amountPlayerRadioTowerCard.Count + " en main)\n");
                         }
                         else
                             Console.WriteLine();
@@ -313,14 +313,14 @@ namespace Miniville_GroupeC
                     Console.ResetColor();
 
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountCentreCommercialCard.Count > 0)
+                    if (amountShoppingCentreCard.Count > 0)
                     {
                         Console.Write("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
-                        var amountPlayerCentreCommercialCard = playerCardList.Where(x => x is CentreCommercialCard).ToList();
-                        if (amountPlayerCentreCommercialCard.Count >= 1)
+                        var amountPlayerShoppingCentreCard = playerCardList.Where(x => x is ShoppingCentreCard).ToList();
+                        if (amountPlayerShoppingCentreCard.Count >= 1)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerCentreCommercialCard.Count + " en main)\n");
+                            Console.Write("(" + amountPlayerShoppingCentreCard.Count + " en main)\n");
                         }
                         else
                             Console.WriteLine();
@@ -438,10 +438,10 @@ namespace Miniville_GroupeC
                         if (carte is ForestCard) { CardForet = true; }
                         if (carte is RestaurantCard) { CardRestaurant = true; }
                         if (carte is StadiumCard) { CardStade = true; }
-                        if (carte is ParcAttractionsCard) { CardParcAttraction = true; }
-                        if (carte is TourRadioCard) { CardTourRadio = true; }
-                        if (carte is GareCard) { CardGare = true; }
-                        if (carte is CentreCommercialCard) { CardCentreCommercial = true; }
+                        if (carte is AmusementParcCard) { CardParcAttraction = true; }
+                        if (carte is RadioTowerCard) { CardTourRadio = true; }
+                        if (carte is TrainStationCard) { CardGare = true; }
+                        if (carte is ShoppingCentreCard) { CardCentreCommercial = true; }
                     }
 
                     //si le joueur ne l'a pas on le la lui prend
@@ -659,8 +659,8 @@ namespace Miniville_GroupeC
                     Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
                     break;
                 case 14:
-                    var gare = new GareCard();
-                    if (amountGareCard.Count <= 0)
+                    var gare = new TrainStationCard();
+                    if (amountTrainStationCard.Count <= 0)
                     {
                         if (!this.isItAnAI)
                             Console.WriteLine("Cette carte n'est plus disponible...");
@@ -673,8 +673,8 @@ namespace Miniville_GroupeC
                     Console.WriteLine("{0} a choisi d'acheter une gare", this.name);
                     break;
                 case 15:
-                    var parc = new ParcAttractionsCard();
-                    if (amountParcAttractionsCard.Count <= 0)
+                    var parc = new AmusementParcCard();
+                    if (amountAmusementParcCard.Count <= 0)
                     {
                         if (!this.isItAnAI)
                             Console.WriteLine("Cette carte n'est plus disponible...");
@@ -687,8 +687,8 @@ namespace Miniville_GroupeC
                     Console.WriteLine("{0} a choisi d'acheter un parc d'attractions", this.name);
                     break;
                 case 16:
-                    var tour = new TourRadioCard();
-                    if (amountTourRadioCard.Count <= 0)
+                    var tour = new RadioTowerCard();
+                    if (amountRadioTowerCard.Count <= 0)
                     {
                         if (!this.isItAnAI)
                             Console.WriteLine("Cette carte n'est plus disponible...");
@@ -701,8 +701,8 @@ namespace Miniville_GroupeC
                     Console.WriteLine("{0} a choisi d'acheter une tour radio", this.name);
                     break;
                 case 17:
-                    var centre = new CentreCommercialCard();
-                    if (amountCentreCommercialCard.Count <= 0)
+                    var centre = new ShoppingCentreCard();
+                    if (amountShoppingCentreCard.Count <= 0)
                     {
                         if(!this.isItAnAI)
                             Console.WriteLine("Cette carte n'est plus disponible...");

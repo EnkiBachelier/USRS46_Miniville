@@ -109,8 +109,8 @@ namespace Miniville_GroupeC
                     }
                     else
                     {
-                        var GareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
-                        if (GareCard.Count >= 1)
+                        var TrainStationCard = currentPlayer.playerCardList.Where(x => x is TrainStationCard).ToList();
+                        if (TrainStationCard.Count >= 1)
                         {
                             int errorTryCatch = 0;
                             do
@@ -157,8 +157,8 @@ namespace Miniville_GroupeC
                     #endregion
 
                     #region Activation et Achats
-                    var TourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
-                    if (TourRadioCard.Count >= 1)
+                    var RadioTowerCard = currentPlayer.playerCardList.Where(x => x is RadioTowerCard).ToList();
+                    if (RadioTowerCard.Count >= 1)
                     {
                         Console.WriteLine("Voulez-vous relancer les dés ?\n");
                         Console.WriteLine("o -- Oui");
@@ -179,8 +179,8 @@ namespace Miniville_GroupeC
 
                         }
                     }
-                    var CentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
-                    if (CentreCommercialCard.Count >= 1)
+                    var ShoppingCentreCard = currentPlayer.playerCardList.Where(x => x is ShoppingCentreCard).ToList();
+                    if (ShoppingCentreCard.Count >= 1)
                     {
                         hasCentreCommercial = true;
                     }
@@ -205,8 +205,8 @@ namespace Miniville_GroupeC
 
                     hasCentreCommercial = false;
 
-                    var ParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList();
-                    if (ParcAttractionsCard.Count >= 1 && valueDice2 == valueDice1)
+                    var AmusementParcCard = currentPlayer.playerCardList.Where(x => x is AmusementParcCard).ToList();
+                    if (AmusementParcCard.Count >= 1 && valueDice2 == valueDice1)
                     {
                         Console.WriteLine("{0} a fait un double et peut donc directement rejouer !\n", currentPlayer.name);
                         playerWhoSkipped = i;
@@ -269,11 +269,11 @@ namespace Miniville_GroupeC
                 }
                 else if (isReelModeOn)
                 {
-                    var amountTourRadioCard = currentPlayer.playerCardList.Where(x => x is TourRadioCard).ToList();
-                    var amountGareCard = currentPlayer.playerCardList.Where(x => x is GareCard).ToList();
-                    var amountParcAttractionsCard = currentPlayer.playerCardList.Where(x => x is ParcAttractionsCard).ToList();
-                    var amountCentreCommercialCard = currentPlayer.playerCardList.Where(x => x is CentreCommercialCard).ToList();
-                    if (amountCentreCommercialCard.Count * amountGareCard.Count * amountParcAttractionsCard.Count * amountTourRadioCard.Count > 0)
+                    var amountRadioTowerCard = currentPlayer.playerCardList.Where(x => x is RadioTowerCard).ToList();
+                    var amountTrainStationCard = currentPlayer.playerCardList.Where(x => x is TrainStationCard).ToList();
+                    var amountAmusementParcCard = currentPlayer.playerCardList.Where(x => x is AmusementParcCard).ToList();
+                    var amountShoppingCentreCard = currentPlayer.playerCardList.Where(x => x is ShoppingCentreCard).ToList();
+                    if (amountShoppingCentreCard.Count * amountTrainStationCard.Count * amountAmusementParcCard.Count * amountRadioTowerCard.Count > 0)
                     {
                         isInLoop = false;
                     }

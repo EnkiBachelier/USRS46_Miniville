@@ -33,7 +33,6 @@ namespace Miniville_GroupeC
         #endregion
 
         #region Méthodes
-
         //Selon la valeur du dé, réalise l'effet de la carte
         public abstract void OnDiceResult(int diceResult, Player playerWhosPlaying);
 
@@ -49,9 +48,7 @@ namespace Miniville_GroupeC
     #region Class : WheatFieldCard (Dérivée de MasterCard)
     public class WheatFieldCard : MasterCard
     {
-        public WheatFieldCard() : base(1, CardColor.BLUE, "Champs de blé", 1)
-        {
-        }
+        public WheatFieldCard() : base(1, CardColor.BLUE, "Champs de blé", 1) { }
 
         //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -65,9 +62,7 @@ namespace Miniville_GroupeC
     #region Class : FarmCard (Dérivée de MasterCard)
     public class FarmCard : MasterCard
     {
-        public FarmCard() : base(2, CardColor.BLUE, "Ferme", 1)
-        {
-        }
+        public FarmCard() : base(2, CardColor.BLUE, "Ferme", 1) { }
 
         //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -81,23 +76,17 @@ namespace Miniville_GroupeC
     #region Class : BakeryCard (Dérivée de MasterCard)
     public class BakeryCard : MasterCard
     {
-        public BakeryCard() : base(2, CardColor.GREEN, "Boulangerie", 1)
-        {
-        }
+        public BakeryCard() : base(2, CardColor.GREEN, "Boulangerie", 1) { }
 
         //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
         {
-
             if (playerOwner == playerWhosPlaying && (diceResult == activationValue || diceResult == 3))
             {
                 playerOwner.nbPiece += 2;
                 if (Game.hasCentreCommercial)
-                {
                     playerOwner.nbPiece++;
-                }
             }
-            
         }
     }
     #endregion
@@ -105,9 +94,7 @@ namespace Miniville_GroupeC
     #region Class : CoffeeCard (Dérivée de MasterCard)
     public class CoffeeCard : MasterCard
     {
-        public CoffeeCard() : base(3, CardColor.RED, "Café", 2)
-        {
-        }
+        public CoffeeCard() : base(3, CardColor.RED, "Café", 2) { }
 
         //Le joueur qui possède la carte vole 1$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -117,9 +104,7 @@ namespace Miniville_GroupeC
                 playerOwner.nbPiece++;
                 playerWhosPlaying.nbPiece--;
                 if (Game.hasCentreCommercial)
-                {
                     playerOwner.nbPiece++;
-                }
             }
         }
     }
@@ -128,9 +113,7 @@ namespace Miniville_GroupeC
     #region Class : MiniMarketCard (Dérivée de MasterCard)
     public class MiniMarketCard : MasterCard
     {
-        public MiniMarketCard() : base(4, CardColor.GREEN, "Superette", 2)
-        {
-        }
+        public MiniMarketCard() : base(4, CardColor.GREEN, "Superette", 2) { }
 
         //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -138,9 +121,7 @@ namespace Miniville_GroupeC
             if (playerOwner == playerWhosPlaying && diceResult == activationValue)
                 playerOwner.nbPiece += 3;
             if (Game.hasCentreCommercial)
-            {
                 playerOwner.nbPiece++;
-            }
         }
     }
     #endregion
@@ -148,9 +129,7 @@ namespace Miniville_GroupeC
     #region Class : ForestCard (Dérivée de MasterCard)
     public class ForestCard : MasterCard
     {
-        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 3)
-        {
-        }
+        public ForestCard() : base(5, CardColor.BLUE, "Forêt", 3) { }
 
         //Ajoute 1$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -164,9 +143,7 @@ namespace Miniville_GroupeC
     #region Class : StadiumCard (Dérivée de MasterCard)
     public class StadiumCard : MasterCard
     {
-        public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6)
-        {
-        }
+        public StadiumCard() : base(6, CardColor.BLUE, "Stade", 6) { }
 
         //Ajoute 4$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -180,9 +157,7 @@ namespace Miniville_GroupeC
     #region Class : CheeseFactoryCard (Dérivée de MasterCard)
     public class CheeseFactoryCard : MasterCard
     {
-        public CheeseFactoryCard() : base(7, CardColor.GREEN, "Fromagerie", 5)
-        {
-        }
+        public CheeseFactoryCard() : base(7, CardColor.GREEN, "Fromagerie", 5) { }
 
         //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -196,9 +171,7 @@ namespace Miniville_GroupeC
     #region Class : FurnitureFactoryCard (Dérivée de MasterCard)
     public class FurnitureFactoryCard : MasterCard
     {
-        public FurnitureFactoryCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3)
-        {
-        }
+        public FurnitureFactoryCard() : base(8, CardColor.GREEN, "Fabrique de meubles", 3) { }
 
         //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -212,9 +185,7 @@ namespace Miniville_GroupeC
     #region Class : MineCard (Dérivée de MasterCard)
     public class MineCard : MasterCard
     {
-        public MineCard() : base(9, CardColor.BLUE, "Mine", 6)
-        {
-        }
+        public MineCard() : base(9, CardColor.BLUE, "Mine", 6) { }
 
         //Ajoute 5$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -228,9 +199,7 @@ namespace Miniville_GroupeC
     #region Class : RestaurantCard (Dérivée de MasterCard)
     public class RestaurantCard : MasterCard
     {
-        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 3)
-        {
-        }
+        public RestaurantCard() : base(9, CardColor.RED, "Restaurant", 3) { }
 
         //Le joueur qui possède la carte vole 2$ au joueur qui a lancé le dé
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -239,10 +208,8 @@ namespace Miniville_GroupeC
             {
                 playerWhosPlaying.nbPiece -= 2;
                 playerOwner.nbPiece += 2;
-				if (Game.hasCentreCommercial)
-                {
+                if (Game.hasCentreCommercial)
                     playerOwner.nbPiece++;
-                }
             }
         }
     }
@@ -251,9 +218,7 @@ namespace Miniville_GroupeC
     #region Class : OrchardCard (Dérivée de MasterCard)
     public class OrchardCard : MasterCard
     {
-        public OrchardCard() : base(10, CardColor.BLUE, "Verger", 3)
-        {
-        }
+        public OrchardCard() : base(10, CardColor.BLUE, "Verger", 3) { }
 
         //Ajoute 3$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -267,9 +232,7 @@ namespace Miniville_GroupeC
     #region Class : MarketCard (Dérivée de MasterCard)
     public class MarketCard : MasterCard
     {
-        public MarketCard() : base(11, CardColor.GREEN, "Marche de fruits et légumes", 2)
-        {
-        }
+        public MarketCard() : base(11, CardColor.GREEN, "Marche de fruits et légumes", 2) { }
 
         //Ajoute 2$ au joueur qui possède la carte
         public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
@@ -280,59 +243,39 @@ namespace Miniville_GroupeC
     }
     #endregion
 
-    #region Class : ParcAttractionsCard (Dérivée de MasterCard)
-    public class ParcAttractionsCard : MasterCard
+    #region Class : AmusementParcCard (Dérivée de MasterCard)
+    public class AmusementParcCard : MasterCard
     {
-        public ParcAttractionsCard() : base(0, CardColor.YELLOW, "Parc d'Attractions", 16)
-        {
+        public AmusementParcCard() : base(0, CardColor.YELLOW, "Parc d'Attractions", 16) { }
 
-        }
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            
-        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying) { }
     }
     #endregion
 
-    #region Class : TourRadioCard (Dérivée de MAsterCard)
-    public class TourRadioCard : MasterCard
+    #region Class : RadioTowerCard (Dérivée de MasterCard)
+    public class RadioTowerCard : MasterCard
     {
-        public TourRadioCard() : base(0, CardColor.YELLOW, "Tour Radio", 22)
-        {
+        public RadioTowerCard() : base(0, CardColor.YELLOW, "Tour Radio", 22) { }
 
-        }
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            
-        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying) { }
     }
     #endregion
 
-    #region Class : GareCard (Dérivée de MasterCard)
-    public class GareCard : MasterCard
+    #region Class : TrainStationCard (Dérivée de MasterCard)
+    public class TrainStationCard : MasterCard
     {
-        public GareCard() : base(0, CardColor.YELLOW, "Gare", 4)
-        {
+        public TrainStationCard() : base(0, CardColor.YELLOW, "Gare", 4) { }
 
-        }
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            
-        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying) { }
     }
     #endregion
 
-    #region Class : CentreCommercialCard (Dérivée de MasterCard)
-    public class CentreCommercialCard : MasterCard
+    #region Class : ShoppingCentreCard (Dérivée de MasterCard)
+    public class ShoppingCentreCard : MasterCard
     {
-        public CentreCommercialCard() : base(0, CardColor.YELLOW, "Centre Commercial", 10)
-        {
+        public ShoppingCentreCard() : base(0, CardColor.YELLOW, "Centre Commercial", 10) { }
 
-        }
-        public override void OnDiceResult(int diceResult, Player playerWhosPlaying)
-        {
-            
-        }
+        public override void OnDiceResult(int diceResult, Player playerWhosPlaying) { }
     }
     #endregion
 }
