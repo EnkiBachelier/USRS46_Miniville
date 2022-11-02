@@ -19,11 +19,17 @@ namespace Miniville_GroupeC
             bool isReelModeOn = false;
             int nbPiecesToWin = 0;
             Random rnd = new Random();
-            string[] IAName = { "Rufus", "Zzyzx", "Nimrod", "Moo", "Lucifer", "Zamzam", "Dzyre", "Jalousy", "Bush", "Kyller", "MC", "Bear", "Dakota", "Fido", "Vanya", "Samuel", 
-                                "Koani", "Volodya", "Prince", "Yiska", "Chicos", "Chipie", "Chiquita", "Chouquette", "Choupette", "Azimut", "Zazou", "Zanzibar", "Zebulon", 
-                                "Zephyr", "Zigou", "Zoupette", "Volt", "Dynamite", "Mélo", "Mélopée", "Michette", "Mistik", "Moustakoamande", "Caramel", "Chocolat", "Noisette", 
-                                "Pistache", "Pralinébibi", "Bidou", "Biloute", "Barjès", "Batilou", "Bernik", "Cachou", "Cambo", "Capoune", "Capri", "Clown", "Dino", "Doli", 
-                                "Flip", "Indi", "Djimi", "Litz", "Loutz", "Pat", "Patouille", "Pipette", "Pirouette", "Pitikok", "Poulette", "Slim"};
+            //string[] IAName = { "Rufus", "Zzyzx", "Nimrod", "Moo", "Lucifer", "Zamzam", "Dzyre", "Jalousy", "Bush", "Kyller", "MC", "Bear", "Dakota", "Fido", "Vanya", "Samuel", 
+            //                    "Koani", "Volodya", "Prince", "Yiska", "Chicos", "Chipie", "Chiquita", "Chouquette", "Choupette", "Azimut", "Zazou", "Zanzibar", "Zebulon", 
+            //                    "Zephyr", "Zigou", "Zoupette", "Volt", "Dynamite", "Mélo", "Mélopée", "Michette", "Mistik", "Moustakoamande", "Caramel", "Chocolat", "Noisette", 
+            //                    "Pistache", "Pralinébibi", "Bidou", "Biloute", "Barjès", "Batilou", "Bernik", "Cachou", "Cambo", "Capoune", "Capri", "Clown", "Dino", "Doli", 
+            //                    "Flip", "Indi", "Djimi", "Litz", "Loutz", "Pat", "Patouille", "Pipette", "Pirouette", "Pitikok", "Poulette", "Slim"};
+
+            List<string> IaNameList = new List<string>() {"Rufus", "Zzyzx", "Nimrod", "Moo", "Lucifer", "Zamzam", "Dzyre", "Jalousy", "Bush", "Kyller", "MC", "Bear", "Dakota", "Fido", "Vanya", "Samuel",
+                                "Koani", "Volodya", "Prince", "Yiska", "Chicos", "Chipie", "Chiquita", "Chouquette", "Choupette", "Azimut", "Zazou", "Zanzibar", "Zebulon",
+                                "Zephyr", "Zigou", "Zoupette", "Volt", "Dynamite", "Mélo", "Mélopée", "Michette", "Mistik", "Moustakoamande", "Caramel", "Chocolat", "Noisette",
+                                "Pistache", "Pralinébibi", "Bidou", "Biloute", "Barjès", "Batilou", "Bernik", "Cachou", "Cambo", "Capoune", "Capri", "Clown", "Dino", "Doli",
+                                "Flip", "Indi", "Djimi", "Litz", "Loutz", "Pat", "Patouille", "Pipette", "Pirouette", "Pitikok", "Poulette", "Slim" } ;
             #endregion
 
             #region Textes de lancement
@@ -120,8 +126,11 @@ namespace Miniville_GroupeC
                     //Les noms des ordinateurs
                     else
                     {
-                        int mIndex = rnd.Next(IAName.Length);
-                        string name = IAName[mIndex];
+                        int mIndex = rnd.Next(IaNameList.Count);
+                        string name = IaNameList[mIndex];
+
+                        IaNameList.RemoveAt(mIndex);
+
                         namePlayers.Add(name);
                         Console.Write("\nLe nom du maire ordinateur n°" + (i + 1)+" est {0}",name);
                     }
