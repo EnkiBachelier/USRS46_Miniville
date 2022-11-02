@@ -236,6 +236,9 @@ namespace Miniville_GroupeC
             Program.Wait(0.3f);
             Console.WriteLine("Depuis que le nouveau maire a renommé la ville, le taux de criminalité a fortement baissé, les petits vieux ne se sentent plus menacés.");
             Console.WriteLine("A vrai dire, c'est devenu le parfait opposé de l'ancienne ville, les petits vieux se mettent à attaquer les jeunes et à les humilier publiquement");
+            Program.Wait(0.3f);
+            Console.WriteLine("L'un des points positifs fut le recrutement de vos adversaires en agents municipaux ! Ils ont 'gentiment' accepté de travailler gratuitement !");
+            Console.WriteLine("Cependant, tous ces soucis vous ont causé une vieillesse prématurée et vous devez donc vous mettre en quête d'un nouveau maire...");
             #endregion
         }
 

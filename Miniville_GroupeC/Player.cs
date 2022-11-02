@@ -63,7 +63,7 @@ namespace Miniville_GroupeC
             //Le joueur n'est pas une IA
             if (!isItAnAI)
             {
-                #region Affichage Cartes de la playPile selon leur disponibilité
+                #region Affichage Cartes de la pile selon leur disponibilité
                 do
                 {
                     #region Affichage Champs de Blé
@@ -311,7 +311,7 @@ namespace Miniville_GroupeC
                     #region Affichage Parc d'attraction
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     if (amountPlayerAmusementParcCard.Count == 0)
-                        Console.Write("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rejouez directement");
+                        Console.WriteLine("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rejouez directement");
                     else if (amountPlayerAmusementParcCard.Count == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -323,7 +323,7 @@ namespace Miniville_GroupeC
                     #region Affichage Tour Radio
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     if (amountPlayerRadioTowerCard.Count == 0)
-                        Console.Write("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
+                        Console.WriteLine("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
                     else if (amountPlayerRadioTowerCard.Count == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -335,7 +335,7 @@ namespace Miniville_GroupeC
                     #region Affichage Centre Commercial
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     if (amountPlayerShoppingCentreCard.Count == 0)
-                        Console.Write("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
+                        Console.WriteLine("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
                     else if (amountPlayerShoppingCentreCard.Count == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
