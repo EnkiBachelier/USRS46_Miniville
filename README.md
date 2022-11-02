@@ -35,5 +35,12 @@ Vous pouvez retrouver l'énoncé du projet donné par l'ENJMIN, les différents 
 
 # Quelles seront les futures améliorations ?
 
-Un projet n'est jamais véritablement fini, il peut être amélioré en terme de visuel et d'optimisation.
+Un projet n'est jamais véritablement fini, il peut être amélioré en terme de visuel et d'optimisation. Nous pouvons également rajouter toutes les améliorations consoles sur la version Unity.
+
+# Qui a travaillé sur quoi ?
+
+Noa Hussenet a travaillé sur le système de dés (simple et double), sur l'intégration des monuments et du mode de jeu "réel".
+Sullivan Michalon a travaillé sur l'intégralité de l'IA, une partie de la classe Player et le mode de jeu "Contre l'Ordinateur".
+Théo Excille a travaillé sur la version Unity, la classe Mastercard et ses dérivées et une partie de la classe Player (Activation des cartes et Possibilité d'achat).
+Enki Bachelier a coordonné le projet en travaillant sur l'intégration des différentes branches et le debug général. Il a également travaillé sur la classe Game, les modes de difficultés (sauf le réel) et réalisé les visuels des cartes.
 
