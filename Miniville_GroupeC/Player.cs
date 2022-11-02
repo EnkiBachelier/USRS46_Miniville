@@ -7,24 +7,23 @@ namespace Miniville_GroupeC
     public class Player
     {
         #region Déclaration de variables
-        public List<MasterCard> playerCardList = new List<MasterCard>();
         public int nbPiece;
-        public Game game;
         public string name;
-        private Pile pile;
+        public Game game;
+        private Pile playPile;
+        public List<MasterCard> playerCardList = new List<MasterCard>();
         public bool isItAnAI;
-        public bool testCanBuy;
         public bool isChoiceNotPossible = false;
         #endregion
 
         #region Constructeur
-        public Player(int piece, List<MasterCard> Mastercard, Game game, string name, Pile pile, bool isItAnAI)
+        public Player(int piece, List<MasterCard> Mastercard, Game game, string name, Pile playPile, bool isItAnAI)
         {
             this.nbPiece = piece;
             this.playerCardList = Mastercard;
             this.game = game;
             this.name = name;
-            this.pile = pile;
+            this.playPile = playPile;
             this.isItAnAI = isItAnAI;
         }
         #endregion
@@ -34,27 +33,31 @@ namespace Miniville_GroupeC
         //Affiche les différentes cartes qu'on peut acheter et réalise l'achat si le joueur a assez d'argent
         public void BuyCard(bool isAILooping = false)
         {
-
+            #region Déclaration de variables
             int choice = -1;
+            #endregion
+
             #region Compteurs du nombre restant de chaque type de carte dans la pile
-            //Retourne le nombre restant dans la pile de chaque type de carte (si <= 0, la carte n'est plus disponible) 
-            var amountWheatFields = pile.mainPile.Where(x => x is WheatFieldCard).ToList();
-            var amountFarms = pile.mainPile.Where(x => x is FarmCard).ToList();
-            var amountBakeries = pile.mainPile.Where(x => x is BakeryCard).ToList();
-            var amountCoffees = pile.mainPile.Where(x => x is CoffeeCard).ToList();
-            var amountMiniMarkets = pile.mainPile.Where(x => x is MiniMarketCard).ToList();
-            var amountForests = pile.mainPile.Where(x => x is ForestCard).ToList();
-            var amountRestaurants = pile.mainPile.Where(x => x is RestaurantCard).ToList();
-            var amountStadiums = pile.mainPile.Where(x => x is StadiumCard).ToList();
-            var amountCheeseFactories = pile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
-            var amountFurnitureFactories = pile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
-            var amountMines = pile.mainPile.Where(x => x is MineCard).ToList();
-            var amountOrchards = pile.mainPile.Where(x => x is OrchardCard).ToList();
-            var amountMarkets = pile.mainPile.Where(x => x is MarketCard).ToList();
-            var amountTourRadioCard = pile.mainPile.Where(x => x is TourRadioCard).ToList();
-            var amountGareCard = pile.mainPile.Where(x => x is GareCard).ToList();
-            var amountParcAttractionsCard = pile.mainPile.Where(x => x is ParcAttractionsCard).ToList();
-            var amountCentreCommercialCard = pile.mainPile.Where(x => x is CentreCommercialCard).ToList();
+            var amountWheatFields = playPile.mainPile.Where(x => x is WheatFieldCard).ToList();
+            var amountFarms = playPile.mainPile.Where(x => x is FarmCard).ToList();
+            var amountBakeries = playPile.mainPile.Where(x => x is BakeryCard).ToList();
+            var amountCoffees = playPile.mainPile.Where(x => x is CoffeeCard).ToList();
+            var amountMiniMarkets = playPile.mainPile.Where(x => x is MiniMarketCard).ToList();
+            var amountForests = playPile.mainPile.Where(x => x is ForestCard).ToList();
+            var amountRestaurants = playPile.mainPile.Where(x => x is RestaurantCard).ToList();
+            var amountStadiums = playPile.mainPile.Where(x => x is StadiumCard).ToList();
+            var amountCheeseFactories = playPile.mainPile.Where(x => x is CheeseFactoryCard).ToList();
+            var amountFurnitureFactories = playPile.mainPile.Where(x => x is FurnitureFactoryCard).ToList();
+            var amountMines = playPile.mainPile.Where(x => x is MineCard).ToList();
+            var amountOrchards = playPile.mainPile.Where(x => x is OrchardCard).ToList();
+            var amountMarkets = playPile.mainPile.Where(x => x is MarketCard).ToList();
+            #endregion
+
+            #region Compteurs du nombre de monuments dans la main du joueur
+            var amountPlayerAmusementParcCard = this.playerCardList.Where(x => x is AmusementParcCard).ToList();
+            var amountPlayerRadioTowerCard = this.playerCardList.Where(x => x is RadioTowerCard).ToList();
+            var amountPlayerShoppingCentreCard = this.playerCardList.Where(x => x is ShoppingCentreCard).ToList();
+            var amountPlayerTrainStationCard = this.playerCardList.Where(x => x is TrainStationCard).ToList();
             #endregion
 
             //Le joueur n'est pas une IA
@@ -63,6 +66,7 @@ namespace Miniville_GroupeC
                 #region Affichage Cartes de la pile selon leur disponibilité
                 do
                 {
+                    #region Affichage Champs de Blé
                     //On affiche la ligne dans la couleur de la carte
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     //On affiche la description de la carte si elle est encore disponible
@@ -80,7 +84,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Ferme
                     //On affiche la ligne dans la couleur de la carte
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     //On affiche la description de la carte si elle est encore disponible
@@ -98,7 +104,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Boulangerie
                     //On affiche la ligne dans la couleur de la carte
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     //On affiche la description de la carte si elle est encore disponible
@@ -116,7 +124,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Café
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (amountCoffees.Count > 0)
                     {
@@ -131,7 +141,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Supérette
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (amountMiniMarkets.Count > 0)
                     {
@@ -146,7 +158,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Forêt
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     if (amountForests.Count > 0)
                     {
@@ -161,7 +175,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Restaurant
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (amountRestaurants.Count > 0)
                     {
@@ -176,7 +192,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Stade
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     if (amountStadiums.Count > 0)
                     {
@@ -191,7 +209,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Fromagerie
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (amountCheeseFactories.Count > 0)
                     {
@@ -206,7 +226,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Fabrique de meubles
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (amountFurnitureFactories.Count > 0)
                     {
@@ -221,7 +243,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Mine
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     if (amountMines.Count > 0)
                     {
@@ -236,7 +260,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Verger
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     if (amountOrchards.Count > 0)
                     {
@@ -251,7 +277,9 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Marché
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     if (amountMarkets.Count > 0)
                     {
@@ -266,70 +294,61 @@ namespace Miniville_GroupeC
                             Console.WriteLine();
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Gare
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountGareCard.Count > 0)
+                    if (amountPlayerTrainStationCard.Count == 0)
+                        Console.WriteLine("14  - Une gare (4$) ? Vous pouvez lancer deux dés !");
+                    else if (amountPlayerTrainStationCard.Count == 1)
                     {
-                        Console.Write("14  - Une gare (4$) ? Vous pouvez lancer deux dés !");
-                        var amountPlayerGareCard = playerCardList.Where(x => x is GareCard).ToList();
-                        if (amountPlayerGareCard.Count >= 1)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerGareCard.Count + " en main)\n");
-                        }
-                        else
-                            Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Vous possèdez déjà une gare ! Vous pouvez donc choisir de lancer deux dés au début du tour !");
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Parc d'attraction
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountParcAttractionsCard.Count > 0)
+                    if (amountPlayerAmusementParcCard.Count == 0)
+                        Console.WriteLine("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rejouez directement");
+                    else if (amountPlayerAmusementParcCard.Count == 1)
                     {
-                        Console.Write("15  - Un parc d'attraction (16$) ? Si votre jet de dés est un double, rajoutez un tour après celui-ci !");
-                        var amountPlayerParcAttractionsCard = playerCardList.Where(x => x is ParcAttractionsCard).ToList();
-                        if (amountPlayerParcAttractionsCard.Count >= 1)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerParcAttractionsCard.Count + " en main)\n");
-                        }
-                        else
-                            Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Vous possèdez déjà un parc d'attractions ! Si jamais votre jet de dés est un double, vous pouvez rejouer directement !");
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Tour Radio
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountTourRadioCard.Count > 0)
+                    if (amountPlayerRadioTowerCard.Count == 0)
+                        Console.WriteLine("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
+                    else if (amountPlayerRadioTowerCard.Count == 1)
                     {
-                        Console.Write("16  - Une tour radio (22$) ? Une fois par tour, vous pouvez choisir de relancer vos dés !");
-                        var amountPlayerTourRadioCard = playerCardList.Where(x => x is TourRadioCard).ToList();
-                        if (amountPlayerTourRadioCard.Count >= 1)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerTourRadioCard.Count + " en main)\n");
-                        }
-                        else
-                            Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Vous possèdez déjà une tour Radio ! Vous pouvez donc choisir de relancer vos dés en début de tour !");
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Centre Commercial
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    if (amountCentreCommercialCard.Count > 0)
+                    if (amountPlayerShoppingCentreCard.Count == 0)
+                        Console.WriteLine("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
+                    else if (amountPlayerShoppingCentreCard.Count == 1)
                     {
-                        Console.Write("17  - Un centre commercial (10$) ? Vos établissement de type café, restaurant, supérette et boulangerie rapporte une pièce de plus !");
-                        var amountPlayerCentreCommercialCard = playerCardList.Where(x => x is CentreCommercialCard).ToList();
-                        if (amountPlayerCentreCommercialCard.Count >= 1)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.Write("(" + amountPlayerCentreCommercialCard.Count + " en main)\n");
-                        }
-                        else
-                            Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Vous possèdez déjà un centre commercial ! Vos cafés, restaurants, supérettes et boulangeries sont boostées d'une pièce !");
                     }
                     Console.ResetColor();
+                    #endregion
 
+                    #region Affichage Passer le tour
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("18 - Passer votre tour");
                     Console.ResetColor();
+                    #endregion
 
                 } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 18);
                 #endregion
@@ -337,141 +356,128 @@ namespace Miniville_GroupeC
             //Le joueur est une IA
             else
             {
-                int Cagnote = 0;
-                foreach (Player perso in game.players)
+                #region Récupération du nombre de joueurs ayant moins de la moitié de l'argent requis pour gagner
+                int nbPlayersBelowHalfOfVictory = 0;
+                foreach (Player perso in game.playersInGame)
                 {
                     if (perso.nbPiece < game.nbPieceVictory / 2) { }
-                    else { Cagnote++; }
+                    else { nbPlayersBelowHalfOfVictory++; }
                 }
+                #endregion
 
-                int maxforet = 0;
-                foreach (Player perso in game.players) //Parcour tout les joueurs
+                #region Récupération du maximum de forêt & de champs dans les mains des autres joueurs
+                int maxOfAllForest = 0;
+                foreach (Player perso in game.playersInGame)
                 {
-                    int testforet = 0;
-
-                    foreach (MasterCard carte in this.playerCardList) //parcour toute les cartes du joueurs
-                    {
-                        if (carte is ForestCard) { testforet += 1; } // si le joueur a une foret
-                        testforet++;
-                    }
-                    if (testforet > maxforet) { maxforet = testforet; }
-
+                    int currentMaxForest = perso.playerCardList.Where(x => x is ForestCard).ToList().Count;
+                    if (currentMaxForest > maxOfAllForest) { maxOfAllForest = currentMaxForest; }
                 }
 
-
-                int myretaurant = 0;
-                foreach (MasterCard carte in this.playerCardList) //parcour toute les cartes de ce joueur
+                int maxOfAllWheatField = 0;
+                foreach (Player perso in game.playersInGame)
                 {
-                    if (carte is ForestCard) { myretaurant++; }
-                }
-
-
-                int maxchamp = 0;
-                foreach (Player perso in game.players) //Parcour tout les joueurs
-                {
-                    int testchamp = 0;
-
-                    foreach (MasterCard carte in this.playerCardList) //parcour toute les cartes du joueurs
-                    {
-                        if (carte is WheatFieldCard) { testchamp += 1; } // si le joueur a une foret
-                        testchamp++;
-                    }
-                    if (testchamp > maxchamp) { maxchamp = testchamp; }
+                    int currentMaxWheatField = perso.playerCardList.Where(x => x is WheatFieldCard).ToList().Count;
+                    if (currentMaxWheatField > maxOfAllWheatField) { maxOfAllWheatField = currentMaxWheatField; }
 
                 }
+                #endregion
 
-                int myferme = 0;
-                foreach (MasterCard carte in this.playerCardList) //parcour toute les cartes de ce joueur
-                {
-                    if (carte is FarmCard) { myferme++; }
-                }
+                #region Récupération du nombre de restaurant & de fermes dans la main du joueur 
+                int nbOfCurrentRestaurant = this.playerCardList.Where(x => x is RestaurantCard).ToList().Count;
+                int nbOfCurrentFarm = this.playerCardList.Where(x => x is FarmCard).ToList().Count;
+                #endregion
 
-                if (maxforet < myretaurant) //si un joueur enemy a plus de foret que son nombre de restau en prendre un
+                #region Selon les données précédentes, faire un choix
+                //On contre les Forêts par les Restaurants (Si les autres ont plus de Forêt que notre nombre de Restaurant, on achète un Restaurant)
+                if (maxOfAllForest > nbOfCurrentRestaurant)
                 {
                     if (nbPiece >= 4)
-                    {
                         choice = 7;
-                    }
                 }
-                else if (maxchamp < myferme) //si un joueur enemy a plus de champ que son nombre de ferme en prendre un sinon prendre boulangerie si pas asser
+                //On contre les Champs de Blés par les Fermes ou les Boulangeries (Si les autres ont plus de Champs de Blés que notre nombre de Fermes, on achète une Ferme ou une Boulangerie)
+                else if (maxOfAllWheatField > nbOfCurrentFarm)
                 {
                     if (nbPiece >= 2)
-                    {
                         choice = 2;
-                    }
-                    else
-                    {
-                        if (nbPiece >= 1)
-                        {
-                            choice = 3;
-                        }
-                    }
+                    else if (nbPiece >= 1)
+                        choice = 3;
                 }
-                else if (Cagnote == 0) //prendre un stade si la cagnote de tout les joueurs sont faible pour remonter la partie
+                //Si tout les joueurs sont presque à la victoire (au dessus de la moitié du montant exigé), on achète un stade
+                else if (nbPlayersBelowHalfOfVictory == 0)
                 {
                     if (nbPiece >= 6)
-                    {
                         choice = 8;
-                    }
                 }
+                #endregion
+
+                #region Décision de l'IA basée sur ses types de cartes possédées
                 else //Sinon prendre une carte qui n'a pas encore était prise par le joueur
                 {
-                    bool CardChamp = false;
-                    bool CardFerme = false;
-                    bool CardBoulangerie = false;
-                    bool CardCaffee = false;
-                    bool CardSuperette = false;
-                    bool CardForet = false;
-                    bool CardRestaurant = false;
-                    bool CardStade = false;
-                    bool CardTourRadio = false;
-                    bool CardGare = false;
-                    bool CardCentreCommercial = false;
-                    bool CardParcAttraction = false;
+                    #region Déclaration des bools de chaque carte pour savoir si l'IA possède ce type
+                    bool isWheatFieldInHand = false;
+                    bool isFarmInHand = false;
+                    bool isBakeryInHand = false;
+                    bool isCoffeeInHand = false;
+                    bool isMiniMarketInHand = false;
+                    bool isForestInHand = false;
+                    bool isRestaurantInHand = false;
+                    bool isStadiumInHand = false;
+                    bool isRadioTowerInHand = false;
+                    bool isTrainStationInHand = false;
+                    bool isShoppingCentreInHand = false;
+                    bool isAttractionParcInHand = false;
+                    #endregion
+
+                    #region Mise à jour des précédents bools en parcourant les cartes de la main du joueur
                     foreach (MasterCard carte in this.playerCardList) //on teste si les cartes appartiennent au joueur
                     {
-                        if (carte is WheatFieldCard) { CardChamp = true; }
-                        if (carte is FarmCard) { CardFerme = true; }
-                        if (carte is BakeryCard) { CardBoulangerie = true; }
-                        if (carte is CoffeeCard) { CardCaffee = true; }
-                        if (carte is MiniMarketCard) { CardSuperette = true; }
-                        if (carte is ForestCard) { CardForet = true; }
-                        if (carte is RestaurantCard) { CardRestaurant = true; }
-                        if (carte is StadiumCard) { CardStade = true; }
-                        if (carte is ParcAttractionsCard) { CardParcAttraction = true; }
-                        if (carte is TourRadioCard) { CardTourRadio = true; }
-                        if (carte is GareCard) { CardGare = true; }
-                        if (carte is CentreCommercialCard) { CardCentreCommercial = true; }
+                        if (carte is WheatFieldCard) { isWheatFieldInHand = true; }
+                        if (carte is FarmCard) { isFarmInHand = true; }
+                        if (carte is BakeryCard) { isBakeryInHand = true; }
+                        if (carte is CoffeeCard) { isCoffeeInHand = true; }
+                        if (carte is MiniMarketCard) { isMiniMarketInHand = true; }
+                        if (carte is ForestCard) { isForestInHand = true; }
+                        if (carte is RestaurantCard) { isRestaurantInHand = true; }
+                        if (carte is StadiumCard) { isStadiumInHand = true; }
+                        if (carte is AmusementParcCard) { isAttractionParcInHand = true; }
+                        if (carte is RadioTowerCard) { isRadioTowerInHand = true; }
+                        if (carte is TrainStationCard) { isTrainStationInHand = true; }
+                        if (carte is ShoppingCentreCard) { isShoppingCentreInHand = true; }
                     }
+                    #endregion
 
-                    //si le joueur ne l'a pas on le la lui prend
-                    if (CardChamp == false) { if (nbPiece >= 1) { choice = 1; } }
-                    if (CardFerme == false) { if (nbPiece >= 2) { choice = 2; } }
-                    if (CardBoulangerie == false) { if (nbPiece >= 1) { choice = 3; } }
-                    if (CardCaffee == false) { if (nbPiece >= 2) { choice = 4; } }
-                    if (CardSuperette == false) { if (nbPiece >= 2) { choice = 5; } }
-                    if (CardForet == false) { if (nbPiece >= 2) { choice = 6; } }
-                    if (CardRestaurant == false) { if (nbPiece >= 4) { choice = 7; } }
-                    if (CardStade == false) { if (nbPiece >= 6) { choice = 8; } }
-                    if (CardGare == false) { if (nbPiece >= 4) { choice = 14; } }
-                    if (CardCentreCommercial == false) { if (nbPiece >= 10) { choice = 15; } }
-                    if (CardTourRadio == false) { if (nbPiece >= 22) { choice = 16; } }
-                    if (CardParcAttraction == false) { if (nbPiece >= 15) { choice = 17; } }
-
-
+                    #region Si le joueur ne possède pas un type de carte, on lui fait acheter
+                    if (isWheatFieldInHand == false) { if (nbPiece >= 1) { choice = 1; } }
+                    if (isFarmInHand == false) { if (nbPiece >= 2) { choice = 2; } }
+                    if (isBakeryInHand == false) { if (nbPiece >= 1) { choice = 3; } }
+                    if (isCoffeeInHand == false) { if (nbPiece >= 2) { choice = 4; } }
+                    if (isMiniMarketInHand == false) { if (nbPiece >= 2) { choice = 5; } }
+                    if (isForestInHand == false) { if (nbPiece >= 2) { choice = 6; } }
+                    if (isRestaurantInHand == false) { if (nbPiece >= 4) { choice = 7; } }
+                    if (isStadiumInHand == false) { if (nbPiece >= 6) { choice = 8; } }
+                    if (isTrainStationInHand == false) { if (nbPiece >= 4) { choice = 14; } }
+                    if (isShoppingCentreInHand == false) { if (nbPiece >= 10) { choice = 15; } }
+                    if (isRadioTowerInHand == false) { if (nbPiece >= 22) { choice = 16; } }
+                    if (isAttractionParcInHand == false) { if (nbPiece >= 15) { choice = 17; } }
+                    #endregion
                 }
+                #endregion
+
+                #region Décision aléatoire de l'IA
+                //Si elle n'a pas sélectionné de choix avant ou pour éviter qu'elle fasse une boucle infini
                 if (choice == -1 || isAILooping)
                 {
                     Random rdm = new Random();
                     choice = rdm.Next(1, 19);
                 }
+                #endregion
             }
 
             #region Effectue l'achat si c'est possible (carte disponible et assez d'argent)
             switch (choice)
             {
                 case 1:
-                    var wheatFieldCard = new WheatFieldCard();
+                    #region Champ de blé
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountWheatFields.Count <= 0)
                     {
@@ -481,13 +487,14 @@ namespace Miniville_GroupeC
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
-                    CanBuyCard(wheatFieldCard);
+                    CanBuyCard(new WheatFieldCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un champ de blé", this.name);
+                    #endregion
                     break;
                 case 2:
-                    var farm = new FarmCard();
+                    #region Ferme
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountFarms.Count <= 0)
                     {
@@ -497,13 +504,14 @@ namespace Miniville_GroupeC
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
-                    CanBuyCard(farm);
+                    CanBuyCard(new FarmCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une ferme", this.name);
+                    #endregion
                     break;
                 case 3:
-                    var bakery = new BakeryCard();
+                    #region Boulangerie
                     //Si le joueur rentre quand même le numéro de la carte alors qu'il n'y en a plus, on le refait choisir une autre option
                     if (amountBakeries.Count <= 0)
                     {
@@ -513,13 +521,14 @@ namespace Miniville_GroupeC
                         break;
                     }
                     //On teste si le joueur peut acheter la carte avec son argent
-                    CanBuyCard(bakery);
+                    CanBuyCard(new BakeryCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une boulangerie", this.name);
+                    #endregion
                     break;
                 case 4:
-                    var cafe = new CoffeeCard();
+                    #region Café
                     if (amountCoffees.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -527,13 +536,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(cafe);
+                    CanBuyCard(new CoffeeCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un café", this.name);
+                    #endregion
                     break;
                 case 5:
-                    var minimarket = new MiniMarketCard();
+                    #region Supérette
                     if (amountMiniMarkets.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -541,13 +551,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(minimarket);
+                    CanBuyCard(new MiniMarketCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une superette", this.name);
+                    #endregion
                     break;
                 case 6:
-                    var forest = new ForestCard();
+                    #region Forêt
                     if (amountForests.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -555,13 +566,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(forest);
+                    CanBuyCard(new ForestCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une forêt", this.name);
+                    #endregion
                     break;
                 case 7:
-                    var restau = new RestaurantCard();
+                    #region Restaurant
                     if (amountRestaurants.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -569,13 +581,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(restau);
+                    CanBuyCard(new RestaurantCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un restaurant", this.name);
+                    #endregion
                     break;
                 case 8:
-                    var stadium = new StadiumCard();
+                    #region Stade
                     if (amountStadiums.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -583,13 +596,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(stadium);
+                    CanBuyCard(new StadiumCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un stade", this.name);
+                    #endregion
                     break;
                 case 9:
-                    var cheeseFacto = new CheeseFactoryCard();
+                    #region Fromagerie
                     if (amountCheeseFactories.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -597,13 +611,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(cheeseFacto);
+                    CanBuyCard(new CheeseFactoryCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une fromagerie", this.name);
+                    #endregion
                     break;
                 case 10:
-                    var furnitureFacto = new FurnitureFactoryCard();
+                    #region Fabrique de Meubles
                     if (amountFurnitureFactories.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -611,13 +626,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(furnitureFacto);
+                    CanBuyCard(new FurnitureFactoryCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une fabrique de meuble", this.name);
+                    #endregion
                     break;
                 case 11:
-                    var mine = new StadiumCard();
+                    #region Mine
                     if (amountMines.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -625,13 +641,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(mine);
+                    CanBuyCard(new MineCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une mine", this.name);
+                    #endregion
                     break;
                 case 12:
-                    var orchard = new OrchardCard();
+                    #region Verger
                     if (amountOrchards.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -639,13 +656,14 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(orchard);
+                    CanBuyCard(new OrchardCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un verger", this.name);
+                    #endregion
                     break;
                 case 13:
-                    var market = new MarketCard();
+                    #region Marché
                     if (amountMarkets.Count <= 0)
                     {
                         if (!this.isItAnAI)
@@ -653,66 +671,71 @@ namespace Miniville_GroupeC
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(market);
+                    CanBuyCard(new MarketCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un marché", this.name);
+                    #endregion
                     break;
                 case 14:
-                    var gare = new GareCard();
-                    if (amountGareCard.Count <= 0)
+                    #region Gare
+                    if (amountPlayerTrainStationCard.Count == 1)
                     {
                         if (!this.isItAnAI)
-                            Console.WriteLine("Cette carte n'est plus disponible...");
+                            Console.WriteLine("Vous possèdez déjà ce monument...");
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(gare);
+                    CanBuyCard(new TrainStationCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une gare", this.name);
+                    #endregion
                     break;
                 case 15:
-                    var parc = new ParcAttractionsCard();
-                    if (amountParcAttractionsCard.Count <= 0)
+                    #region Parc d'Attractions
+                    if (amountPlayerAmusementParcCard.Count == 1)
                     {
                         if (!this.isItAnAI)
-                            Console.WriteLine("Cette carte n'est plus disponible...");
+                            Console.WriteLine("Vous possèdez déjà ce monument...");
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(parc);
+                    CanBuyCard(new AmusementParcCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un parc d'attractions", this.name);
+                    #endregion
                     break;
                 case 16:
-                    var tour = new TourRadioCard();
-                    if (amountTourRadioCard.Count <= 0)
+                    #region Tour Radio
+                    if (amountPlayerRadioTowerCard.Count == 1)
                     {
                         if (!this.isItAnAI)
-                            Console.WriteLine("Cette carte n'est plus disponible...");
+                            Console.WriteLine("Vous possèdez déjà ce monument...");
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(tour);
+                    CanBuyCard(new RadioTowerCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter une tour radio", this.name);
+                    #endregion
                     break;
                 case 17:
-                    var centre = new CentreCommercialCard();
-                    if (amountCentreCommercialCard.Count <= 0)
+                    #region Centre Commercial
+                    if (amountPlayerShoppingCentreCard.Count == 1)
                     {
-                        if(!this.isItAnAI)
-                            Console.WriteLine("Cette carte n'est plus disponible...");
+                        if (!this.isItAnAI)
+                            Console.WriteLine("Vous possèdez déjà ce monument...");
                         isChoiceNotPossible = true;
                         break;
                     }
-                    CanBuyCard(centre);
+                    CanBuyCard(new ShoppingCentreCard());
                     if (isChoiceNotPossible)
                         break;
                     Console.WriteLine("{0} a choisi d'acheter un centre commercial", this.name);
+                    #endregion
                     break;
 
                 case 18:
@@ -729,6 +752,7 @@ namespace Miniville_GroupeC
             if (isChoiceNotPossible)
             {
                 isChoiceNotPossible = false;
+                //Pour éviter que l'IA fasse une boucle infinie
                 if (this.isItAnAI)
                     BuyCard(true);
                 else
@@ -746,14 +770,14 @@ namespace Miniville_GroupeC
                 isChoiceNotPossible = false;
                 nbPiece -= card.costValue;
                 playerCardList.Add(card);
-                game.pile.RemoveCardFromPile(card);
+                game.playPile.RemoveCardFromPile(card);
                 card.SetPlayerOwner(this);
 
             }
             //Le joueur n'a pas assez d'argent
             else
             {
-                if(!this.isItAnAI)
+                if (!this.isItAnAI)
                     Console.WriteLine("{0} n'a pas assez de pièces. Veuillez choisir une autre carte !\n", this.name);
                 isChoiceNotPossible = true;
             }
@@ -764,7 +788,6 @@ namespace Miniville_GroupeC
         {
             foreach (var card in playerCardList)
                 card.OnDiceResult(diceValue, game.currentPlayer);
-
         }
         #endregion
     }
