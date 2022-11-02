@@ -11,34 +11,36 @@ namespace Miniville_GroupeC
         #region Constructeur
         public Pile(int nbCountPlayers)
         {
-            int nb = 0;
+            //Ajout de 6 instances de chaque carte standard (sauf Monuments) dans la pile
+            int nbStandardCard = 0;
             for (int i = 0; i < 6 * 13; i++)
             {
-                //Ajout de 6 instances de chaque carte dans la pile
                 if (i % 6 == 0)
-                    nb++;
-                AddCardToPile(nb);
+                    nbStandardCard++;
+                AddStandardCardToPile(nbStandardCard);
             }
-            int monument = 0;
-            for(int i = 0; i < nbCountPlayers * 4 ; i++)
+
+            //Ajout d'un monument par Joueur dans la pile
+            int nbMonument = 0;
+            for (int i = 0; i < nbCountPlayers * 4; i++)
             {
-                if(i % nbCountPlayers == 0)
-                    monument++;
-                AddMonumentToPile(monument);
-                
+                if (i % nbCountPlayers == 0)
+                    nbMonument++;
+                AddMonumentToPile(nbMonument);
             }
         }
         #endregion
 
         #region Méthodes
+        //Pour le debug, affiche toutes les cartes présentes dans la pile
         public override string ToString()
         {
             string thisReturn = "";
             foreach (MasterCard thisCard in mainPile)
                 thisReturn += thisCard.name + "\n";
-
             return thisReturn;
         }
+
         //Retire une carte précise (achetée par exemple) de la pile
         public void RemoveCardFromPile(MasterCard card)
         {
@@ -55,9 +57,9 @@ namespace Miniville_GroupeC
         }
 
         //Selon un numéro, ajoute une instance de la carte correspondante à la pile
-        private void AddCardToPile(int nb)
+        private void AddStandardCardToPile(int nbStandardCard)
         {
-            switch (nb)
+            switch (nbStandardCard)
             {
                 case 1:
                     mainPile.Add(new WheatFieldCard());
@@ -98,13 +100,13 @@ namespace Miniville_GroupeC
                 case 13:
                     mainPile.Add(new MarketCard());
                     break;
-                
-                
             }
         }
-        private void AddMonumentToPile(int monument)
+
+        //Selon un numéro, ajoute une instance du monument correspondant à la pile
+        private void AddMonumentToPile(int nbMonument)
         {
-            switch (monument)
+            switch (nbMonument)
             {
                 case 1:
                     mainPile.Add(new TrainStationCard());
