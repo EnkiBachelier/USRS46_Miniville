@@ -6,7 +6,11 @@ City-builder tour par tour qui se joue avec des cartes et des dés (Conçu par M
 
 # Comment lancer le projet Console ?
 
-Dans le fichier "Version Console", lancer la solution (.sln) avec Visual Studio 2019. Puis "CTRL + F5" pour exécuter le jeu.
+Dans le fichier "Miniville_GroupeC", lancer la solution (Miniville_GroupeC.sln) avec Visual Studio 2019. Puis "CTRL + F5" pour exécuter le jeu.
+
+# Comment lancer le projet Unity ?
+
+Dézipper le fichier "Miniville_Unity_GroupeC" puis lancer l'application Miniville (icône en pièce avec une tête).
 
 # Comment démarrer le jeu ?
 
