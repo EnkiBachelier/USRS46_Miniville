@@ -1,6 +1,6 @@
 # USRS46_Miniville
 
-Le jeu de Miniville (dans le cadre de l'UE USRS46) réalisé par Noa Hussenet, Théo Excille, Sulivan Michalon et Enki Bachelier (Groupe C).
+Le jeu de Miniville (dans le cadre de l'UE USRS46) réalisé par Noa Hussenet, Théo Excille, Sullivan Michalon et Enki Bachelier (Groupe C).
 
 City-builder tour par tour qui se joue avec des cartes et des dés (Conçu par Masao Suganuma).
 
